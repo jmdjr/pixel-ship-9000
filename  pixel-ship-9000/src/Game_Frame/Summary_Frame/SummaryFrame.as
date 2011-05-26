@@ -14,10 +14,10 @@ package src.Game_Frame.Summary_Frame
 		private var ScoreText:TextField;
 		private var BTContinue:MovieClip;
 		
-		
 		public function SummaryFrame()
 		{
 			super();
+			Background = new StatFrameBG();
 		}
 	}
 }
