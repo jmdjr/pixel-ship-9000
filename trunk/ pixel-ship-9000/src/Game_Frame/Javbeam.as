@@ -12,6 +12,7 @@ package src.Game_Frame
 			_CurrentClass = Javbeam;
 			
 			speed = 5;
+			Damage = 2;
 		}
 	}
 }
