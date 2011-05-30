@@ -16,6 +16,10 @@ package src.Game_Frame
 			_CurrentClass = EnemyJavelin;
 			FireRate = 1;
 			FireTimer = 1;
+			FullHealth = 3;
+			Health = 3;
+			
+			Attack = FullHealth;
 			HasFired = false;
 			PrimaryWeapon = new Javbeam();
 		}	

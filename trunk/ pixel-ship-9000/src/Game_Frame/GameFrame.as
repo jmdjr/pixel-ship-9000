@@ -13,7 +13,9 @@ package src.Game_Frame
 	import flash.ui.Keyboard;
 	
 	import src.Background;
+	import src.Frames;
 	import src.GameDataTracker;
+	import src.JukeBox;
 	import src.PhysVector2D;
 	import src.Ship;
 
@@ -45,8 +47,6 @@ package src.Game_Frame
 		public function GameFrame()
 		{
 			IsPlaying = false;
-			
-			WorldMusic = new BulletDance.mp3();
 			SpaceBG = new Background();
 			ship = new Ship();
 			shipHealthBar = new ShipHealthMeterDisplay();
@@ -66,6 +66,7 @@ package src.Game_Frame
 			
 			level1.AddFactory( Factory );
 			level1.AddShip( ship );
+			level1.LoadGameData( gameData );
 			
 			ship.LoadGameData( gameData );
 			ResetFrame();
@@ -76,18 +77,7 @@ package src.Game_Frame
 			addChild( level1 );
 		}
 		
-		/**
-		 * LoadGameData( data )
-		 *   loads the base game data that is used between frames
-		 * Parameters:
-		 *   data - the basic game data reference
-		 * 
-		 *  @author John M Davis Jr.
-		 */
-		public function LoadGameData( data:GameDataTracker )
-		{
-			gameData = data;
-		}
+		
 		
 		/**
 		 * ResetFrame():void
@@ -134,13 +124,6 @@ package src.Game_Frame
 				addChild( shipHealthBar );
 			}
 			
-			
-			level1.Reset();
-			if( !contains( level1 ) )
-			{
-				addChild( level1 );
-			}
-			
 			with( ship ) 
 			{
 				x = this.SpaceBG.width/2;
@@ -151,6 +134,12 @@ package src.Game_Frame
 			if( !contains( ship ) )
 			{
 				addChild( ship );
+			}
+			
+			level1.Reset();
+			if( !contains( level1 ) )
+			{
+				addChild( level1 );
 			}
 		}
 		
@@ -168,14 +157,7 @@ package src.Game_Frame
 			{
 				if( !IsPlaying )
 				{
-					ResetFrame();
-					if( WorldChannel != null )
-					{
-						WorldChannel.stop();	
-					}
-					
-					WorldChannel = new SoundChannel();
-					WorldChannel = WorldMusic.play( 0, -1 );
+					ResetFrame(); 
 					IsPlaying = true;
 				}
 				
@@ -197,12 +179,7 @@ package src.Game_Frame
 				if( ship.HealthPercentage() <= 0 )
 				{
 					CleanUp();
-					dispatchEvent( new Event( "GameOverFrame", true ) );
-					WorldChannel.stop(); 
-					WorldChannel = new SoundChannel();
-					var tempMusic:Sound = new UnfriendlyRave.mp3();
-					WorldChannel = tempMusic.play(0, 0);
-					
+					dispatchEvent( new Event( Frames.CUSTOM, true ) );
 				}
 			}
 		}
@@ -278,6 +255,20 @@ package src.Game_Frame
 			}
 			
 			ship.CorrectVelocity();
+		}
+		
+		
+		/**
+		 * LoadGameData( data )
+		 *   loads the base game data that is used between frames
+		 * Parameters:
+		 *   data - the basic game data reference
+		 * 
+		 *  @author John M Davis Jr.
+		 */
+		public function LoadGameData( data:GameDataTracker )
+		{
+			gameData = data;
 		}
 	}
 }

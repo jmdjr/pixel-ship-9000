@@ -12,6 +12,7 @@ package src.Game_Frame
 		
 		public function ModGrid()
 		{
+			
 		}
 	}
 }

@@ -14,6 +14,9 @@ package src.Game_Frame
 		{
 			super();
 			FireRate = 1;
+			FullHealth = 2;
+			Health = 2;
+			Attack = FullHealth;
 			_CurrentClass = EnemyDrone;
 		}
 		

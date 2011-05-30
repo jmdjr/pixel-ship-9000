@@ -23,12 +23,40 @@ package src.Game_Frame
 		protected var IsDead:Boolean;
 		protected var Invulnerable:Boolean;
 		
-		protected var Speed:Number;
 		protected var Velocity:PhysVector2D;
 		protected var IsStopped:Boolean;
 		
-		protected var Defense:Number;
-		protected var Attack:Number;
+		protected var defense:Number;
+		protected var attack:Number;
+		protected var speed:Number;
+		
+		
+		protected function get Speed():Number
+		{
+			return speed;
+		}		
+		protected function set Speed( s:Number ):void
+		{
+			speed = s;
+		}
+			
+		protected function get Attack():Number
+		{
+			return attack;
+		}
+		protected function set Attack( a:Number ):void
+		{
+			attack = a;
+		}
+		
+		protected function get Defense():Number
+		{
+			return defense;
+		}
+		protected function set Defense( d:Number ):void
+		{
+			defense = d;
+		}
 		
 		public function get isDead():Boolean
 		{
@@ -44,9 +72,9 @@ package src.Game_Frame
 			FireTimer = 0;
 			Health = 1;
 			FullHealth = 1;
-			Defense = 1;
-			Attack = 1;
-			Speed = 1;
+			defense = 1;
+			attack = 1;
+			speed = 1;
 			Invulnerable = false;
 			PrimaryWeapon = null;
 			WeaponBoundary = null;
@@ -136,7 +164,7 @@ package src.Game_Frame
 		{
 			if( !Invulnerable )
 			{
-				Health -= amount;
+				Health -= amount - Defense;
 				if( Health <= 0 )
 				{
 					Explode();

@@ -36,7 +36,7 @@ package
 			customFrame.LoadGameData( myData ); 
 			
 			addEventListener( Frames.GAME, gotoGameFrame );
-			addEventListener( Frames.CUSTOM, gotoGameOverFrame );
+			addEventListener( Frames.CUSTOM, gotoCustomizeFrame );
 			addEventListener( Frames.TITLE, gotoTitleFrame ); 
 			addEventListener( Event.ADDED_TO_STAGE, Start );
 		}
@@ -49,7 +49,7 @@ package
 				this.gotoTitleFrame( null );
 			}
 		}
-		
+		 
 		private function gotoTitleFrame( event:Event ):void
 		{
 			while( this.numChildren > 0 )
@@ -80,7 +80,7 @@ package
 			this.addChild( this.gameFrame );
 		}
 		
-		private function gotoGameOverFrame( event:Event ):void
+		private function gotoCustomizeFrame( event:Event ):void
 		{
 			while( this.numChildren > 0 )
 			{

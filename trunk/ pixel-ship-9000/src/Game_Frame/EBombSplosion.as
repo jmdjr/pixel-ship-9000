@@ -28,6 +28,7 @@ package src.Game_Frame
 			Timer = 0;
 			Interval = 1;
 			DimBy = 0.01;
+			Damage = 2;
 			GrowDiff = GrowToScale/TimeLast;
 		}
 		

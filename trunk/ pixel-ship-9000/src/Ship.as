@@ -5,6 +5,7 @@ package src
 	import flash.geom.Rectangle;
 	
 	import src.Game_Frame.Missile;
+	import src.Game_Frame.ModGrid;
 	import src.Game_Frame.Projectile;
 	import src.Game_Frame.ShipObject;
 	import src.PhysVector2D;
@@ -14,6 +15,27 @@ package src
 		private var isFiring:Boolean;
 		var gameData:GameDataTracker;
 		var canFire:Boolean;
+		
+		private var ModAttack;
+		private var ModSpeed;
+		private var ModDefense;
+		
+		private var MG:ModGrid;
+		
+		protected override function get Attack():Number
+		{
+			return ModAttack + attack;
+		}
+		
+		protected override function get Defense():Number
+		{
+			return ModDefense + defense;
+		}
+		
+		protected override function get Speed():Number
+		{
+			return ModSpeed + speed;
+		}
 		
 		public function Ship()
 		{
@@ -30,8 +52,15 @@ package src
 			Defense = 1;
 			FireTimer = 0;
 			FireRate = 1;
+			
+			ModAttack = 0;
+			ModDefense = 0;
+			ModSpeed = 0;
+			
 			Boundary = null;
 			WeaponBoundary = null;
+			Attack = FullHealth;
+			
 		}
 		
 		public override function Update( tick:Event ):void
@@ -65,13 +94,13 @@ package src
 				gameData.FireShot();
 				
 				canFire = false;
+				FireTimer = 1;
 			}
 			
 			if( stage != null && !canFire && FireTimer % ( stage.frameRate / FireRate )  == 0 )
 			{
 				canFire = true;
 			}
-			
 		}
 		
 		protected override function DoBoundaryChecks():void

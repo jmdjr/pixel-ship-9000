@@ -23,7 +23,7 @@ package src.Game_Frame
 			_CurrentClass = Projectile;
 			Velocity = new PhysVector2D( );
 			Speed = 0;
-			Damage = 0;
+			Damage = 2;
 			Center = new PhysVector2D( height/2, width/2 );
 		}
 		

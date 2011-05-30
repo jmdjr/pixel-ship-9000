@@ -10,10 +10,10 @@ package src.Game_Frame
 		public function EnemyMissile()
 		{
 			super();
-			this._CurrentClass = EnemyMissile;
+			_CurrentClass = EnemyMissile;
 			
-			this.Damage = 1;
-			this.speed = 5;
+			Damage = 2;
+			speed = 5;
 		}
 	}
 }

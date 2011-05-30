@@ -6,13 +6,20 @@ package src.Game_Frame.Customize_Frame
 	
 	import src.Frames;
 	import src.GameDataTracker;
+	import src.Ship;
 	
 	public class CustomizeFrame extends MovieClip
 	{
+		public static var RESTART_ONLY:String = "RestartOnly";
+		public static var RESTART_CONTINUE:String = "RestartAndContinue";
+		
 		var gameData:GameDataTracker;
 		var background:CustomFrameBackground;
 		var BTMainMenu:GOMainMenuButton;
 		var BTPlayAgain:playAgainButton;
+		var BTContinue:MovieClip;
+		var MGC:ModGridCustomizer;
+		var ShipReference:Ship;
 		
 		public function CustomizeFrame()
 		{
@@ -22,6 +29,18 @@ package src.Game_Frame.Customize_Frame
 			BTPlayAgain = new playAgainButton();
 			
 			this.addEventListener( Event.ADDED_TO_STAGE, init );
+		}
+		
+		private function ContinueOrRestart( e:Event ):void
+		{
+			if( e.type == RESTART_ONLY )
+			{
+				
+			}
+			else if ( e.type == RESTART_CONTINUE )
+			{
+				
+			}
 		}
 		
 		public function init( e:Event ):void
@@ -34,17 +53,15 @@ package src.Game_Frame.Customize_Frame
 			
 			with( background )
 			{
-				x = stage.stageWidth - width;
-				x -= x / 2; 
-				y = stage.stageHeight - height;
-				y -= y / 2; 
+				x = stage.x + width/2;
+				y = stage.y + height/2;
 			}
 			
 			with( BTMainMenu )
 			{
-				x = stage.stageWidth - width;
+				x = background.x - width;
 				x -= x / 2; 
-				y = stage.stageHeight - height;
+				y = background.y - height;
 				y -= y / 2;
 				addEventListener( MouseEvent.CLICK, returnMainMenu );
 			}

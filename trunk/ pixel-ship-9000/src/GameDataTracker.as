@@ -13,8 +13,10 @@ package src
 		private var Score:Number;
 		private var CurrentScrap:Number;
 		private var TotalScrap:Number;
-		
+		public var JB:JukeBox;
 		private var CurrentLevel:Level;
+		
+		
 		
 		public function GameDataTracker()
 		{
@@ -25,6 +27,7 @@ package src
 			TotalScrap = 0;
 			Accuracy = 1.0;
 			CurrentLevel = null;
+			JB = new JukeBox();
 		}
 		
 		public function FireShot():void
