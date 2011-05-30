@@ -14,7 +14,7 @@ package src.Game_Frame
 			_CurrentClass = Missile;
 			
 			Speed = 10; 
-			Damage = 1;
+			Damage = 2;
 			Center = new PhysVector2D( height/2, width/2 );
 			Velocity = new PhysVector2D( 0, 0 );
 		}

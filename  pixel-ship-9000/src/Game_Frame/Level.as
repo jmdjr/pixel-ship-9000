@@ -1,8 +1,19 @@
 ﻿package src.Game_Frame
 {
+	import fl.motion.Color;
+	import fl.motion.ColorMatrix;
+	
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.geom.ColorTransform;
+	import flash.sensors.Accelerometer;
+	import flash.text.StyleSheet;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
 	
+	import src.GameDataTracker;
+	import src.Game_Frame.Summary_Frame.StatFrameBG;
+	import src.JukeBox;
 	import src.PhysVector2D;
 	import src.Ship;
 
@@ -15,6 +26,8 @@
 		protected var myShip:Ship;
 		public var LevelTitle:String;
 		protected var isComplete:Boolean;
+		protected var InternalFrame:Sprite;
+		protected var gameData:GameDataTracker;
 		
 		public function Level()
 		{
@@ -25,6 +38,7 @@
 			factory = null;
 			BossReference = null;
 			LevelTitle = "Awsome Level Great Job!";
+			InternalFrame = new Sprite();
 		}
 		
 		public function get IsComplete():Boolean
@@ -48,12 +62,66 @@
 			BossMode = false;
 		}
 		
+		private function DisplayLevelHint():void  
+		{
+			if( parent != null )
+			{
+				if( !parent.contains( InternalFrame ) )
+				{
+					parent.addChild( InternalFrame );
+				}
+				
+				var bg:StatFrameBG = StatFrameBG( InternalFrame.addChild( new StatFrameBG() ) );
+				bg.x = stage.stageWidth / 2;
+				bg.y = stage.stageHeight / 2; 
+				
+				var Title:TextField = TextField( InternalFrame.addChild( new TextField() ) );
+				
+				var mini:TextFormat = new TextFormat( "BM mini", 24, new Color( 0.5, 1.0, 0.5 ) );
+				Title.width = bg.width;
+				Title.wordWrap = true;
+				
+				Title.defaultTextFormat = mini;
+				Title.text = this.LevelTitle;
+	 			
+				Title.x = bg.x - bg.width/2 + 50;
+				Title.y = bg.y - bg.height/2 + 20;
+			}
+		}
+		
+		private function RemoveLevelHint():void
+		{
+			if( parent != null && parent.contains( InternalFrame ) )
+			{
+				while( InternalFrame.numChildren > 0 )
+				{
+					InternalFrame.removeChildAt( 0 );
+				}
+				
+				parent.removeChild( InternalFrame );
+			}
+		}
+		
+		
 		public function Update( tick:Event ):void
 		{
 			if( !BossMode )
 			{
 				++Time;
 			}
+			
+			if( Time == 1 )
+			{
+				DisplayLevelHint();
+				gameData.JB.Play( JukeBox.BOSS_MUSIC );
+			}
+			
+			if ( Time == 3 * stage.frameRate )
+			{
+				gameData.JB.Play( JukeBox.GAME_MUSIC );
+				RemoveLevelHint();
+			}
+			
 			//e1
 			if( Time == 5 * stage.frameRate ) 
 			{
@@ -298,6 +366,19 @@
 			{
 				isComplete = true;
 			}
+		}
+		
+		/**
+		 * LoadGameData( data )
+		 *   loads the base game data that is used between frames
+		 * Parameters:
+		 *   data - the basic game data reference
+		 * 
+		 *  @author John M Davis Jr.
+		 */
+		public function LoadGameData( data:GameDataTracker )
+		{
+			gameData = data;
 		}
 	}
 }

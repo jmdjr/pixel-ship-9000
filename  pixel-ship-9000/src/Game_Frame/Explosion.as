@@ -1,8 +1,9 @@
 package src.Game_Frame
 {
+	import explode2.wav;
+	
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	import explode2.wav;
 	
 	public class Explosion extends MovieClip
 	{
