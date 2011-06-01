@@ -14,11 +14,18 @@ package src.Game_Frame.Customize_Frame
 		public static var RESTART_CONTINUE:String = "RestartAndContinue";
 		
 		var gameData:GameDataTracker;
+		
 		var background:CustomFrameBackground;
 		var BTMainMenu:GOMainMenuButton;
 		var BTPlayAgain:playAgainButton;
 		var BTContinue:MovieClip;
 		var MGC:ModGridCustomizer;
+		var GameOverTest:Boolean;
+		
+		var BuyRED:ModPixel;
+		var BuySPEED:ModPixel;
+		var BuyDEF:ModPixel;
+		
 		var ShipReference:Ship;
 		
 		public function CustomizeFrame()
@@ -28,52 +35,93 @@ package src.Game_Frame.Customize_Frame
 			BTMainMenu = new GOMainMenuButton();
 			BTPlayAgain = new playAgainButton();
 			
+			
 			this.addEventListener( Event.ADDED_TO_STAGE, init );
 		}
 		
 		private function ContinueOrRestart( e:Event ):void
-		{
+		{ 
 			if( e.type == RESTART_ONLY )
 			{
-				
+				GameOverTest = true;
 			}
 			else if ( e.type == RESTART_CONTINUE )
 			{
-				
+				GameOverTest = false;	
 			}
+		}
+		
+		public function LoadShipReference( sr:Ship ):void
+		{
+			this.ShipReference = sr;
 		}
 		
 		public function init( e:Event ):void
 		{
-			this.removeEventListener( Event.ADDED_TO_STAGE, init );
+			removeEventListener( Event.ADDED_TO_STAGE, init );
+			ResetFrame();
+			addEventListener( Event.ENTER_FRAME, Update );
+		}
+		
+		public function ResetFrame():void
+		{
+			var CenteringX = 0;
+			var CenteringY = 0;
 			
-			addChild( background );
-			addChild( BTMainMenu );
-			addChild( BTPlayAgain );
-			
-			with( background )
+			if( stage != null )
 			{
-				x = stage.x + width/2;
-				y = stage.y + height/2;
+				CenteringX = stage.stageWidth;
+				CenteringY = stage.stageHeight;
+			}
+			else
+			{
+				CenteringX = background.width;
+				CenteringY = background.height;
+			}
+				
+			if( !contains( background ))
+			{
+				addChild( background );
+				with( background )
+				{
+					x = CenteringX/2;
+					y = CenteringY/2;
+				}
 			}
 			
-			with( BTMainMenu )
+			if( !contains( BTMainMenu ))
 			{
-				x = background.x - width;
-				x -= x / 2; 
-				y = background.y - height;
-				y -= y / 2;
-				addEventListener( MouseEvent.CLICK, returnMainMenu );
+				addChild( BTMainMenu );
+				with( BTMainMenu )
+				{
+					x = background.x - 159.10; 
+					y = background.y + 194.70;
+					addEventListener( MouseEvent.CLICK, returnMainMenu );
+				}
 			}
-			with( BTPlayAgain )
+			
+			if( GameOverTest )
 			{
-				x = stage.stageWidth - width;
-				x -= x / 2; 
-				y = stage.stageHeight - height;
-				y -= y / 2;
-				addEventListener( MouseEvent.CLICK, returnPlayAgain );
+				if( !contains( BTPlayAgain ))
+				{
+					addChild( BTPlayAgain );
+					with( BTPlayAgain )
+					{
+						x = BTMainMenu.x - width - 20;
+						y = BTMainMenu.y;
+						addEventListener( MouseEvent.CLICK, returnPlayAgain ); 
+					}
+				}
+				
+				if( !contains( ShipReference ) )
+				{
+					addChild( ShipReference );
+					ShipReference.x = width/2;
+					ShipReference.y = height/2;
+				}
 			}
 		}
+		
 		
 		public function LoadGameData( data:GameDataTracker )
 		{
@@ -84,7 +132,7 @@ package src.Game_Frame.Customize_Frame
 		{
 			if( enabled )
 			{
-				
+				ResetFrame();
 			}
 		}
 		

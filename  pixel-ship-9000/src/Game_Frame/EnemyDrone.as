@@ -14,15 +14,15 @@ package src.Game_Frame
 		{
 			super();
 			FireRate = 1;
-			FullHealth = 2;
-			Health = 2;
+			FullHealth = 10;
+			Health = 10;
 			Attack = FullHealth;
 			_CurrentClass = EnemyDrone;
 		}
 		
 		protected override function DoCombatChecks():void
 		{
-			if( FireTimer % ( stage.frameRate / FireRate ) <= 0 )
+			if( FireTimer % ( stage.frameRate / FireRate ) == 0 )
 			{
 				super.DoCombatChecks();
 			}

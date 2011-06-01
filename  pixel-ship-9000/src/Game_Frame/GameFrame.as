@@ -5,8 +5,10 @@ package src.Game_Frame
 	import UnfriendlyRave.mp3;
 	
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
+	import flash.geom.ColorTransform;
 	import flash.geom.Rectangle;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
@@ -43,31 +45,35 @@ package src.Game_Frame
 		var WorldChannel:SoundChannel;
 		
 		var fps:FrameRate;
+		var viewport:Sprite;
 		
 		public function GameFrame()
 		{
 			IsPlaying = false;
 			SpaceBG = new Background();
-			ship = new Ship();
 			shipHealthBar = new ShipHealthMeterDisplay();
 			fps = new FrameRate();
 			level1 = new Level();
 			Factory = new EnemyFactory();
+			/*viewport = new Sprite();
+			viewport.transform.colorTransform = new ColorTransform( 1.0, 1.0, 1.0, 1.0, 255, 255, 255, 100 );*/
 			addEventListener( Event.ADDED_TO_STAGE, Loaded );
+			
 		}
 		
 		public function Loaded( e:Event ):void
 		{ 
+			
 			var enemyBound:Rectangle = new Rectangle( -100, -100, stage.stageWidth + 100, stage.stageHeight + 100 );
 			var shipBound:Rectangle = new Rectangle( 50, 50, stage.stageWidth - 50, stage.stageHeight - 50 );
 			
-			ship.LoadBoundary( shipBound, enemyBound );
+			
 			Factory.LoadBoundary( enemyBound, enemyBound );
 			
 			level1.AddFactory( Factory );
 			level1.AddShip( ship );
 			level1.LoadGameData( gameData );
-			
+			ship.LoadBoundary( shipBound, enemyBound );
 			ship.LoadGameData( gameData );
 			ResetFrame();
 			
@@ -77,8 +83,11 @@ package src.Game_Frame
 			addChild( level1 );
 		}
 		
-		
-		
+		public function LoadShipReference( sr:Ship ):void
+		{
+			ship = sr;
+		}
+		 
 		/**
 		 * ResetFrame():void
 		 *   Used to reset all of the elements within the frame to a starting state.
@@ -141,6 +150,19 @@ package src.Game_Frame
 			{
 				addChild( level1 );
 			}
+			
+		/*	if( !contains( viewport ) )
+			{
+				addChild( viewport );
+			}*/
+			
+			/*with( viewport )
+			{
+				x = this.x;
+				y = this.y;
+				width = this.width;
+				height = this.height;
+			}*/
 		}
 		
 		/**
@@ -179,6 +201,7 @@ package src.Game_Frame
 				if( ship.HealthPercentage() <= 0 )
 				{
 					CleanUp();
+					gameData.JB.Stop();
 					dispatchEvent( new Event( Frames.CUSTOM, true ) );
 				}
 			}

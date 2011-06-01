@@ -4,18 +4,19 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
-	import src.Game_Frame.Customize_Frame.CustomizeFrame;
-	import src.GameDataTracker;
-	import src.Game_Frame.GameFrame;
-	import src.Title_Frame.TitleFrame;
 	import src.Frames;
+	import src.GameDataTracker;
+	import src.Game_Frame.Customize_Frame.CustomizeFrame;
+	import src.Game_Frame.GameFrame;
+	import src.Ship;
+	import src.Title_Frame.TitleFrame;
 	
 	public class PixelShip9000 extends Sprite
 	{
 		var titleFrame:TitleFrame;
 		var gameFrame:GameFrame;
 		var customFrame:CustomizeFrame;
-		
+		var masterShipReference:Ship;
 		var myData:GameDataTracker;
 		
 		public function PixelShip9000()
@@ -24,7 +25,7 @@ package
 			gameFrame = new GameFrame(); 
 			titleFrame = new TitleFrame();
 			customFrame = new CustomizeFrame();
-			
+			masterShipReference = new Ship();
 			// Initialize all of the variables and load data.
 			init();
 		}
@@ -32,8 +33,12 @@ package
 		private function init():void
 		{
 			gameFrame.LoadGameData( myData );
+			
 			titleFrame.LoadGameData( myData );
-			customFrame.LoadGameData( myData ); 
+			customFrame.LoadGameData( myData );
+			
+			gameFrame.LoadShipReference( masterShipReference );
+			customFrame.LoadShipReference( masterShipReference );
 			
 			addEventListener( Frames.GAME, gotoGameFrame );
 			addEventListener( Frames.CUSTOM, gotoCustomizeFrame );
