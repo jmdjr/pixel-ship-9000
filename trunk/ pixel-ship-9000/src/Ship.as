@@ -5,7 +5,7 @@ package src
 	import flash.geom.Rectangle;
 	
 	import src.Game_Frame.Missile;
-	import src.Game_Frame.ModGrid;
+	import src.Game_Frame.Customize_Frame.ModGrid;
 	import src.Game_Frame.Projectile;
 	import src.Game_Frame.ShipObject;
 	import src.PhysVector2D;

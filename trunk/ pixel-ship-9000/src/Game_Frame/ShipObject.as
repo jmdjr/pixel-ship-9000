@@ -4,9 +4,13 @@ package src.Game_Frame
 	
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.events.TimerEvent;
+	import flash.geom.ColorTransform;
 	import flash.geom.Rectangle;
+	import flash.utils.Timer;
 	
 	import src.PhysVector2D;
+	import src.Ship;
 	
 	public class ShipObject extends MovieClip
 	{
@@ -30,51 +34,26 @@ package src.Game_Frame
 		protected var attack:Number;
 		protected var speed:Number;
 		
-		
-		protected function get Speed():Number
-		{
-			return speed;
-		}		
-		protected function set Speed( s:Number ):void
-		{
-			speed = s;
-		}
-			
-		protected function get Attack():Number
-		{
-			return attack;
-		}
-		protected function set Attack( a:Number ):void
-		{
-			attack = a;
-		}
-		
-		protected function get Defense():Number
-		{
-			return defense;
-		}
-		protected function set Defense( d:Number ):void
-		{
-			defense = d;
-		}
-		
-		public function get isDead():Boolean
-		{
-			return IsDead;
-		}
-		
+		protected var damageEffectTimer:Timer;
+
 		public function ShipObject()
 		{
 			super();
 			IsStopped = false;
 			IsDead = false;
+			
 			FireRate = 1;
 			FireTimer = 0;
 			Health = 1;
 			FullHealth = 1;
-			defense = 1;
+			defense = 0;
 			attack = 1;
 			speed = 1;
+			
+			transform.colorTransform = new ColorTransform();
+			damageEffectTimer = new Timer(0, 10);
+			damageEffectTimer.addEventListener( TimerEvent.TIMER, damEffectTimer );
+			
 			Invulnerable = false;
 			PrimaryWeapon = null;
 			WeaponBoundary = null;
@@ -82,19 +61,47 @@ package src.Game_Frame
 			Velocity = null;
 		}
 		
-		public function ResetHealth():void
+		private function damEffectTimer( e:TimerEvent ):void
 		{
-			Health = FullHealth;
+			damageEffectTimer.delay = 1000;
+			if( damageEffectTimer.currentCount % 2 == 1 )
+			{
+				transform.colorTransform.redOffset += 200;
+			}
+			else
+			{
+				transform.colorTransform.redOffset -= 200;
+			}
 		}
 		
-		public function get ShipSpeed():Number
-		{
-			return Speed;
+		public function TakeDamage( amount:Number ):void
+		{ 
+			if( !Invulnerable )
+			{
+				Health -= amount - Defense;
+				DamageEffect();
+				if( Health <= 0 )
+				{
+					Explode();
+					IsDead = true;
+				}
+			}
 		}
 		
-		public function set ShipSpeed( s:Number ):void
+		protected function DamageEffect( ):void
 		{
-			Speed = s;
+			damageEffectTimer.start();
+		}
+		
+		/**
+		 * Deals an amount of Damage to another ship.
+		 */ 
+		public function DealDamage( someone:ShipObject ):void
+		{
+			if( !Invulnerable )
+			{
+				someone.TakeDamage( Attack );
+			}
 		}
 		
 		
@@ -160,28 +167,53 @@ package src.Game_Frame
 			if( !IsDead ) DoCombatChecks();
 		}
 		
-		public function TakeDamage( amount:Number ):void
+		
+		
+		public function ResetHealth():void
 		{
-			if( !Invulnerable )
-			{
-				Health -= amount - Defense;
-				if( Health <= 0 )
-				{
-					Explode();
-					IsDead = true;
-				}
-			}
+			Health = FullHealth;
 		}
 		
-		/**
-		 * Deals an amount of Damage to another ship.
-		 */ 
-		public function DealDamage( someone:ShipObject ):void
+		protected function get Speed():Number
 		{
-			if( !Invulnerable )
-			{
-				someone.TakeDamage( Attack );
-			}
+			return speed;
+		}		
+		protected function set Speed( s:Number ):void
+		{
+			speed = s;
+		}
+		
+		protected function get Attack():Number
+		{
+			return attack;
+		}
+		protected function set Attack( a:Number ):void
+		{
+			attack = a;
+		}
+		
+		protected function get Defense():Number
+		{
+			return defense;
+		}
+		protected function set Defense( d:Number ):void
+		{
+			defense = d;
+		}
+		
+		public function get isDead():Boolean
+		{
+			return IsDead;
+		}
+		
+		public function get ShipSpeed():Number
+		{
+			return Speed;
+		}
+		
+		public function set ShipSpeed( s:Number ):void
+		{
+			Speed = s;
 		}
 	}
 }

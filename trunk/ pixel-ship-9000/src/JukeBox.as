@@ -25,8 +25,13 @@ package src
 		
 		public function Play( StaticName:Sound ):void
 		{
-			WorldChannel.stop(); 
+			Stop();
 			WorldChannel = StaticName.play(0, 100);
+		}
+		
+		public function Stop():void
+		{
+			WorldChannel.stop(); 
 		}
 	}
 }

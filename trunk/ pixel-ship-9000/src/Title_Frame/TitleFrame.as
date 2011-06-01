@@ -28,8 +28,6 @@ package src.Title_Frame
 			{
 				x = 324/800 * this.myWidth;
 				y = 330/600 * this.myHeight;
-				height = scaleY * this.myHeight;
-				width = scaleX * this.myWidth;
 			}
 			
 			this.playBT = PlayButton( this.addChild( new PlayButton() ) );
@@ -37,9 +35,7 @@ package src.Title_Frame
 			{
 				x = 246/800 * this.myWidth;
 				y = 400/600 * this.myHeight;
-				height = scaleY * this.myHeight;
-				width = scaleX * this.myWidth;
-				addEventListener( MouseEvent.CLICK, ChangeToTitleFrame );
+				addEventListener( MouseEvent.CLICK, ChangeToCustomFrame );
 			}
 			
 			this.shootLogo = menuShootLogo( this.addChild( new menuShootLogo() ) );
@@ -47,8 +43,6 @@ package src.Title_Frame
 			{
 				x = 19/800 * this.myWidth;
 				y = 263/600 * this.myHeight;
-				height = scaleY * this.myHeight; 
-				width = scaleX * this.myWidth;
 			}
 		}
 		
@@ -68,6 +62,11 @@ package src.Title_Frame
 		private function ChangeToTitleFrame( click:MouseEvent ):void
 		{
 			this.dispatchEvent( new Event( Frames.GAME, true ) );
+		}
+		
+		private function ChangeToCustomFrame( click:MouseEvent ):void
+		{
+			this.dispatchEvent( new Event( Frames.CUSTOM, true ) );
 		}
 	}
 }
