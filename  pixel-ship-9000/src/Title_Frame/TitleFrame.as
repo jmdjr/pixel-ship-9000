@@ -41,8 +41,8 @@ package src.Title_Frame
 			this.shootLogo = menuShootLogo( this.addChild( new menuShootLogo() ) );
 			with( this.shootLogo )
 			{
-				x = 19/800 * this.myWidth;
-				y = 263/600 * this.myHeight;
+				x = 0.5 * this.myWidth;
+				y = 0.5 * this.myHeight;
 			}
 		}
 		
