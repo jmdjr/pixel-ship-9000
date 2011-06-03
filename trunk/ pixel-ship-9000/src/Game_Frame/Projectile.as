@@ -4,6 +4,7 @@ package src.Game_Frame
 	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	
 	import src.PhysVector2D;
 	
 	public class Projectile extends MovieClip
@@ -64,13 +65,18 @@ package src.Game_Frame
 		// will set events up so that the object will act like it should.
 		public function Initialize():void
 		{
-			this.addEventListener( Event.ENTER_FRAME, Update );
-			this.addEventListener(Event.REMOVED_FROM_STAGE, Unloaded );
+			addEventListener( Event.ADDED_TO_STAGE, Echo );
+			addEventListener(Event.REMOVED_FROM_STAGE, Unloaded );
+		}
+		
+		private function Echo( test:Event )
+		{
+			stage.addEventListener( ShipObject.UPDATE_EVENT, Update );
 		}
 		
 		private function Unloaded( uload:Event ):void
 		{
-			this.removeEventListener( Event.ENTER_FRAME, Update );
+			stage.removeEventListener( "Test", Update );
 		}
 		
 		public function Update( tick:Event ):void

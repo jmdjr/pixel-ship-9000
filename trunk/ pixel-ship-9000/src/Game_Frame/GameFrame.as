@@ -44,6 +44,9 @@ package src.Game_Frame
 		var WorldMusic:Sound;
 		var WorldChannel:SoundChannel;
 		
+		var paused:Boolean;
+		var pauseText:Pause_Text;
+		
 		var fps:FrameRate;
 		var viewport:Sprite;
 		
@@ -55,9 +58,10 @@ package src.Game_Frame
 			fps = new FrameRate();
 			level1 = new Level();
 			Factory = new EnemyFactory();
-			/*viewport = new Sprite();
-			viewport.transform.colorTransform = new ColorTransform( 1.0, 1.0, 1.0, 1.0, 255, 255, 255, 100 );*/
 			addEventListener( Event.ADDED_TO_STAGE, Loaded );
+			paused = false;
+			pauseText = new Pause_Text();
+			
 			
 		}
 		
@@ -151,18 +155,18 @@ package src.Game_Frame
 				addChild( level1 );
 			}
 			
-		/*	if( !contains( viewport ) )
+			if( !contains( pauseText ))
 			{
-				addChild( viewport );
-			}*/
+				addChild( pauseText );
+			}
 			
-			/*with( viewport )
+			with( pauseText )
 			{
-				x = this.x;
-				y = this.y;
-				width = this.width;
-				height = this.height;
-			}*/
+				enabled = false;
+				visible = false;
+				x = this.stage.stageWidth / 2;
+				y = this.stage.stageHeight / 2;
+			}
 		}
 		
 		/**
@@ -174,35 +178,40 @@ package src.Game_Frame
 		 */  
 		public function Update( tick:Event ):void
 		{
-			SpaceBG.Update( tick );
-			if( enabled )
+			pauseText.enabled = paused;
+			pauseText.visible = paused;
+			
+			if( enabled && !paused )
 			{
+				//Reset frame's base objects and tell game that this frame is playing stuff
 				if( !IsPlaying )
 				{
 					ResetFrame(); 
 					IsPlaying = true;
 				}
 				
-				timeTracker += 1;
+				//
 				
-				shipHealthBar.ShowAPercentage( ship.HealthPercentage() );
 				
 				// updating Ship
-				ship.Update( tick );
-				level1.Update( tick );
+				
 				
 				//**********************************************************************************************
-				//*  Ship Boundry Case
+				//*  Update calls for all base objects under this frame's control
 				//**********************************************************************************************
-				// restricting ship to spacebackground area and height of world - ~10
-				// These act as the values determining whether or not to push the ship back into the boundries 
-				// of the game environment.
+				timeTracker += 1;
+				dispatchEvent( new Event( ShipObject.UPDATE_EVENT, true ) );
+				
+				SpaceBG.Update( tick );
+				ship.Update( tick );
+				level1.Update( tick );
+				shipHealthBar.ShowAPercentage( ship.HealthPercentage() );
 				
 				if( ship.HealthPercentage() <= 0 )
 				{
 					CleanUp();
 					gameData.JB.Stop();
-					dispatchEvent( new Event( Frames.CUSTOM, true ) );
+					dispatchEvent( new Event( Frames.TITLE, true ) );
 				}
 			}
 		}
@@ -273,6 +282,9 @@ package src.Game_Frame
 					ship.EndFiring();
 					break;
 				
+				case Keyboard.P:
+					paused = !paused;
+					
 				default:
 					break;
 			}

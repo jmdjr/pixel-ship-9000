@@ -20,7 +20,7 @@ package src.Game_Frame.Customize_Frame
 		var BTPlayAgain:playAgainButton;
 		var BTContinue:MovieClip;
 		var MGC:ModGridCustomizer;
-		var GameOverTest:Boolean;
+		var DidShipDie:Boolean;
 		
 		var BuyRED:ModPixel;
 		var BuySPEED:ModPixel;
@@ -34,7 +34,7 @@ package src.Game_Frame.Customize_Frame
 			background = new CustomFrameBackground();
 			BTMainMenu = new GOMainMenuButton();
 			BTPlayAgain = new playAgainButton();
-			
+			DidShipDie = false;
 			
 			this.addEventListener( Event.ADDED_TO_STAGE, init );
 		}
@@ -43,11 +43,11 @@ package src.Game_Frame.Customize_Frame
 		{ 
 			if( e.type == RESTART_ONLY )
 			{
-				GameOverTest = true;
+				DidShipDie = true;
 			}
 			else if ( e.type == RESTART_CONTINUE )
 			{
-				GameOverTest = false;	
+				DidShipDie = false;	
 			}
 		}
 		
@@ -100,24 +100,20 @@ package src.Game_Frame.Customize_Frame
 				}
 			}
 			
-			if( GameOverTest )
+			if( !contains( ShipReference ) )
 			{
-				if( !contains( BTPlayAgain ))
+				addChild( ShipReference );
+				ShipReference.x = width/2;
+				ShipReference.y = height/2;
+			}
+			
+			if( !contains( BTPlayAgain ))
+			{
+				addChild( BTPlayAgain );
+				with( BTPlayAgain )
 				{
-					addChild( BTPlayAgain );
-					with( BTPlayAgain )
-					{
-						x = BTMainMenu.x - width - 20;
-						y = BTMainMenu.y;
-						addEventListener( MouseEvent.CLICK, returnPlayAgain ); 
-					}
-				}
-				
-				if( !contains( ShipReference ) )
-				{
-					addChild( ShipReference );
-					ShipReference.x = width/2;
-					ShipReference.y = height/2;
+					BTPlayAgain.SetPositionIf( DidShipDie );
+					addEventListener( MouseEvent.CLICK, returnPlayAgain ); 
 				}
 			}
 		}

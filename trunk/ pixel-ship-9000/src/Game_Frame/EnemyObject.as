@@ -51,13 +51,18 @@ package src.Game_Frame
 		
 		public function Initialize():void
 		{
-			addEventListener( Event.ENTER_FRAME, Update );
+			addEventListener( Event.ADDED_TO_STAGE, Echo );
 			addEventListener(Event.REMOVED_FROM_STAGE, Unloaded );
+		}
+		
+		private function Echo( test:Event )
+		{
+			stage.addEventListener( ShipObject.UPDATE_EVENT, Update );
 		}
 		
 		private function Unloaded( uload:Event ):void
 		{
-			removeEventListener( Event.ENTER_FRAME, Update );
+			stage.removeEventListener( ShipObject.UPDATE_EVENT, Update );
 		}
 		
 		public function LoadBoundary( _bound:Rectangle, _weaponBound:Rectangle = null ):void
