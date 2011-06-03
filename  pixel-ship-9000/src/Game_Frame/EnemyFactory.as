@@ -20,8 +20,9 @@ package src.Game_Frame
 			MasterCopyList["Drone"] = new EnemyDrone(); 
 			MasterCopyList["Jav"] = new EnemyJavelin();
 			MasterCopyList["Bomb"] = new EnemyBomb();
-			
+					
 			MasterCopyList["MidBoss"] = new Lvl01_MidBoss();
+			MasterCopyList["BigBoss"] = new Level1_Boss_Real();
 		} 
 		
 		public function LoadBoundary( _bound:Rectangle, _wepBound:Rectangle ):void
@@ -30,6 +31,7 @@ package src.Game_Frame
 			EnemyJavelin( MasterCopyList["Jav"] ).LoadBoundary( _bound, _wepBound );
 			EnemyBomb( MasterCopyList["Bomb"] ).LoadBoundary( _bound, _wepBound );
 			
+			Level1_Boss_Real( MasterCopyList["BigBoss"] ).LoadBoundary( _bound, _wepBound );
 			Lvl01_MidBoss( MasterCopyList["MidBoss"] ).LoadBoundary( _bound, _wepBound );
 		}
 		

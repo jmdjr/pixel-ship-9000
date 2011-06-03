@@ -14,6 +14,7 @@ package src.Game_Frame
 	
 	public class ShipObject extends MovieClip
 	{
+		public static var UPDATE_EVENT:String = "UPDATE_MANAGED";
 		public var Boundary:Rectangle;
 		
 		protected var WeaponBoundary:Rectangle;
@@ -35,7 +36,9 @@ package src.Game_Frame
 		protected var speed:Number;
 		
 		protected var damageEffectTimer:Timer;
-
+		protected var damageColor:ColorTransform;
+		protected var normalColor:ColorTransform;
+		
 		public function ShipObject()
 		{
 			super();
@@ -50,28 +53,41 @@ package src.Game_Frame
 			attack = 1;
 			speed = 1;
 			
-			transform.colorTransform = new ColorTransform();
-			damageEffectTimer = new Timer(0, 10);
-			damageEffectTimer.addEventListener( TimerEvent.TIMER, damEffectTimer );
+			normalColor = new ColorTransform();
+			damageColor = new ColorTransform( 1, 1, 1, 1, 255, -255, -255 );
+			transform.colorTransform = normalColor;
 			
+			damageEffectTimer = new Timer(50, 5);
+			damageEffectTimer.addEventListener( TimerEvent.TIMER, damEffectTimer );
+			damageEffectTimer.addEventListener( TimerEvent.TIMER_COMPLETE, restoreNormalColor );
 			Invulnerable = false;
 			PrimaryWeapon = null;
-			WeaponBoundary = null;
+			WeaponBoundary = null; 
 			Boundary = null;
 			Velocity = null;
 		}
 		
+		private function restoreNormalColor( e:TimerEvent ):void
+		{
+			transform.colorTransform = normalColor;
+		}
+		
 		private function damEffectTimer( e:TimerEvent ):void
 		{
-			damageEffectTimer.delay = 1000;
 			if( damageEffectTimer.currentCount % 2 == 1 )
 			{
-				transform.colorTransform.redOffset += 200;
+				transform.colorTransform = damageColor;
 			}
 			else
 			{
-				transform.colorTransform.redOffset -= 200;
+				transform.colorTransform = normalColor;
 			}
+		}
+		
+		protected function DamageEffect( ):void
+		{
+				damageEffectTimer.reset();
+				damageEffectTimer.start();
 		}
 		
 		public function TakeDamage( amount:Number ):void
@@ -79,18 +95,15 @@ package src.Game_Frame
 			if( !Invulnerable )
 			{
 				Health -= amount - Defense;
+				
 				DamageEffect();
+				
 				if( Health <= 0 )
 				{
 					Explode();
 					IsDead = true;
 				}
 			}
-		}
-		
-		protected function DamageEffect( ):void
-		{
-			damageEffectTimer.start();
 		}
 		
 		/**
@@ -136,12 +149,12 @@ package src.Game_Frame
 		}
 		protected function DoCombatChecks():void
 		{
-			IsDead = (this.parent == null);
+			IsDead = (parent == null);
 		}
 		 
 		protected function DoBoundaryChecks():void
 		{
-			IsDead = (this.parent == null);
+			IsDead = (parent == null);
 		}
 		
 		protected function DoHealthChecks():void

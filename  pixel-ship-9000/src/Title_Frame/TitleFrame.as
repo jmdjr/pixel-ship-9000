@@ -35,7 +35,7 @@ package src.Title_Frame
 			{
 				x = 246/800 * this.myWidth;
 				y = 400/600 * this.myHeight;
-				addEventListener( MouseEvent.CLICK, ChangeToCustomFrame );
+				addEventListener( MouseEvent.CLICK, ChangeToTitleFrame );
 			}
 			
 			this.shootLogo = menuShootLogo( this.addChild( new menuShootLogo() ) );
