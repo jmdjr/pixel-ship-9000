@@ -139,7 +139,7 @@ package src.Game_Frame
 			
 			with( ship ) 
 			{
-				x = this.SpaceBG.width/2;
+				x = this.SpaceBG.width/2 + 100;
 				y = this.stage.stageHeight/2;
 				ResetHealth();
 			}
@@ -190,12 +190,6 @@ package src.Game_Frame
 					IsPlaying = true;
 				}
 				
-				//
-				
-				
-				// updating Ship
-				
-				
 				//**********************************************************************************************
 				//*  Update calls for all base objects under this frame's control
 				//**********************************************************************************************
@@ -206,6 +200,11 @@ package src.Game_Frame
 				ship.Update( tick );
 				level1.Update( tick );
 				shipHealthBar.ShowAPercentage( ship.HealthPercentage() );
+				
+				if( getChildIndex( shipHealthBar ) < numChildren-1 )
+				{
+					setChildIndex( shipHealthBar, numChildren-1 ); 
+				}
 				
 				if( ship.HealthPercentage() <= 0 )
 				{

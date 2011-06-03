@@ -23,7 +23,7 @@ package src.Game_Frame
 			FireRate = 1;
 			FireTimer = 0;
 			Attack = FullHealth;
-			PrimaryWeapon = new EnemyMissile();
+			PrimaryWeapon = null;
 			Velocity = new PhysVector2D();
 			FireDirection = new PhysVector2D();
 			
