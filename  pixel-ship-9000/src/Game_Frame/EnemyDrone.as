@@ -14,9 +14,10 @@ package src.Game_Frame
 		{
 			super();
 			FireRate = 1;
-			FullHealth = 1;
-			Health = 10;
-			Attack = FullHealth;
+			fullHealth = 1;
+			ResetHealth();
+			PrimaryWeapon = new EnemyMissile();
+			PrimaryWeapon.ProjectileDamage = 1;
 			_CurrentClass = EnemyDrone;
 		}
 		

@@ -15,8 +15,8 @@ package src.Game_Frame
 			PrimaryWeapon = new EnemyMissile();
 			fadeEffectTimer = 200;
 			alpha = 0;
-			this.Health = 5;
-			this.FullHealth = 5;
+			health = 5;
+			this.fullHealth = 5;
 		}
 		
 		/**
@@ -53,12 +53,12 @@ package src.Game_Frame
 				
 				if( ShipTop < Boundary.y || ShipBottom > 300 )
 				{
-					this.Velocity.Y *= -1;
+					this.velocity.Y *= -1;
 				}
 				
 				if( ShipLeft < Boundary.x || ShipRight > Boundary.width )
 				{
-					this.Velocity.X *= -1;
+					this.velocity.X *= -1;
 				}
 			}
 		}

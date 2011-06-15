@@ -11,16 +11,16 @@ package src.Game_Frame
 		{
 			super();
 			CollectedTargets = null;
-			this._CurrentClass = PlayerProjectile;
+			_CurrentClass = PlayerProjectile;
 		}
 		
-		public override function Update(tick:Event):void
+		public override function Update( tick:Event ):void
 		{
 			super.Update( tick );
 			
-			if(this.parent != null )
+			if( parent != null )
 			{
-				CollectedTargets = this.parent.getObjectsUnderPoint( new Point( this.x + this.Center.X, this.y + this.Center.Y ) );
+				CollectedTargets = parent.getObjectsUnderPoint( new Point( x, y ) );
 				
 				if( CollectedTargets != null && CollectedTargets.length > 0 )
 				{

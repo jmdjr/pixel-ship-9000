@@ -121,16 +121,16 @@
 				gameData.JB.Play( JukeBox.GAME_MUSIC );
 				RemoveLevelHint();
 			}
-			if( Time == 4 * stage.frameRate )
+			if( true && Time == 4 * stage.frameRate )
 			{
 				if( !BossMode )
 				{
-					BossReference = EnemyObject( parent.addChild( factory.Spawn( "BigBoss", 125, 125, PhysVector2D.ZERO, myShip ) ) );
+					BossReference = EnemyObject( parent.addChild( factory.Spawn( "BigBoss", 0, 0, PhysVector2D.ZERO, myShip ) ) );
 					BossReference.LoadBoundary( myShip.Boundary );
 				}
 				
 				BossMode = true;
-				if( BossReference != null && BossReference.isDead )
+				if( BossReference != null && BossReference.IsDead )
 				{
 					BossReference = null;
 					BossMode = false;
@@ -140,12 +140,15 @@
 			//e1
 			if( Time == 5 * stage.frameRate ) 
 			{
-				parent.addChild( factory.Spawn( "Drone", 250, 400, PhysVector2D.ZERO, myShip ) );
+				parent.addChild( factory.Spawn( "Jav", 250, 0, PhysVector2D.DOWN, myShip ) );
+				parent.addChild( factory.Spawn( "Jav", 0, 250, PhysVector2D.RIGHT, myShip ) );
+				parent.addChild( factory.Spawn( "Jav", 500, 300, PhysVector2D.LEFT, myShip ) );
+				parent.addChild( factory.Spawn( "Jav", 100, 600, PhysVector2D.UP, myShip ) );
 			}
 			//e2 e3
 			if( Time == 10 * stage.frameRate )
 			{ 
-				parent.addChild( factory.Spawn( "Jav", 150, 0, PhysVector2D.DOWN, myShip ) );
+				parent.addChild( factory.Spawn( "Jav", 0, 250, PhysVector2D.RIGHT, myShip ) );
 				parent.addChild( factory.Spawn( "Drone", 350, 0, PhysVector2D.DOWN, myShip ) );
 			}
 			//e4 e5 e6
@@ -370,7 +373,7 @@
 				}
 				
 				BossMode = true;
-				if( BossReference != null && BossReference.isDead )
+				if( BossReference != null && BossReference.IsDead )
 				{
 					BossReference = null;
 					BossMode = false;

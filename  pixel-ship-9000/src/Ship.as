@@ -19,8 +19,19 @@ package src
 		private var ModAttack;
 		private var ModSpeed;
 		private var ModDefense;
-		
 		private var MG:ModGrid;
+		
+		public override function Disappear():void
+		{
+			removeEventListener( Event.ENTER_FRAME, Update );
+			this.visible = false;
+		}
+		
+		public override function ResetHealth():void
+		{
+			super.ResetHealth();
+			this.visible = true;
+		}
 		
 		protected override function get Attack():Number
 		{
@@ -43,14 +54,12 @@ package src
 			isFiring = false;
 			canFire = false;
 			
-			Velocity = new PhysVector2D();
+			velocity = new PhysVector2D();
 			PrimaryWeapon = new Missile();
-			
-			Health = 5;
-			FullHealth = 5;
+			fullHealth = 10;
 			ShipSpeed = 3;
-			Defense = 1;
-			FireTimer = 0;
+			Defense = 0;
+			FireTimer = 1;
 			FireRate = 1;
 			
 			ModAttack = 0;
@@ -59,8 +68,8 @@ package src
 			
 			Boundary = null;
 			WeaponBoundary = null;
-			Attack = FullHealth;
-			
+			Attack = fullHealth;
+			ResetHealth();
 		}
 		
 		public override function Update( tick:Event ):void
@@ -145,8 +154,8 @@ package src
 		
 		public function HealthPercentage():Number
 		{
-			IsDead = false;
-			return Health / FullHealth;
+			isDead = false;
+			return health / fullHealth;
 		}
 		public function LoadBoundary( _bound:Rectangle, _bullet:Rectangle ):void
 		{
@@ -172,38 +181,38 @@ package src
 		// Movement functions for updating the direction of the ship's movement.
 		public function MoveNorth():void
 		{
-			Velocity.Y = -1;
+			velocity.Y = -1;
 		}
 		
 		public function MoveSouth():void
 		{
-			Velocity.Y = 1;
+			velocity.Y = 1;
 		}
 		
 		public function MoveEast():void
 		{
-			Velocity.X = 1;
+			velocity.X = 1;
 		}
 		
 		public function MoveWest():void
 		{
-			Velocity.X = -1;
+			velocity.X = -1;
 		}
 		
 		public function StopVertical():void
 		{
-			Velocity.Y = 0;
+			velocity.Y = 0;
 		}
 		
 		public function StopHorizontal():void
 		{
-			Velocity.X = 0;
+			velocity.X = 0;
 		}
 		
 		public function CorrectVelocity():void
 		{
-			Velocity.Normalize();
-			Velocity.Multiply( Speed );
+			velocity.Normalize();
+			velocity.Multiply( Speed );
 		}
 	}
 }
