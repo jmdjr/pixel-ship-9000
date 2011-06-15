@@ -22,9 +22,8 @@ package src.Game_Frame
 			Boundary = null;
 			FireRate = 1;
 			FireTimer = 0;
-			Attack = FullHealth;
 			PrimaryWeapon = null;
-			Velocity = new PhysVector2D();
+			velocity = new PhysVector2D();
 			FireDirection = new PhysVector2D();
 			
 		}
@@ -34,12 +33,12 @@ package src.Game_Frame
 			var temp:EnemyObject = new _CurrentClass();
 			temp.x = _x;
 			temp.y = _y;
-			temp.Velocity.Equal( _v.UnitV() );
-			
+			temp.velocity.Equal( _v.UnitV() );
 			temp.Initialize();
-			temp.Velocity.Multiply( temp.ShipSpeed );
+			temp.velocity.Multiply( temp.ShipSpeed );
+			
 			temp.LoadBoundary( Boundary, WeaponBoundary );
-			temp.FireDirection.Equal( temp.Velocity );
+			temp.FireDirection.Equal( _v );
 			
 			return temp;
 		}
@@ -51,18 +50,21 @@ package src.Game_Frame
 		
 		public function Initialize():void
 		{
-			addEventListener( Event.ADDED_TO_STAGE, Echo );
+			addEventListener( Event.ADDED_TO_STAGE, OnAddToStage );
 			addEventListener(Event.REMOVED_FROM_STAGE, Unloaded );
 		}
 		
-		private function Echo( test:Event )
+		private function OnAddToStage( test:Event )
 		{
-			stage.addEventListener( ShipObject.UPDATE_EVENT, Update );
+			// Made for an internally managed update.
+			//  this way enemies and items can be placed dynamically without any need
+			//  for additional memory usage, but still being able to manage their updates.
+			stage.addEventListener( ShipObject.MANAGED_UPDATE, Update );
 		}
 		
 		private function Unloaded( uload:Event ):void
 		{
-			stage.removeEventListener( ShipObject.UPDATE_EVENT, Update );
+			stage.removeEventListener( ShipObject.MANAGED_UPDATE, Update );
 		}
 		
 		public function LoadBoundary( _bound:Rectangle, _weaponBound:Rectangle = null ):void
@@ -94,16 +96,33 @@ package src.Game_Frame
 				}
 			}
 		}
-		
+
+		/**
+		 * Does Collision checks with the Ship
+		 */
 		protected function DoCollisionChecks():void
 		{
-			if( !IsDead && !Invulnerable &&  hitTestObject( ShipReference ) )
+			if( !IsDead && hitTestObject( ShipReference ) )
 			{
-				ShipReference.DealDamage( this );
-				DealDamage( ShipReference );
+				if( !Invulnerable )
+				{
+					ShipReference.DealDamage( this );
+					DealDamage( ShipReference );
+				}
+				
+				var centersVector:PhysVector2D = PhysVector2D.Subtract( velocity, ShipReference.Velocity );
+				var throwDistance:Number = ( height + width + ShipReference.height + ShipReference.width ) / 4;
+				centersVector.Normalize();
+				centersVector.Multiply( throwDistance );
+				ShipReference.x += centersVector.X;
+				ShipReference.y += centersVector.Y;
 			}
 		}
 		
+		/**
+		 * Does combat checks, ensuring that enemy can fire its primary weapons
+		 *   override this to include additional attacks, throttle fire speeds, etc.
+		 * */
 		protected override function DoCombatChecks():void
 		{
 			super.DoCombatChecks();
@@ -118,10 +137,12 @@ package src.Game_Frame
 			}
 		}
 		
+		/**
+		 * Update that adds the collision checks for the ship.
+		 * */
 		public override function Update( tick:Event ):void
 		{
 			super.Update( tick );
-			
 			if( !IsDead ) DoCollisionChecks();
 		}
 	}

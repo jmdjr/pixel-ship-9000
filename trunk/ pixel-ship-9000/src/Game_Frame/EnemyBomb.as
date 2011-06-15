@@ -9,10 +9,10 @@ package src.Game_Frame
 			super();
 			Speed = 1;
 			FireRate = 1;
-			FullHealth = 5;
-			Health = 5;
+			fullHealth = 5;
+			health = 5;
 			
-			Attack = FullHealth;
+			Attack = fullHealth;
 			_CurrentClass = EnemyBomb;
 			PrimaryWeapon = new EBombSplosion();
 		}

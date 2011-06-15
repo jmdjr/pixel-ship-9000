@@ -194,7 +194,7 @@ package src.Game_Frame
 				//*  Update calls for all base objects under this frame's control
 				//**********************************************************************************************
 				timeTracker += 1;
-				dispatchEvent( new Event( ShipObject.UPDATE_EVENT, true ) );
+				dispatchEvent( new Event( ShipObject.MANAGED_UPDATE, true ) );
 				
 				SpaceBG.Update( tick );
 				ship.Update( tick );

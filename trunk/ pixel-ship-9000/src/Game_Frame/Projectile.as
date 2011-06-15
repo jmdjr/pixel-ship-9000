@@ -9,13 +9,12 @@ package src.Game_Frame
 	
 	public class Projectile extends MovieClip
 	{
-		protected var Center:PhysVector2D;     // Internal reference to the center of the Projectile
+		protected var Center:PhysVector2D;     	// Internal reference to the center of the Projectile
 		protected var Velocity:PhysVector2D;    // The direction of the Projectile
 		protected var Damage:Number;            // The amount of damage the Projectile can cause
-		protected var Boundary:Rectangle;      // The restrictive boundary determining when the Projectile should be removed
-		protected var speed:Number;			// The speed of the Projectile.  accessors used to update Velocity.
-		
-		protected var _CurrentClass:Class;    // An internal reference to the current class for spawning
+		protected var Boundary:Rectangle;      	// The restrictive boundary determining when the Projectile should be removed
+		protected var speed:Number;				// The speed of the Projectile.  accessors used to update Velocity.
+		protected var _CurrentClass:Class;    	// An internal reference to the current class for spawning
 		
 		public function Projectile()
 		{
@@ -52,6 +51,7 @@ package src.Game_Frame
 			temp.Velocity.Equal( _v.UnitV() );
 			temp.Velocity.Normalize();
 			temp.Velocity.Multiply( temp.speed );
+			temp.Damage = Damage;
 			temp.Initialize();
 			
 			return temp;
@@ -71,12 +71,12 @@ package src.Game_Frame
 		
 		private function Echo( test:Event )
 		{
-			stage.addEventListener( ShipObject.UPDATE_EVENT, Update );
+			stage.addEventListener( ShipObject.MANAGED_UPDATE, Update );
 		}
 		
 		private function Unloaded( uload:Event ):void
 		{
-			stage.removeEventListener( "Test", Update );
+			stage.removeEventListener( ShipObject.MANAGED_UPDATE, Update );
 		}
 		
 		public function Update( tick:Event ):void
@@ -103,11 +103,18 @@ package src.Game_Frame
 		public function Disappear():void
 		{
 			removeEventListener(Event.ENTER_FRAME, Update );
+			
 			if( parent != null )
 			{
 				parent.removeChild( this );
 			}
 		}
+		
+		public function set ProjectileDamage( _d:Number ):void
+		{
+			Damage = _d;
+		}
+		
 	}
 }
 

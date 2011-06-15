@@ -1,7 +1,5 @@
 package src.Game_Frame
 {
-	
-	
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
@@ -14,7 +12,7 @@ package src.Game_Frame
 	
 	public class ShipObject extends MovieClip
 	{
-		public static var UPDATE_EVENT:String = "UPDATE_MANAGED";
+		public static var MANAGED_UPDATE:String = "ManagedUpdate";
 		public var Boundary:Rectangle;
 		
 		protected var WeaponBoundary:Rectangle;
@@ -23,12 +21,12 @@ package src.Game_Frame
 		protected var FireRate:Number;
 		protected var CanFire:Boolean;
 		
-		protected var Health:Number;
-		protected var FullHealth:Number;
-		protected var IsDead:Boolean;
-		protected var Invulnerable:Boolean;
+		protected var health:Number;
+		protected var fullHealth:Number;
+		protected var isDead:Boolean;
+		protected var invulnerable:Boolean;
 		
-		protected var Velocity:PhysVector2D;
+		protected var velocity:PhysVector2D;
 		protected var IsStopped:Boolean;
 		
 		protected var defense:Number;
@@ -43,28 +41,28 @@ package src.Game_Frame
 		{
 			super();
 			IsStopped = false;
-			IsDead = false;
+			isDead = false;
 			
 			FireRate = 1;
 			FireTimer = 0;
-			Health = 1;
-			FullHealth = 1;
+			fullHealth = 1;
 			defense = 0;
 			attack = 1;
 			speed = 1;
 			
+			ResetHealth();
 			normalColor = new ColorTransform();
 			damageColor = new ColorTransform( 1, 1, 1, 1, 255, -255, -255 );
 			transform.colorTransform = normalColor;
 			
-			damageEffectTimer = new Timer(50, 5);
+			damageEffectTimer = new Timer(10, 5);
 			damageEffectTimer.addEventListener( TimerEvent.TIMER, damEffectTimer );
 			damageEffectTimer.addEventListener( TimerEvent.TIMER_COMPLETE, restoreNormalColor );
-			Invulnerable = false;
+			invulnerable = false;
 			PrimaryWeapon = null;
 			WeaponBoundary = null; 
 			Boundary = null;
-			Velocity = null;
+			velocity = null;
 		}
 		
 		private function restoreNormalColor( e:TimerEvent ):void
@@ -95,13 +93,12 @@ package src.Game_Frame
 			if( !Invulnerable )
 			{
 				Health -= amount - Defense;
-				
 				DamageEffect();
 				
 				if( Health <= 0 )
 				{
 					Explode();
-					IsDead = true;
+					isDead = true;
 				}
 			}
 		}
@@ -122,7 +119,11 @@ package src.Game_Frame
 		{
 			removeEventListener( Event.ENTER_FRAME, Update );
 			parent.removeChild( this );
-			IsDead = true;
+			while( numChildren > 0 )
+			{
+				removeChildAt( 0 );
+			}
+			isDead = true;
 		}
 		
 		public function Explode():void
@@ -140,21 +141,21 @@ package src.Game_Frame
 		{
 			if( !IsStopped )
 			{
-				Velocity.Normalize();
-				Velocity.Multiply( Speed );
+				velocity.Normalize();
+				velocity.Multiply( Speed );
 				
-				x += Velocity.X;
-				y += Velocity.Y;
+				x += velocity.X;
+				y += velocity.Y;
 			}
 		}
 		protected function DoCombatChecks():void
 		{
-			IsDead = (parent == null);
+			isDead = ( parent == null );
 		}
 		 
 		protected function DoBoundaryChecks():void
 		{
-			IsDead = (parent == null);
+			isDead = ( parent == null );
 		}
 		
 		protected function DoHealthChecks():void
@@ -181,10 +182,9 @@ package src.Game_Frame
 		}
 		
 		
-		
 		public function ResetHealth():void
 		{
-			Health = FullHealth;
+			Health = fullHealth;
 		}
 		
 		protected function get Speed():Number
@@ -214,9 +214,18 @@ package src.Game_Frame
 			defense = d;
 		}
 		
-		public function get isDead():Boolean
+		public function get Health():Number
 		{
-			return IsDead;
+			return health;
+		}
+		public function set Health( _h:Number ):void
+		{
+			health = _h;
+		}
+		
+		public function get IsDead():Boolean
+		{
+			return isDead;
 		}
 		
 		public function get ShipSpeed():Number
@@ -227,6 +236,21 @@ package src.Game_Frame
 		public function set ShipSpeed( s:Number ):void
 		{
 			Speed = s;
+		}
+		
+		public function get Invulnerable():Boolean
+		{
+			return invulnerable;
+		}
+		
+		public function set Invulnerable( _b:Boolean ):void
+		{
+			invulnerable = _b;
+		}
+		
+		public function get Velocity():PhysVector2D
+		{
+			return this.velocity;
 		}
 	}
 }
