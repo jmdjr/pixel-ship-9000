@@ -8,8 +8,8 @@ package src.Game_Frame
 		{
 			super();
 			_CurrentClass = Level1_Boss_Bullet_Real;
-			this.Damage = 2;
-			this.speed = 1;
+			Damage = 2;
+			speed = 3;
 		}
 	}
 }

@@ -111,7 +111,7 @@ package src.Game_Frame
 				}
 				
 				var centersVector:PhysVector2D = PhysVector2D.Subtract( velocity, ShipReference.Velocity );
-				var throwDistance:Number = ( height + width + ShipReference.height + ShipReference.width ) / 4;
+				var throwDistance:Number = ( height + width + ShipReference.height + ShipReference.width ) / 8;
 				centersVector.Normalize();
 				centersVector.Multiply( throwDistance );
 				ShipReference.x += centersVector.X;
