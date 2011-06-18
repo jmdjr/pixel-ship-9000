@@ -210,7 +210,7 @@ package src.Game_Frame
 				{
 					CleanUp();
 					gameData.JB.Stop();
-					dispatchEvent( new Event( Frames.TITLE, true ) );
+					dispatchEvent( new Event( Frames.CUSTOM, true ) );
 				}
 			}
 		}

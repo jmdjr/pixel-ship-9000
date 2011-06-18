@@ -65,57 +65,7 @@ package src.Game_Frame.Customize_Frame
 		
 		public function ResetFrame():void
 		{
-			var CenteringX = 0;
-			var CenteringY = 0;
 			
-			if( stage != null )
-			{
-				CenteringX = stage.stageWidth;
-				CenteringY = stage.stageHeight;
-			}
-			else
-			{
-				CenteringX = background.width;
-				CenteringY = background.height;
-			}
-				
-			if( !contains( background ))
-			{
-				addChild( background );
-				with( background )
-				{
-					x = CenteringX/2;
-					y = CenteringY/2;
-				}
-			}
-			
-			if( !contains( BTMainMenu ))
-			{
-				addChild( BTMainMenu );
-				with( BTMainMenu )
-				{
-					x = background.x - 159.10; 
-					y = background.y + 194.70;
-					addEventListener( MouseEvent.CLICK, returnMainMenu );
-				}
-			}
-			
-			if( !contains( ShipReference ) )
-			{
-				addChild( ShipReference );
-				ShipReference.x = width/2;
-				ShipReference.y = height/2;
-			}
-			
-			if( !contains( BTPlayAgain ))
-			{
-				addChild( BTPlayAgain );
-				with( BTPlayAgain )
-				{
-					BTPlayAgain.SetPositionIf( DidShipDie );
-					addEventListener( MouseEvent.CLICK, returnPlayAgain ); 
-				}
-			}
 		}
 		
 		

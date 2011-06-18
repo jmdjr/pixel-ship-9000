@@ -53,7 +53,7 @@ package src.Game_Frame
 		{
 			super.Update( tick );
 			
-			if( !HitPlayer && PlayerReference != null && hitTestObject( PlayerReference ) )
+			if( !HitPlayer && PlayerReference != null &&  hitTestPoint( PlayerReference.x, PlayerReference.y, true ) )
 			{
 				HitPlayer = true;
 				PlayerReference.TakeDamage( Damage );
