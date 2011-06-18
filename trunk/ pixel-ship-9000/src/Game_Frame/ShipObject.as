@@ -230,7 +230,7 @@ package src.Game_Frame
 		
 		public function get ShipSpeed():Number
 		{
-			return Speed;
+			return Speed; 
 		}
 		
 		public function set ShipSpeed( s:Number ):void

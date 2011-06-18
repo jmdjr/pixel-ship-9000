@@ -25,17 +25,18 @@ package src.Game_Frame
 		
 		public function doCombatCheck():void
 		{
+			FireDirection.Equal( velocity );
 			super.DoCombatChecks();
 		}
 		public function doMoveChecks():void
 		{
 			super.DoMoveChecks();
 		}
-		
-		protected override function DoBoundaryChecks():void
+
+		protected override function DoCombatChecks():void
 		{}
 		
-		protected override function DoCombatChecks():void
+		protected override function DoBoundaryChecks():void
 		{}
 		
 		protected override function DoMoveChecks():void
