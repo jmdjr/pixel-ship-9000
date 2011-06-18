@@ -7,9 +7,10 @@ package src.Game_Frame
 		public function Level1_Boss_Bullet_Real()
 		{
 			super();
+			addChild( new Level1_Boss_Bullet().getChildAt(0) );
 			_CurrentClass = Level1_Boss_Bullet_Real;
 			Damage = 2;
-			speed = 3;
+			speed = 2;
 		}
 	}
 }

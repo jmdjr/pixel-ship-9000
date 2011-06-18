@@ -9,7 +9,7 @@ package src.Game_Frame
 			super();
 			_CurrentClass = Level1_Boss_Phantom;
 			PrimaryWeapon = new Level1_Boss_Bullet_Phantom();
-			speed = 1;
+			speed = 0.5;
 			Invulnerable = true;
 		}
 		

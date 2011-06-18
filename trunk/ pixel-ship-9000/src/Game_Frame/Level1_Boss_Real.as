@@ -30,16 +30,20 @@ package src.Game_Frame
 			ResetHealth();
 			addEventListener( Event.ADDED, LoadPhantom );
 			stateStep = 0;
-			speed = 1;
-			this.invulnerable = true;
+			speed = 0.5;
+			invulnerable = true;
 		}
 		
 		private function LoadPhantom( e:Event ):void
 		{
-			this.removeEventListener( Event.ADDED, LoadPhantom );
+			removeEventListener( Event.ADDED, LoadPhantom );
 			PhantomBoss.Initialize();
+			PhantomBoss.LoadBoundary( Boundary, WeaponBoundary );
 			PhantomBoss.LoadPlayerReference( ShipReference );
 			parent.addChild( PhantomBoss );
+			parent.addChildAt( this, parent.getChildIndex( ShipReference ) + 1);
+			parent.addChildAt( PhantomBoss, parent.getChildIndex( ShipReference ) + 1);
+			
 			RestartPlay();
 		}
 		
@@ -56,12 +60,12 @@ package src.Game_Frame
 				PhantomBoss.setVelocity = PhysVector2D.UP;
 				
 				PhantomBoss.x = 375;
-				PhantomBoss.y = 675;
+				PhantomBoss.y = 650;
 			}
 			else
 			{
 				x = 375;
-				y = 675;
+				y = 650;
 				
 				TopLeftPosition = false;
 				
