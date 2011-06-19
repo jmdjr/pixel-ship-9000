@@ -62,6 +62,14 @@ package src.Game_Frame
 				}
 			}
 		}
+		
+		protected override function DoCombatChecks():void
+		{
+			if( FireTimer % ( stage.frameRate / FireRate ) == 0 )
+			{
+				super.DoCombatChecks();
+			}
+		}
 	}
 }
 

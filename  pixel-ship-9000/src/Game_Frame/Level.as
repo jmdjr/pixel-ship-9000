@@ -125,7 +125,7 @@
 			{
 				if( !BossMode )
 				{
-					BossReference = EnemyObject( parent.addChild( factory.Spawn( "BigBoss", 0, 0, PhysVector2D.ZERO, myShip ) ) );
+					BossReference = EnemyObject( parent.addChild( factory.Spawn( "MidBoss", 250, 250, new PhysVector2D( 1, -1 ), myShip ) ) );
 					BossReference.LoadBoundary( myShip.Boundary );
 				}
 				

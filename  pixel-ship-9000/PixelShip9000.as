@@ -39,11 +39,7 @@ package
 			
 			gameFrame.LoadShipReference( masterShipReference );
 			customFrame.LoadShipReference( masterShipReference );
-			if( stage != null )
-			{
-				customFrame.x = stage.stageWidth / 2;
-				customFrame.y = stage.stageHeight / 2;
-			}
+
 			
 			addEventListener( Frames.GAME, gotoGameFrame );
 			addEventListener( Frames.CUSTOM, gotoCustomizeFrame );
@@ -101,6 +97,12 @@ package
 			
 			this.customFrame.visible = true;
 			this.customFrame.enabled = true;
+			
+			if( stage != null )
+			{
+				customFrame.x = stage.stageWidth / 2;
+				customFrame.y = stage.stageHeight / 2;
+			}
 			
 			this.addChild( this.customFrame );
 		}
