@@ -4,6 +4,8 @@ package src.Game_Frame
 	
 	import UnfriendlyRave.mp3;
 	
+	import fl.motion.Color;
+	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -12,6 +14,9 @@ package src.Game_Frame
 	import flash.geom.Rectangle;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
+	import flash.text.StyleSheet;
+	import flash.text.TextField;
+	import flash.text.engine.TextBlock;
 	import flash.ui.Keyboard;
 	
 	import src.Background;
@@ -33,6 +38,7 @@ package src.Game_Frame
 		var gameData:GameDataTracker;
 		var timeTracker:Number;
 		var shipHealthBar:ShipHealthMeterDisplay;
+		var shipHBText:TextField;
 		
 		var SpaceBG:Background;
 		var ship:Ship;
@@ -48,7 +54,6 @@ package src.Game_Frame
 		var pauseText:Pause_Text;
 		
 		var fps:FrameRate;
-		var viewport:Sprite;
 		
 		public function GameFrame()
 		{
@@ -61,8 +66,7 @@ package src.Game_Frame
 			addEventListener( Event.ADDED_TO_STAGE, Loaded );
 			paused = false;
 			pauseText = new Pause_Text();
-			
-			
+			shipHBText = new TextField();
 		}
 		
 		public function Loaded( e:Event ):void
@@ -80,6 +84,8 @@ package src.Game_Frame
 			ship.LoadBoundary( shipBound, enemyBound );
 			ship.LoadGameData( gameData );
 			ResetFrame();
+			shipHBText.defaultTextFormat.color = new Color( 0xFF0000 );
+			shipHBText.defaultTextFormat.size = new int(16);
 			
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, KeyPressed );
 			stage.addEventListener( KeyboardEvent.KEY_UP, KeyReleased );
@@ -125,6 +131,18 @@ package src.Game_Frame
 				addChild( fps );
 			}
 			
+			with( shipHBText )
+			{
+				text = "Ship Health";
+				x = 5;
+				y = height / 2 + 5;
+			}
+			
+			if( !contains( shipHBText ) )
+			{
+				addChild( shipHBText );
+			}
+			
 			with( shipHealthBar )
 			{ 
 				rotation = -90;
@@ -139,7 +157,7 @@ package src.Game_Frame
 			
 			with( ship ) 
 			{
-				x = this.SpaceBG.width/2 + 100;
+				x = this.SpaceBG.width/2;
 				y = this.stage.stageHeight/2;
 				ResetHealth();
 			}
@@ -210,7 +228,7 @@ package src.Game_Frame
 				{
 					CleanUp();
 					gameData.JB.Stop();
-					dispatchEvent( new Event( Frames.CUSTOM, true ) );
+					dispatchEvent( new Event( Frames.TITLE, true ) );
 				}
 			}
 		}
