@@ -88,12 +88,12 @@ package
 		
 		private function gotoCustomizeFrame( event:Event ):void
 		{
-			while( this.numChildren > 0 )
+			/*while( this.numChildren > 0 )
 			{
 				var SomeFrame:MovieClip = MovieClip( this.removeChildAt(0) );
 				SomeFrame.visible = false;
 				SomeFrame.enabled = false;
-			}
+			}*/
 			
 			this.customFrame.visible = true;
 			this.customFrame.enabled = true;
