@@ -4,8 +4,8 @@ package src
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
-	import src.Game_Frame.Missile;
 	import src.Game_Frame.Customize_Frame.ModGrid;
+	import src.Game_Frame.Missile;
 	import src.Game_Frame.Projectile;
 	import src.Game_Frame.ShipObject;
 	import src.PhysVector2D;
@@ -150,6 +150,11 @@ package src
 		public function KilledEnemy():void
 		{
 			gameData.EnemyKill();
+		}
+		
+		public function AddScrap( scrapToAdd:Number ):void
+		{
+			gameData.AddScrap( scrapToAdd );
 		}
 		
 		public function HealthPercentage():Number

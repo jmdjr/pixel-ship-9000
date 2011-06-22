@@ -15,6 +15,7 @@ package src.Game_Frame
 			super();
 			FireRate = 1;
 			fullHealth = 1;
+			scrapAmount = fullHealth;
 			ResetHealth();
 			PrimaryWeapon = new EnemyMissile();
 			PrimaryWeapon.ProjectileDamage = 1;

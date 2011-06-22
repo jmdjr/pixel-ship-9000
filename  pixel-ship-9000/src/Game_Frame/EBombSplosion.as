@@ -21,14 +21,14 @@ package src.Game_Frame
 		{
 			super();
 			_CurrentClass = EBombSplosion;
-			
+			Damage = 2;
 			GrowToScale = 1;
-			SpinBy = 30;
+			SpinBy = 20;
 			TimeLast = 2;
 			Timer = 0;
-			Interval = 1;
-			DimBy = 0.01;
-			Damage = 2;
+			Interval = 0.5;
+			DimBy = 0.02;
+			
 			GrowDiff = GrowToScale/TimeLast;
 		}
 		

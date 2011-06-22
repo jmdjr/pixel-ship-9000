@@ -79,15 +79,24 @@ package src.Game_Frame.Customize_Frame
 				{
 					this.BTPlayAgain = playAgainButton( testObject );
 				}
-				else if( testObject is ModGridCustomizer )
+				else 
+					if( testObject is ModGridCustomizer )
 				{
 					this.MGC = ModGridCustomizer( testObject );
 				}
-				else if( testObject is ContinueButton )
+				else 
+					if( testObject is ContinueButton )
 				{
 					this.BTContinue = ContinueButton( testObject );
 				}
-				else if( testObject is TextObject )
+				else
+					if( testObject is ModPixel )
+					{
+						this.BuyRED = testObject;
+					}
+				else
+					
+					if( testObject is TextObject )
 				{
 					assignTextObjects( TextObject( testObject ) );
 				}

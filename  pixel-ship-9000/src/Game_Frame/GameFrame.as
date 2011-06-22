@@ -16,6 +16,7 @@ package src.Game_Frame
 	import flash.media.SoundChannel;
 	import flash.text.StyleSheet;
 	import flash.text.TextField;
+	import flash.text.TextFormat;
 	import flash.text.engine.TextBlock;
 	import flash.ui.Keyboard;
 	
@@ -39,6 +40,7 @@ package src.Game_Frame
 		var timeTracker:Number;
 		var shipHealthBar:ShipHealthMeterDisplay;
 		var shipHBText:TextField;
+		var shipPixelCount:TextField;
 		
 		var SpaceBG:Background;
 		var ship:Ship;
@@ -67,6 +69,7 @@ package src.Game_Frame
 			paused = false;
 			pauseText = new Pause_Text();
 			shipHBText = new TextField();
+			shipPixelCount = new TextField();
 		}
 		
 		public function Loaded( e:Event ):void
@@ -84,8 +87,14 @@ package src.Game_Frame
 			ship.LoadBoundary( shipBound, enemyBound );
 			ship.LoadGameData( gameData );
 			ResetFrame();
-			shipHBText.defaultTextFormat.color = new Color( 0xFF0000 );
-			shipHBText.defaultTextFormat.size = new int(16);
+			var textformat:TextFormat = new TextFormat( "BM mini", 16 );
+			var textcolor:ColorTransform = new ColorTransform( 1, 1, 1, 1, 255 );
+			
+			shipHBText.defaultTextFormat = textformat;	
+			shipHBText.transform.colorTransform = textcolor;
+			
+			shipPixelCount.defaultTextFormat = textformat;
+			shipPixelCount.transform.colorTransform = textcolor;
 			
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, KeyPressed );
 			stage.addEventListener( KeyboardEvent.KEY_UP, KeyReleased );
@@ -96,6 +105,16 @@ package src.Game_Frame
 		public function LoadShipReference( sr:Ship ):void
 		{
 			ship = sr;
+		}
+		
+		public function UpdateScrapText():void
+		{
+			with( shipPixelCount )
+			{
+				text = "Scrap: " + this.gameData.Scrap.toString();
+				x = this.stage.stageWidth - ( shipHBText.x + textWidth );
+				y = shipHBText.y;
+			}
 		}
 		 
 		/**
@@ -114,11 +133,6 @@ package src.Game_Frame
 				y = startY; 
 				scrollRate = 10;
 			}
-		
-			if( !contains( SpaceBG ) )
-			{
-				addChild( SpaceBG );
-			}
 			
 			with( fps )
 			{
@@ -126,33 +140,25 @@ package src.Game_Frame
 				fps.y = 100;
 			}
 			
-			if( !contains( fps ) )
-			{
-				addChild( fps );
-			}
-			
 			with( shipHBText )
 			{
-				text = "Ship Health";
+				text = "Health";
 				x = 5;
-				y = height / 2 + 5;
+				y = 5;
 			}
 			
-			if( !contains( shipHBText ) )
+			with( shipPixelCount )
 			{
-				addChild( shipHBText );
+				text = "Scrap: " + this.gameData.Scrap.toString();
+				x = this.stage.stageWidth - ( shipHBText.x + textWidth );
+				y = shipHBText.y;
 			}
 			
 			with( shipHealthBar )
 			{ 
 				rotation = -90;
-				x = width / 2 + 5;
-				y = height + 5;
-			}
-			
-			if( !contains( shipHealthBar ) )
-			{
-				addChild( shipHealthBar );
+				x = width / 2 + shipHBText.textWidth / 2;
+				y = height + shipHBText.y + shipHBText.textHeight;
 			}
 			
 			with( ship ) 
@@ -162,12 +168,47 @@ package src.Game_Frame
 				ResetHealth();
 			}
 			
+			with( pauseText )
+			{
+				enabled = false;
+				visible = false;
+				x = this.stage.stageWidth / 2;
+				y = this.stage.stageHeight / 2;
+			}
+			
+			UpdateScrapText();
+			level1.Reset();
+			
+			if( !contains( fps ) )
+			{
+				addChild( fps );
+			}
+			
+			if( !contains( SpaceBG ) )
+			{
+				addChild( SpaceBG );
+			}
+			
+			if( !contains( shipHBText ) )
+			{
+				addChild( shipHBText );
+			}
+			
+			if( !contains( shipPixelCount ) )
+			{
+				addChild( shipPixelCount );
+			}
+			
+			if( !contains( shipHealthBar ) )
+			{
+				addChild( shipHealthBar );
+			}
+			
 			if( !contains( ship ) )
 			{
 				addChild( ship );
 			}
 			
-			level1.Reset();
 			if( !contains( level1 ) )
 			{
 				addChild( level1 );
@@ -176,14 +217,6 @@ package src.Game_Frame
 			if( !contains( pauseText ))
 			{
 				addChild( pauseText );
-			}
-			
-			with( pauseText )
-			{
-				enabled = false;
-				visible = false;
-				x = this.stage.stageWidth / 2;
-				y = this.stage.stageHeight / 2;
 			}
 		}
 		
@@ -217,7 +250,9 @@ package src.Game_Frame
 				SpaceBG.Update( tick );
 				ship.Update( tick );
 				level1.Update( tick );
+				
 				shipHealthBar.ShowAPercentage( ship.HealthPercentage() );
+				UpdateScrapText();
 				
 				if( getChildIndex( shipHealthBar ) < numChildren-1 )
 				{

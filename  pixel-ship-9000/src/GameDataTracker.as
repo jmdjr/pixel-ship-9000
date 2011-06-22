@@ -16,8 +16,6 @@ package src
 		public var JB:JukeBox;
 		private var CurrentLevel:Level;
 		
-		
-		
 		public function GameDataTracker()
 		{
 			ShotsFired = 0; 
@@ -49,7 +47,17 @@ package src
 		{
 			CurrentScrap += _s;
 		}
-
+		
+		public function SpendScrap( _s:Number ):Boolean
+		{
+			if( _s > CurrentScrap )
+			{
+				return false;
+			}
+			
+			CurrentScrap -= _s;
+			return true;
+		}
 		
 		public function CalcScore():void
 		{
