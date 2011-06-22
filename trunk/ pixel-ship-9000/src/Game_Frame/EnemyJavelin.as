@@ -17,6 +17,7 @@ package src.Game_Frame
 			FireRate = 1;
 			FireTimer = 1;
 			fullHealth = 3;
+			scrapAmount = fullHealth;
 			ResetHealth();
 			HasFired = false;
 			PrimaryWeapon = new Javbeam();

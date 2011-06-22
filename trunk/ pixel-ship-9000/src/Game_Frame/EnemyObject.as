@@ -9,7 +9,8 @@ package src.Game_Frame
 	
 	public class EnemyObject extends ShipObject
 	{
-		public var ShipReference:Ship;
+		public static var ShipReference:Ship;
+		public var scrapAmount:Number;
 		
 		protected var _CurrentClass:Class;    // An internal reference to the current class for spawning
 		protected var FireDirection:PhysVector2D;
@@ -26,6 +27,7 @@ package src.Game_Frame
 			velocity = new PhysVector2D();
 			FireDirection = new PhysVector2D();
 			
+			scrapAmount = 1;
 		}
 		
 		public function Spawn( _x:Number, _y:Number, _v:PhysVector2D ):EnemyObject
@@ -144,6 +146,13 @@ package src.Game_Frame
 		{
 			super.Update( tick );
 			if( !IsDead ) DoCollisionChecks();
+		}
+		
+		public override function Explode():void
+		{
+			Scrapnul_Spawn.Spawn_Scraps( this, parent, scrapAmount );
+			ShipReference.AddScrap( scrapAmount );
+			super.Explode();
 		}
 	}
 }

@@ -11,6 +11,7 @@ package src.Game_Frame
 			FireRate = 1;
 			fullHealth = 5;
 			health = 5;
+			scrapAmount = fullHealth;
 			
 			Attack = fullHealth;
 			_CurrentClass = EnemyBomb;
