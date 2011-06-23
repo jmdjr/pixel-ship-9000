@@ -163,6 +163,7 @@ package src.Game_Frame
 			if( stage != null && ( x > width + stage.stageWidth || y > height + stage.stageHeight ) )
 			{
 				RestartPlay();
+				PhantomBoss.Hidden = true;
 			}
 		}
 		
@@ -194,23 +195,22 @@ package src.Game_Frame
 				{
 					velocity.Equal( PhysVector2D.ZERO );
 					PhantomBoss.setVelocity = PhysVector2D.ZERO;
+					
 					stateStep = 1;
 				}
 			}
 			else if( stateStep == 1 )
 			{
 				MakePhantomBlink();
-				this.invulnerable = false;
+				PhantomBoss.Hidden = false;
+				invulnerable = false;
 			}
-			else if( stateStep == 2 )
+			else if( stateStep == 2 && MyTimer == null )
 			{
-				if( MyTimer == null )
-				{
-					DecideWhichDirectionToMove();
-					FireDirection.Equal( velocity );
-					super.DoCombatChecks();
-					PhantomBoss.doCombatCheck();
-				}
+				DecideWhichDirectionToMove();
+				FireDirection.Equal( velocity );
+				super.DoCombatChecks();
+				PhantomBoss.doCombatCheck();
 			}
 			else if( stateStep == 3 )
 			{
