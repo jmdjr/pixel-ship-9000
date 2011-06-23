@@ -16,14 +16,10 @@ package src.Game_Frame
 			fadeEffectTimer = 200;
 			alpha = 0;
 			health = 5;
-			this.fullHealth = 5;
+			scrapAmount = 25;
+			fullHealth = 5;
 		}
 		
-		/**
-		 *  
-		 * @param tick
-		 * 
-		 */
 		public override function Update( tick:Event ):void
 		{
 			if( fadeEffectTimer > 0 && 

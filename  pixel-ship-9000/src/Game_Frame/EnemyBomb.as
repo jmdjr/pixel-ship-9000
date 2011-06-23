@@ -1,6 +1,8 @@
 package src.Game_Frame
 {
 	import flash.events.Event;
+	
+	import src.PhysVector2D;
 
 	public class EnemyBomb extends EnemyObject
 	{
@@ -11,7 +13,7 @@ package src.Game_Frame
 			FireRate = 1;
 			fullHealth = 5;
 			health = 5;
-			scrapAmount = fullHealth;
+			scrapAmount = 1;
 			
 			Attack = fullHealth;
 			_CurrentClass = EnemyBomb;
@@ -21,6 +23,13 @@ package src.Game_Frame
 		public override function Update(tick:Event):void
 		{
 			super.Update( tick );
+		}
+		
+		public override function Spawn(_x:Number, _y:Number, _v:PhysVector2D):EnemyObject
+		{
+			var temp:EnemyObject = super.Spawn( _x, _y, _v );
+			temp.rotation = 0;
+			return temp;
 		}
 		
 		protected override function DoCombatChecks():void

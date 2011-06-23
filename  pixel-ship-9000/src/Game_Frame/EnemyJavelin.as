@@ -17,36 +17,10 @@ package src.Game_Frame
 			FireRate = 1;
 			FireTimer = 1;
 			fullHealth = 3;
-			scrapAmount = fullHealth;
+			scrapAmount = 2;
 			ResetHealth();
 			HasFired = false;
 			PrimaryWeapon = new Javbeam();
-		}
-		
-		public override function Spawn(_x:Number, _y:Number, _v:PhysVector2D):EnemyObject
-		{
-			var temp:EnemyObject = super.Spawn( _x, _y, _v );
-			
-			switch( _v )
-			{
-				case PhysVector2D.LEFT:
-					temp.rotation = 90;
-					break;
-				
-				case PhysVector2D.RIGHT:
-					temp.rotation = -90;
-					break;
-				
-				case PhysVector2D.UP:
-					temp.rotation = 180;
-					break;
-				
-				default:
-					temp.rotation = 0;
-					break;
-			}
-			
-			return temp;
 		}
 		
 		protected override function DoCombatChecks():void

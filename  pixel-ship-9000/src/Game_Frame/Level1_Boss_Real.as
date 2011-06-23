@@ -31,6 +31,7 @@ package src.Game_Frame
 			addEventListener( Event.ADDED, LoadPhantom );
 			stateStep = 0;
 			speed = 0.5;
+			scrapAmount = 25;
 			invulnerable = true;
 		}
 		
