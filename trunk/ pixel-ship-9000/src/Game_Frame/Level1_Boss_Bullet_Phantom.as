@@ -9,6 +9,7 @@ package src.Game_Frame
 			_CurrentClass = Level1_Boss_Bullet_Phantom;
 			this.Damage = 0;
 			speed = 2;
+			this.HitPlayer = true;
 		}
 	}
 }

@@ -121,9 +121,23 @@
 				gameData.JB.Play( JukeBox.GAME_MUSIC );
 				RemoveLevelHint();
 			}
-			
+			if( Time == 5 * stage.frameRate )
+			{
+				if( !BossMode )
+				{
+					BossReference = EnemyObject( parent.addChild( factory.Spawn( "BigBoss", 250, 250, new PhysVector2D( 1, -1 ), myShip ) ) );
+					BossReference.LoadBoundary( myShip.Boundary );
+				}
+				
+				BossMode = true;
+				if( BossReference != null && BossReference.IsDead )
+				{
+					BossReference = null;
+					BossMode = false;
+				}
+			}
 			//e1
-			if( Time == 5 * stage.frameRate ) 
+			if( false && Time == 5 * stage.frameRate ) 
 
 			{ 
 				parent.addChild( this.factory.Spawn( "Drone", 350, 499, new PhysVector2D( 0, -1 ), this.myShip ) );

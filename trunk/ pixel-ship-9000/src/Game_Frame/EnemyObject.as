@@ -129,15 +129,18 @@ package src.Game_Frame
 					DealDamage( ShipReference );
 				}
 				
-				var centersVector:PhysVector2D = PhysVector2D.Subtract( velocity, ShipReference.Velocity );
-				var throwDistance:Number = ( height + width + ShipReference.height + ShipReference.width ) / 8;
-				centersVector.Normalize();
-				centersVector.Multiply( throwDistance );
-				ShipReference.x += centersVector.X;
-				ShipReference.y += centersVector.Y;
+				bounceOffShip();
 			}
 		}
-		
+		protected function bounceOffShip():void
+		{
+			var centersVector:PhysVector2D = PhysVector2D.Subtract( velocity, ShipReference.Velocity );
+			var throwDistance:Number = ( height + width + ShipReference.height + ShipReference.width ) / 8;
+			centersVector.Normalize();
+			centersVector.Multiply( throwDistance );
+			ShipReference.x += centersVector.X;
+			ShipReference.y += centersVector.Y;
+		}
 		/**
 		 * Does combat checks, ensuring that enemy can fire its primary weapons
 		 *   override this to include additional attacks, throttle fire speeds, etc.
