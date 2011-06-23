@@ -6,7 +6,7 @@ package
 	
 	import src.Frames;
 	import src.GameDataTracker;
-	import src.Game_Frame.Customize_Frame.CustomizeFrame;
+	import src.Customize_Frame.CustomizeFrame;
 	import src.Game_Frame.GameFrame;
 	import src.Ship;
 	import src.Title_Frame.TitleFrame;
@@ -33,14 +33,12 @@ package
 		private function init():void
 		{
 			gameFrame.LoadGameData( myData );
-			
 			titleFrame.LoadGameData( myData );
 			customFrame.LoadGameData( myData );
 			
 			gameFrame.LoadShipReference( masterShipReference );
 			customFrame.LoadShipReference( masterShipReference );
 
-			
 			addEventListener( Frames.GAME, gotoGameFrame );
 			addEventListener( Frames.CUSTOM, gotoCustomizeFrame );
 			addEventListener( Frames.TITLE, gotoTitleFrame ); 
@@ -88,12 +86,12 @@ package
 		
 		private function gotoCustomizeFrame( event:Event ):void
 		{
-			/*while( this.numChildren > 0 )
+			while( this.numChildren > 0 )
 			{
 				var SomeFrame:MovieClip = MovieClip( this.removeChildAt(0) );
 				SomeFrame.visible = false;
 				SomeFrame.enabled = false;
-			}*/
+			}
 			
 			this.customFrame.visible = true;
 			this.customFrame.enabled = true;

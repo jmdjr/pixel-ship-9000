@@ -9,7 +9,7 @@ package src.Game_Frame
 	
 	public class EnemyObject extends ShipObject
 	{
-		public static var ShipReference:Ship;
+		public var ShipReference:Ship;
 		public var scrapAmount:Number;
 		
 		protected var _CurrentClass:Class;    // An internal reference to the current class for spawning
@@ -41,6 +41,23 @@ package src.Game_Frame
 			
 			temp.LoadBoundary( Boundary, WeaponBoundary );
 			temp.FireDirection.Equal( _v );
+			
+			if( _v.CrossP( PhysVector2D.LEFT ) == 0 && !_v.TestDirOpposite( PhysVector2D.LEFT ) )
+			{
+				temp.rotation = 90;
+			}
+			else if( _v.CrossP( PhysVector2D.RIGHT ) == 0 && !_v.TestDirOpposite( PhysVector2D.RIGHT )  )
+			{
+				temp.rotation = -90;
+			}
+			else if( _v.CrossP( PhysVector2D.UP ) == 0 && !_v.TestDirOpposite( PhysVector2D.UP )  )
+			{
+				temp.rotation = 180;
+			}
+			else
+			{
+				temp.rotation = 0;
+			}
 			
 			return temp;
 		}

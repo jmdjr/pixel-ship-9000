@@ -14,10 +14,5 @@ package src.Game_Frame
 			_CurrentClass = Javbeam;
 			speed = 5;
 		}
-		
-		public override function Spawn(_x:Number, _y:Number, _v:PhysVector2D):Projectile
-		{
-			return super.Spawn( _x, _y, _v );
-		}
 	}
 }

@@ -15,11 +15,18 @@ package src.Game_Frame
 			super();
 			FireRate = 1;
 			fullHealth = 1;
-			scrapAmount = fullHealth;
+			scrapAmount = 1;
 			ResetHealth();
 			PrimaryWeapon = new EnemyMissile();
 			PrimaryWeapon.ProjectileDamage = 1;
 			_CurrentClass = EnemyDrone;
+		}
+		
+		public override function Spawn(_x:Number, _y:Number, _v:PhysVector2D):EnemyObject
+		{
+			var temp:EnemyObject = super.Spawn( _x, _y, _v );
+			temp.rotation = 0;
+			return temp;
 		}
 		
 		protected override function DoCombatChecks():void
