@@ -305,7 +305,7 @@ package src.Game_Frame
 						break;
 					
 					case Keyboard.R:
-						CleanUp();
+						//CleanUp();
 						break;
 					
 					default:

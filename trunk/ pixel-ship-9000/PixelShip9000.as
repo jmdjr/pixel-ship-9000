@@ -4,15 +4,16 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
+	import src.Customize_Frame.CustomizeFrame;
 	import src.Frames;
 	import src.GameDataTracker;
-	import src.Customize_Frame.CustomizeFrame;
 	import src.Game_Frame.GameFrame;
 	import src.Ship;
 	import src.Title_Frame.TitleFrame;
 	
 	public class PixelShip9000 extends Sprite
 	{
+		var gameMask:GameMask;
 		var titleFrame:TitleFrame;
 		var gameFrame:GameFrame;
 		var customFrame:CustomizeFrame;
@@ -21,6 +22,7 @@ package
 		
 		public function PixelShip9000()
 		{
+			gameMask = new GameMask();
 			myData = new GameDataTracker();
 			gameFrame = new GameFrame(); 
 			titleFrame = new TitleFrame();
@@ -67,6 +69,11 @@ package
 			this.titleFrame.enabled = true;
 			
 			this.addChild( this.titleFrame );
+			
+			gameMask.visible = true;
+			gameMask.enabled = true;
+			addChild( gameMask );
+			mask = gameMask;
 		}
 		
 		private function gotoGameFrame( event:Event ):void
@@ -82,27 +89,39 @@ package
 			this.gameFrame.enabled = true;
 			
 			this.addChild( this.gameFrame );
+			
+			gameMask.visible = true;
+			gameMask.enabled = true;
+			addChild( gameMask );
+			mask = gameMask;
 		}
 		
 		private function gotoCustomizeFrame( event:Event ):void
 		{
 			while( this.numChildren > 0 )
 			{
-				var SomeFrame:MovieClip = MovieClip( this.removeChildAt(0) );
+				var SomeFrame:MovieClip = MovieClip( removeChildAt(0) );
 				SomeFrame.visible = false;
 				SomeFrame.enabled = false;
 			}
 			
-			this.customFrame.visible = true;
-			this.customFrame.enabled = true;
+			customFrame.visible = true;
+			customFrame.enabled = true;
 			
 			if( stage != null )
 			{
 				customFrame.x = stage.stageWidth / 2;
 				customFrame.y = stage.stageHeight / 2;
 			}
+			gameMask.visible = true;
+			gameMask.enabled = true;
+			addChild( customFrame );
 			
-			this.addChild( this.customFrame );
+			gameMask.visible = true;
+			gameMask.enabled = true;
+			addChild( gameMask );
+			mask = gameMask;
+			
 		}
 	}
 }
