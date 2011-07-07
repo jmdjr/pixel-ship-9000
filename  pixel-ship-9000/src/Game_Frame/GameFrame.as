@@ -189,6 +189,16 @@ package src.Game_Frame
 				addChild( SpaceBG );
 			}
 			
+			if( !contains( ship ) )
+			{
+				addChild( ship );
+			}
+			
+			if( !contains( level1 ) )
+			{
+				addChild( level1 );
+			}
+			
 			if( !contains( shipHBText ) )
 			{
 				addChild( shipHBText );
@@ -202,16 +212,6 @@ package src.Game_Frame
 			if( !contains( shipHealthBar ) )
 			{
 				addChild( shipHealthBar );
-			}
-			
-			if( !contains( ship ) )
-			{
-				addChild( ship );
-			}
-			
-			if( !contains( level1 ) )
-			{
-				addChild( level1 );
 			}
 			
 			if( !contains( pauseText ))
@@ -254,16 +254,38 @@ package src.Game_Frame
 				shipHealthBar.ShowAPercentage( ship.HealthPercentage() );
 				UpdateScrapText();
 				
+				//***********************************************************************************************
+				//*  UI shift to top of level
+				//***********************************************************************************************
+				
 				if( getChildIndex( shipHealthBar ) < numChildren-1 )
 				{
 					setChildIndex( shipHealthBar, numChildren-1 ); 
 				}
 				
+				if( getChildIndex( shipHBText ) < numChildren-1 )
+				{
+					setChildIndex( shipHBText, numChildren-1 );
+				}
+				
+				if( getChildIndex( shipPixelCount ) < numChildren-1 )
+				{
+					setChildIndex( shipPixelCount, numChildren-1 );
+				}
+				
+				//***********************************************************************************************
+				//*  Cases for end of the game
+				//***********************************************************************************************
 				if( ship.HealthPercentage() <= 0 )
 				{
 					CleanUp();
-					gameData.JB.Stop();
+					gameData.JB.Stop(); 
 					dispatchEvent( new Event( Frames.TITLE, true ) );
+				}
+				
+				if( level1.IsComplete )
+				{
+					dispatchEvent(  new Event( Frames.CUSTOM, true ) );
 				}
 			}
 		}

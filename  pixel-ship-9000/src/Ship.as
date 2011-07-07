@@ -56,7 +56,7 @@ package src
 			
 			velocity = new PhysVector2D();
 			PrimaryWeapon = new Missile();
-			fullHealth = 10;
+			fullHealth = 1000;
 			ShipSpeed = 3;
 			Defense = 0;
 			FireTimer = 1;

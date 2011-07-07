@@ -32,12 +32,11 @@ package src.Customize_Frame
 		var price_attackPixel:Price_AttackPixel;
 		
 		var ship_scrapTotalText:Ship_ScrapTotalText;
-		
 		var MGC:ModGridCustomizer;
 		
-		var BuyATK:AttackMod;
-		var BuySPEED:SpeedMod;
-		var BuyDEF:DefenseMod;
+		var BuyATK:AttackModSpawner;
+		var BuySPEED:SpeedModSpawner;
+		var BuyDEF:DefenseModSpawner;
 		
 		public function CustomizeFrame()
 		{
@@ -69,14 +68,13 @@ package src.Customize_Frame
 		public function init( e:Event ):void
 		{
 			removeEventListener( Event.ADDED_TO_STAGE, init );
-			ResetFrame();
+			LoadFrame();
 			this.addEventListener(Event.ADDED_TO_STAGE, Update );
 		}
 		
-		public function ResetFrame():void
+		public function LoadFrame():void
 		{
-			var child:int = 0;
-			while( child < numChildren )
+			for(var child:int = 0; child < numChildren; ++child )
 			{
 				var childClip = getChildAt( child );
 				
@@ -94,8 +92,6 @@ package src.Customize_Frame
 						assignRest( childClip );
 						break;
 				}
-				
-				++child; 
 			}
 		}
 		
@@ -105,14 +101,6 @@ package src.Customize_Frame
 			{
 				case getQualifiedClassName( ModGridCustomizer ):
 					MGC = ModGridCustomizer( childClip );
-					break;
-				
-				case getQualifiedClassName( Sum_DefenseText ):
-					
-					break;
-				
-				case getQualifiedClassName( Sum_SpeedText ):
-					
 					break;
 			}
 		}
@@ -182,6 +170,19 @@ package src.Customize_Frame
 			if( enabled )
 			{
 			}
+		}
+		
+		private function OnClick_AttackModSpawner( click:MouseEvent ):void
+		{
+			
+		}
+		
+		private function OnClick_DefenseModSpawner( click:MouseEvent ):void
+		{
+		}
+		
+		private function OnClick_SpeedModSpawner( click:MouseEvent ):void
+		{
 		}
 		
 		private function returnMainMenu( click:MouseEvent ):void
