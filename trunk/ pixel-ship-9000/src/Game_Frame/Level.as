@@ -60,6 +60,7 @@
 		{ 
 			Time = 0;
 			BossMode = false;
+			isComplete = false;
 		}
 		
 		private function DisplayLevelHint():void  
