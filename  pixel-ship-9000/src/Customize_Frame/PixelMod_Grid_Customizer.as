@@ -8,12 +8,12 @@ package src.Customize_Frame
 	 * Object used to communicate the customizing functionality of the ship 
 	 *  and display an interface where the ship can be modified and upgraded.
 	 */ 
-	public class ModGridCustomizer extends MovieClip
+	public class PixelMod_Grid_Customizer extends MovieClip
 	{
 		var ShipReference:Ship;
 		
 		
-		public function ModGridCustomizer()
+		public function PixelMod_Grid_Customizer()
 		{
 			
 		}

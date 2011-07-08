@@ -2,10 +2,10 @@ package src.Customize_Frame
 {
 	import flash.display.MovieClip;
 
-	public class TextObject extends MovieClip
+	public class Text_ extends MovieClip
 	{
 		public var _className:Class;
-		public function TextObject()
+		public function Text_()
 		{
 			super();
 		}

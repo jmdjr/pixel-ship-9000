@@ -9,7 +9,7 @@ package src.Customize_Frame
 	 * 
 	 * 
 	 */ 
-	public class ModPixel extends MovieClip
+	public class ModPixel_ extends MovieClip
 	{
 		/**
 		 * ModPixel Class
@@ -19,7 +19,7 @@ package src.Customize_Frame
 		private var position:Number;     //Position in the Mod Grid
 		private var modAmount:Number;    // Generic amount used to modify an attribute. 
 		
-		public function ModPixel()
+		public function ModPixel_()
 		{
 			position = 0;
 			modAmount = 0;
