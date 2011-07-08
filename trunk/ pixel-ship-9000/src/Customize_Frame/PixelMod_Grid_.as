@@ -1,9 +1,9 @@
 package src.Customize_Frame
 {
 
-	public class ModGrid
+	public class PixelMod_Grid_
 	{
-		private var grid:Vector.<ModPixel>;
+		private var grid:Vector.<ModPixel_>;
 		private var rows:Number;
 		private var cols:Number;
 		
@@ -12,7 +12,7 @@ package src.Customize_Frame
 		private var modDefense:Number;
 		private var modSpeed:Number;
 		
-		public function ModGrid()
+		public function PixelMod_Grid_()
 		{
 			
 		}

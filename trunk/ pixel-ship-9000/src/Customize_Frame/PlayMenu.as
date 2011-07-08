@@ -4,8 +4,6 @@ package src.Customize_Frame
 	
 	public class PlayMenu extends MovieClip
 	{
-
-		
 		public function PlayMenu()
 		{
 			super();
