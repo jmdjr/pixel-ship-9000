@@ -4,9 +4,9 @@ package src
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
-	import src.Customize_Frame.ModGrid;
-	import src.Game_Frame.Missile;
-	import src.Game_Frame.Projectile;
+	import src.Customize_Frame.PixelMod_Grid_;
+	import src.Game_Frame.Shot_Player_Missile;
+	import src.Game_Frame.Shot_;
 	import src.Game_Frame.ShipObject;
 	import src.PhysVector2D;
 	
@@ -19,7 +19,7 @@ package src
 		private var ModAttack;
 		private var ModSpeed;
 		private var ModDefense;
-		private var MG:ModGrid;
+		private var MG:PixelMod_Grid_;
 		
 		public override function Disappear():void
 		{
@@ -55,7 +55,7 @@ package src
 			canFire = false;
 			
 			velocity = new PhysVector2D();
-			PrimaryWeapon = new Missile();
+			PrimaryWeapon = new Shot_Player_Missile();
 			fullHealth = 1000;
 			ShipSpeed = 3;
 			Defense = 0;
@@ -81,23 +81,23 @@ package src
 		{	
 			if( isFiring && canFire && parent != null && PrimaryWeapon != null )
 			{
-				var bullet:Projectile;
-				bullet = Projectile( parent.addChild( 
+				var bullet:Shot_;
+				bullet = Shot_( parent.addChild( 
 						PrimaryWeapon.Spawn( x, y, PhysVector2D.UP ) ) );
 				bullet.LoadBoundary( WeaponBoundary );
 				gameData.FireShot();
 				
-				bullet = Projectile( parent.addChild( 
+				bullet = Shot_( parent.addChild( 
 					PrimaryWeapon.Spawn( x, y, PhysVector2D.DOWN ) ) );
 				bullet.LoadBoundary( WeaponBoundary );
 				gameData.FireShot();
 				
-				bullet = Projectile( parent.addChild( 
+				bullet = Shot_( parent.addChild( 
 					PrimaryWeapon.Spawn( x, y, PhysVector2D.LEFT ) ) );
 				bullet.LoadBoundary( WeaponBoundary );
 				gameData.FireShot();
 				
-				bullet = Projectile( parent.addChild( 
+				bullet = Shot_( parent.addChild( 
 					PrimaryWeapon.Spawn( x, y, PhysVector2D.RIGHT ) ) );
 				bullet.LoadBoundary( WeaponBoundary );
 				gameData.FireShot();
