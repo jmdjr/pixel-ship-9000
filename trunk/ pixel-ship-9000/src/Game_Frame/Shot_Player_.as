@@ -3,15 +3,15 @@ package src.Game_Frame
 	import flash.events.Event;
 	import flash.geom.Point;
 
-	public class PlayerProjectile extends Projectile
+	public class Shot_Player_ extends Shot_
 	{
 		protected var CollectedTargets:Array;
 		
-		public function PlayerProjectile()
+		public function Shot_Player_()
 		{
 			super();
 			CollectedTargets = null;
-			_CurrentClass = PlayerProjectile;
+			_CurrentClass = Shot_Player_;
 		}
 		
 		public override function Update( tick:Event ):void
@@ -27,7 +27,7 @@ package src.Game_Frame
 					CollectedTargets = CollectedTargets.filter((
 						function( item:Object, index:int, array:Array )
 						{
-							if( item.parent is EnemyObject )
+							if( item.parent is Enemy_ )
 							{
 								return true;
 							}

@@ -4,15 +4,15 @@ package src.Game_Frame
 	
 	import src.PhysVector2D;
 
-	public class Lvl01_MidBoss extends EnemyObject
+	public class Enemy_L1MidBoss extends Enemy_
 	{
 		var fadeEffectTimer:Number;
 		
-		public function Lvl01_MidBoss()
+		public function Enemy_L1MidBoss()
 		{
 			super();
-			_CurrentClass = Lvl01_MidBoss;
-			PrimaryWeapon = new EnemyMissile();
+			_CurrentClass = Enemy_L1MidBoss;
+			PrimaryWeapon = new Shot_Enemy_Missile();
 			fadeEffectTimer = 200;
 			alpha = 0;
 			health = 5;

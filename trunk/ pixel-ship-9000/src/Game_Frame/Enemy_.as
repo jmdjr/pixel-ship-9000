@@ -7,7 +7,7 @@ package src.Game_Frame
 	import src.PhysVector2D;
 	import src.Ship;
 	
-	public class EnemyObject extends ShipObject
+	public class Enemy_ extends ShipObject
 	{
 		public var ShipReference:Ship;
 		public var scrapAmount:Number;
@@ -15,10 +15,10 @@ package src.Game_Frame
 		protected var _CurrentClass:Class;    // An internal reference to the current class for spawning
 		protected var FireDirection:PhysVector2D;
 		
-		public function EnemyObject()
+		public function Enemy_()
 		{
 			super();
-			_CurrentClass = EnemyObject;
+			_CurrentClass = Enemy_;
 			ShipReference = null;
 			Boundary = null;
 			FireRate = 1;
@@ -30,9 +30,9 @@ package src.Game_Frame
 			scrapAmount = 1;
 		}
 		
-		public function Spawn( _x:Number, _y:Number, _v:PhysVector2D ):EnemyObject
+		public function Spawn( _x:Number, _y:Number, _v:PhysVector2D ):Enemy_
 		{
-			var temp:EnemyObject = new _CurrentClass();
+			var temp:Enemy_ = new _CurrentClass();
 			temp.x = _x;
 			temp.y = _y;
 			temp.velocity.Equal( _v.UnitV() );
@@ -151,7 +151,7 @@ package src.Game_Frame
 			if( !IsDead && PrimaryWeapon != null && parent != null )
 			{
 				var indexOf = parent.getChildIndex( this );
-				var bullet:EnemyProjectile = EnemyProjectile(
+				var bullet:Shot_Enemy_ = Shot_Enemy_(
 					parent.addChildAt( PrimaryWeapon.Spawn( x, y, FireDirection ), indexOf - 1 ) );
 				
 				bullet.LoadBoundary( WeaponBoundary );
@@ -170,7 +170,7 @@ package src.Game_Frame
 		
 		public override function Explode():void
 		{
-			Scrapnul_Spawn.Spawn_Scraps( this, parent, scrapAmount );
+			Clip_Scrap_ParticleEffect.Spawn_Scraps( this, parent, scrapAmount );
 			ShipReference.AddScrap( scrapAmount );
 			super.Explode();
 		}

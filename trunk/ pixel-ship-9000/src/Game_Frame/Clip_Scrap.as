@@ -5,12 +5,12 @@ package src.Game_Frame
 	
 	import src.PhysVector2D;
 	
-	public class ScrapClip extends MovieClip
+	public class Clip_Scrap extends MovieClip
 	{
 		var direction:PhysVector2D;
 		var fade:Number;
 		
-		public function ScrapClip()
+		public function Clip_Scrap()
 		{
 			super();
 			fade = 0.02;

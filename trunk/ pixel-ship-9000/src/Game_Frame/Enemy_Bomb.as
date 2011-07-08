@@ -4,9 +4,9 @@ package src.Game_Frame
 	
 	import src.PhysVector2D;
 
-	public class EnemyBomb extends EnemyObject
+	public class Enemy_Bomb extends Enemy_
 	{
-		public function EnemyBomb()
+		public function Enemy_Bomb()
 		{
 			super();
 			Speed = 1;
@@ -16,8 +16,8 @@ package src.Game_Frame
 			scrapAmount = 1;
 			
 			Attack = fullHealth;
-			_CurrentClass = EnemyBomb;
-			PrimaryWeapon = new EBombSplosion();
+			_CurrentClass = Enemy_Bomb;
+			PrimaryWeapon = new Shot_Enemy_Explosion();
 		}
 		
 		public override function Update(tick:Event):void
@@ -25,9 +25,9 @@ package src.Game_Frame
 			super.Update( tick );
 		}
 		
-		public override function Spawn(_x:Number, _y:Number, _v:PhysVector2D):EnemyObject
+		public override function Spawn(_x:Number, _y:Number, _v:PhysVector2D):Enemy_
 		{
-			var temp:EnemyObject = super.Spawn( _x, _y, _v );
+			var temp:Enemy_ = super.Spawn( _x, _y, _v );
 			temp.rotation = 0;
 			return temp;
 		}

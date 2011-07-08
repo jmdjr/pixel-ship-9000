@@ -7,22 +7,22 @@ package src.Game_Frame
 	import src.PhysVector2D;
 	import src.Ship;
 	
-	public class EnemyProjectile extends Projectile
+	public class Shot_Enemy_ extends Shot_
 	{
 		protected var PlayerReference:Ship;
 		protected var HitPlayer:Boolean;
 		
-		public function EnemyProjectile()
+		public function Shot_Enemy_()
 		{
 			super();
 			HitPlayer = false;
 			PlayerReference = null;
-			_CurrentClass = EnemyProjectile;
+			_CurrentClass = Shot_Enemy_;
 		}
 		
-		public override function Spawn( _x:Number, _y:Number, _v:PhysVector2D ):Projectile
+		public override function Spawn( _x:Number, _y:Number, _v:PhysVector2D ):Shot_
 		{
-			var temp:Projectile = super.Spawn( _x, _y, _v );
+			var temp:Shot_ = super.Spawn( _x, _y, _v );
 			
 			if( _v.CrossP( PhysVector2D.LEFT ) == 0 && !_v.TestDirOpposite( PhysVector2D.LEFT ) )
 			{

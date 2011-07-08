@@ -12,7 +12,7 @@
 	import flash.text.TextFormat;
 	
 	import src.GameDataTracker;
-	import src.Game_Frame.Summary_Frame.StatFrameBG;
+	import src.Game_Frame.Summary_Frame.Asset_Status_Level_BG;
 	import src.JukeBox;
 	import src.PhysVector2D;
 	import src.Ship;
@@ -21,7 +21,7 @@
 	{
 		protected var Time:Number;
 		protected var BossMode:Boolean;
-		protected var BossReference:EnemyObject;
+		protected var BossReference:Enemy_;
 		protected var factory:EnemyFactory;
 		protected var myShip:Ship;
 		public var LevelTitle:String;
@@ -72,7 +72,7 @@
 					parent.addChild( InternalFrame );
 				}
 				
-				var bg:StatFrameBG = StatFrameBG( InternalFrame.addChild( new StatFrameBG() ) );
+				var bg:Asset_Status_Level_BG = Asset_Status_Level_BG( InternalFrame.addChild( new Asset_Status_Level_BG() ) );
 				bg.x = stage.stageWidth / 2;
 				bg.y = stage.stageHeight / 2; 
 				
@@ -223,7 +223,7 @@
 			{
 				if( !BossMode )
 				{
-					BossReference = EnemyObject( parent.addChild( factory.Spawn( "MidBoss", 250, 250, new PhysVector2D( 1, -1 ), myShip ) ) );
+					BossReference = Enemy_( parent.addChild( factory.Spawn( "MidBoss", 250, 250, new PhysVector2D( 1, -1 ), myShip ) ) );
 					BossReference.LoadBoundary( myShip.Boundary );
 				}
 				
@@ -377,7 +377,7 @@
 				
 				if( !BossMode )
 				{
-					BossReference = EnemyObject( parent.addChild( factory.Spawn( "BigBoss", 250, 100, new PhysVector2D( 1, -1 ), myShip ) ) );
+					BossReference = Enemy_( parent.addChild( factory.Spawn( "BigBoss", 250, 100, new PhysVector2D( 1, -1 ), myShip ) ) );
 					BossReference.LoadBoundary( myShip.Boundary );
 					
 				}

@@ -2,15 +2,15 @@ package src.Game_Frame
 {
 	import src.PhysVector2D;
 
-	public class Level1_Boss_Phantom extends EnemyObject
+	public class Enemy_L1Boss_Phantom extends Enemy_
 	{
 		protected var isHidden:Boolean;
 		
-		public function Level1_Boss_Phantom()
+		public function Enemy_L1Boss_Phantom()
 		{
 			super();
-			_CurrentClass = Level1_Boss_Phantom;
-			PrimaryWeapon = new Level1_Boss_Bullet_Phantom();
+			_CurrentClass = Enemy_L1Boss_Phantom;
+			PrimaryWeapon = new Shot_Enemy_L1Boss_Phantom();
 			speed = 0.5;
 			Invulnerable = true;
 			isHidden = true;
