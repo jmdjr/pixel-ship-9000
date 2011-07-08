@@ -2,17 +2,17 @@ package src.Game_Frame
 {
 	import flash.display.MovieClip;
 
-	public class ShipHealthMeterDisplay extends MovieClip
+	public class Clip_HPMeter extends MovieClip
 	{
-		var healthBG:healthMeterBackground;
-		var health:HealthMeterBar;
+		var healthBG:Asset_HPMeter_BG;
+		var health:Asset_HPMeter_FG;
 		var barLength:Number;
 		
-		public function ShipHealthMeterDisplay()
+		public function Clip_HPMeter()
 		{
 			
-			healthBG = healthMeterBackground( addChild( new healthMeterBackground() ) );
-			health = HealthMeterBar( addChild( new HealthMeterBar() ) );
+			healthBG = Asset_HPMeter_BG( addChild( new Asset_HPMeter_BG() ) );
+			health = Asset_HPMeter_FG( addChild( new Asset_HPMeter_FG() ) );
 			
 			barLength = health.width;
 		}

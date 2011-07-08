@@ -2,7 +2,7 @@ package src.Game_Frame
 {
 	import flash.events.Event;
 
-	public class EBombSplosion extends EnemyProjectile
+	public class Shot_Enemy_Explosion extends Shot_Enemy_
 	{
 		private var GrowToScale:Number;
 		private var GrowDiff:Number;
@@ -17,10 +17,10 @@ package src.Game_Frame
 		 * 
 		 * 
 		 */
-		public function EBombSplosion()
+		public function Shot_Enemy_Explosion()
 		{
 			super();
-			_CurrentClass = EBombSplosion;
+			_CurrentClass = Shot_Enemy_Explosion;
 			Damage = 2;
 			GrowToScale = 1;
 			SpinBy = 20;

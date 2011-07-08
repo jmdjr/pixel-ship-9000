@@ -8,12 +8,12 @@ package src.Game_Frame
 	
 	import src.PhysVector2D;
 	
-	public class Level1_Boss_Real extends EnemyObject
+	public class Enemy_L1Boss_Real extends Enemy_
 	{
 		var TopLeftPosition:Boolean;
-		var blackImage:Level1_Boss_Black = new Level1_Boss_Black();
-		var whiteImage:Level1_Boss_White = new Level1_Boss_White();
-		var PhantomBoss:Level1_Boss_Phantom = new Level1_Boss_Phantom();
+		var blackImage:Asset_Enemy_L1Boss_Black = new Asset_Enemy_L1Boss_Black();
+		var whiteImage:Asset_Enemy_L1Boss_White = new Asset_Enemy_L1Boss_White();
+		var PhantomBoss:Enemy_L1Boss_Phantom = new Enemy_L1Boss_Phantom();
 		
 		// in absence of internal structures in AS3.0, I will be using a number
 		//  to represent the state of the boss.
@@ -21,12 +21,12 @@ package src.Game_Frame
 		
 		var MyTimer:Timer;
 		
-		public function Level1_Boss_Real()
+		public function Enemy_L1Boss_Real()
 		{
 			super();
-			_CurrentClass = Level1_Boss_Real;
+			_CurrentClass = Enemy_L1Boss_Real;
 			fullHealth = 20;
-			PrimaryWeapon = new Level1_Boss_Bullet_Real();
+			PrimaryWeapon = new Shot_Enemy_L1Boss_Real();
 			ResetHealth();
 			addEventListener( Event.ADDED, LoadPhantom );
 			stateStep = 0;
@@ -80,8 +80,8 @@ package src.Game_Frame
 		
 		public function DecideWhichSpawnImage()
 		{
-			blackImage = new Level1_Boss_Black();
-			whiteImage = new Level1_Boss_White();
+			blackImage = new Asset_Enemy_L1Boss_Black();
+			whiteImage = new Asset_Enemy_L1Boss_White();
 			while( numChildren > 0 )
 			{
 				removeChildAt( 0 );

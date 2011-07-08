@@ -34,11 +34,11 @@ package src.Game_Frame
 	 * @author John M Davis Jr
 	 * 
 	 */
-	public class GameFrame extends MovieClip
+	public class _Frame_Game extends MovieClip
 	{
 		var gameData:GameDataTracker;
 		var timeTracker:Number;
-		var shipHealthBar:ShipHealthMeterDisplay;
+		var shipHealthBar:Clip_HPMeter;
 		var shipHBText:TextField;
 		var shipPixelCount:TextField;
 		
@@ -53,21 +53,21 @@ package src.Game_Frame
 		var WorldChannel:SoundChannel;
 		
 		var paused:Boolean;
-		var pauseText:Pause_Text;
+		var pauseText:Asset_Text_Pause;
 		
-		var fps:FrameRate;
+		var fps:Clip_FrameRate;
 		
-		public function GameFrame()
+		public function _Frame_Game()
 		{
 			IsPlaying = false;
 			SpaceBG = new Background();
-			shipHealthBar = new ShipHealthMeterDisplay();
-			fps = new FrameRate();
+			shipHealthBar = new Clip_HPMeter();
+			fps = new Clip_FrameRate();
 			level1 = new Level();
 			Factory = new EnemyFactory();
 			addEventListener( Event.ADDED_TO_STAGE, Loaded );
 			paused = false;
-			pauseText = new Pause_Text();
+			pauseText = new Asset_Text_Pause();
 			shipHBText = new TextField();
 			shipPixelCount = new TextField();
 		}

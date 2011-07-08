@@ -7,7 +7,7 @@ package src.Game_Frame
 	
 	import src.PhysVector2D;
 	
-	public class Projectile extends MovieClip
+	public class Shot_ extends MovieClip
 	{
 		protected var Center:PhysVector2D;     	// Internal reference to the center of the Projectile
 		protected var Velocity:PhysVector2D;    // The direction of the Projectile
@@ -16,11 +16,11 @@ package src.Game_Frame
 		protected var speed:Number;				// The speed of the Projectile.  accessors used to update Velocity.
 		protected var _CurrentClass:Class;    	// An internal reference to the current class for spawning
 		
-		public function Projectile()
+		public function Shot_()
 		{
 			super();
 			
-			_CurrentClass = Projectile;
+			_CurrentClass = Shot_;
 			Velocity = new PhysVector2D( );
 			Speed = 0;
 			Damage = 2;
@@ -42,9 +42,9 @@ package src.Game_Frame
 			}
 		}
 		
-		public function Spawn( _x:Number, _y:Number, _v:PhysVector2D ):Projectile
+		public function Spawn( _x:Number, _y:Number, _v:PhysVector2D ):Shot_
 		{
-			var temp:Projectile = new _CurrentClass();
+			var temp:Shot_ = new _CurrentClass();
 			temp.x = _x - x;
 			temp.y = _y - y;
 			

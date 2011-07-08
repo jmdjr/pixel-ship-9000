@@ -2,9 +2,9 @@ package src.Game_Frame
 {
 	import flash.display.MovieClip;
 	
-	public class Level1_Boss_White extends EnemyObject
+	public class Asset_Text_Pause extends MovieClip
 	{
-		public function Level1_Boss_White()
+		public function Asset_Text_Pause()
 		{
 			super();
 		}

@@ -6,21 +6,21 @@ package src.Game_Frame
 	
 	import src.PhysVector2D;
 	
-	public class EnemyJavelin extends EnemyObject
+	public class Enemy_Javelin extends Enemy_
 	{
 		var HasFired:Boolean;
 		
-		public function EnemyJavelin()
+		public function Enemy_Javelin()
 		{
 			super();
-			_CurrentClass = EnemyJavelin;
+			_CurrentClass = Enemy_Javelin;
 			FireRate = 1;
 			FireTimer = 1;
 			fullHealth = 3;
 			scrapAmount = 2;
 			ResetHealth();
 			HasFired = false;
-			PrimaryWeapon = new Javbeam();
+			PrimaryWeapon = new Shot_Enemy_Beam();
 		}
 		
 		protected override function DoCombatChecks():void

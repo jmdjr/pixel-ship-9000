@@ -7,9 +7,9 @@ package src.Game_Frame
 
 	// this class is invoked when an enemy ship explodes, specifically for spawning a specific amount of shrapnul
 	// for display.  uses ScrapClip objects to do so.
-	public class Scrapnul_Spawn
+	public class Clip_Scrap_ParticleEffect
 	{
-		public function Scrapnul_Spawn()
+		public function Clip_Scrap_ParticleEffect()
 		{
 		}
 		
@@ -26,7 +26,7 @@ package src.Game_Frame
 			while( amountToSpawn > 0 )
 			{
 				--amountToSpawn;
-				var tempSpawn:ScrapClip = new ScrapClip();
+				var tempSpawn:Clip_Scrap = new Clip_Scrap();
 				
 				tempSpawn.x = toSpawnAt.x;
 				tempSpawn.y = toSpawnAt.y;

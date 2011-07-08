@@ -5,13 +5,13 @@ package src.Game_Frame
 	import flash.text.TextField;
 	import flash.utils.getTimer;  
 	
-	public class FrameRate extends MovieClip
+	public class Clip_FrameRate extends MovieClip
 	{
 		public var startTime:Number;  
 		public var framesNumber:Number = 0;  
 		public var fps:TextField = new TextField();
 		
-		public function FrameRate()
+		public function Clip_FrameRate()
 		{
 			fpsCounter();  
 		}

@@ -2,9 +2,9 @@ package src.Game_Frame
 {
 	import flash.display.MovieClip;
 	
-	public class HealthMeterBar extends MovieClip
+	public class Asset_Shot_L1Boss extends MovieClip
 	{
-		public function HealthMeterBar()
+		public function Asset_Shot_L1Boss()
 		{
 			super();
 		}

@@ -6,12 +6,12 @@ package src.Game_Frame
 	import flash.utils.getQualifiedClassName;
 	import src.PhysVector2D;
 	
-	public class Missile extends PlayerProjectile
+	public class Shot_Player_Missile extends Shot_Player_
 	{
-		public function Missile() 
+		public function Shot_Player_Missile() 
 		{
 			super();
-			_CurrentClass = Missile;
+			_CurrentClass = Shot_Player_Missile;
 			
 			Speed = 10; 
 			Damage = 1;
@@ -25,7 +25,7 @@ package src.Game_Frame
 			
 			if( CollectedTargets != null && CollectedTargets.length > 0 )
 			{
-				EnemyObject( CollectedTargets[0].parent ).TakeDamage( Damage );
+				Enemy_( CollectedTargets[0].parent ).TakeDamage( Damage );
 				Disappear();
 			}
 		}

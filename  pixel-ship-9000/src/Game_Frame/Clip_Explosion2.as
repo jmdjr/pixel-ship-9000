@@ -1,21 +1,20 @@
 package src.Game_Frame
 {
-	import explode2.wav;
-	
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import explode2.wav;
 	
-	public class Explosion extends MovieClip
+	public class Clip_Explosion2 extends MovieClip
 	{
 		var timer:Number;
-		public function Explosion()
+		public function Clip_Explosion2()
 		{
 			super();
 			timer = this.totalFrames;
 			addEventListener( Event.ADDED_TO_STAGE, Loaded );
 			addEventListener(Event.REMOVED_FROM_STAGE, Unloaded );
 		}
-		 
+		
 		private function Loaded( load:Event ):void
 		{
 			var tempSound:explode2.wav = new wav();

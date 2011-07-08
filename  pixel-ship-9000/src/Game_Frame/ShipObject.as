@@ -16,7 +16,7 @@ package src.Game_Frame
 		public var Boundary:Rectangle;
 		
 		protected var WeaponBoundary:Rectangle;
-		protected var PrimaryWeapon:Projectile;
+		protected var PrimaryWeapon:Shot_;
 		protected var FireTimer:Number;
 		protected var FireRate:Number;
 		protected var CanFire:Boolean;
@@ -130,7 +130,7 @@ package src.Game_Frame
 		{
 			if( parent != null )
 			{
-				var esplosion:Explosion = Explosion( parent.addChild( new Explosion() ) );
+				var esplosion:Clip_Explosion = Clip_Explosion( parent.addChild( new Clip_Explosion() ) );
 				esplosion.x = x;
 				esplosion.y = y;
 				Disappear();

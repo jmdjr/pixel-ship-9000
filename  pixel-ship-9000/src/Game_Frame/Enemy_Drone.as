@@ -8,23 +8,23 @@ package src.Game_Frame
 	
 	import src.PhysVector2D;
 	
-	public class EnemyDrone extends EnemyObject
+	public class Enemy_Drone extends Enemy_
 	{
-		public function EnemyDrone()
+		public function Enemy_Drone()
 		{
 			super();
 			FireRate = 1;
 			fullHealth = 1;
 			scrapAmount = 1;
 			ResetHealth();
-			PrimaryWeapon = new EnemyMissile();
+			PrimaryWeapon = new Shot_Enemy_Missile();
 			PrimaryWeapon.ProjectileDamage = 1;
-			_CurrentClass = EnemyDrone;
+			_CurrentClass = Enemy_Drone;
 		}
 		
-		public override function Spawn(_x:Number, _y:Number, _v:PhysVector2D):EnemyObject
+		public override function Spawn(_x:Number, _y:Number, _v:PhysVector2D):Enemy_
 		{
-			var temp:EnemyObject = super.Spawn( _x, _y, _v );
+			var temp:Enemy_ = super.Spawn( _x, _y, _v );
 			temp.rotation = 0;
 			return temp;
 		}
