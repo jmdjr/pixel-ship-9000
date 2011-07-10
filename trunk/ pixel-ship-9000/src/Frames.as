@@ -6,6 +6,7 @@ package src
 		public static var CUSTOM:String = "CustomFrame";
 		public static var TITLE:String = "TitleFrame";
 		public static var SUMMARY:String = "SummaryFrame";
+		public static var CREDITS:String = "CreditsFrame";
 		
 		public function Frames()
 		{

@@ -6,7 +6,8 @@ package src.Customize_Frame
 	import flash.utils.getQualifiedClassName;
 	import flash.utils.getQualifiedSuperclassName;
 	
-	import src.Frames; 
+	import src.Background;
+	import src.Frames;
 	import src.GameDataTracker;
 	import src.Ship;
 	
@@ -15,6 +16,7 @@ package src.Customize_Frame
 		public static var RESTART_ONLY:String = "RestartOnly";
 		public static var RESTART_CONTINUE:String = "RestartAndContinue";
 		
+		var background:Background;
 		var gameData:GameDataTracker;
 		var DidShipDie:Boolean;
 		var ShipReference:Ship;
@@ -41,6 +43,8 @@ package src.Customize_Frame
 		public function _Frame_Customize()
 		{
 			super();
+			
+			background = new Background();
 			
 			ShipReference = null;
 			
@@ -89,7 +93,7 @@ package src.Customize_Frame
 		{
 			removeEventListener( Event.ADDED_TO_STAGE, init );
 			LoadFrame();
-			this.addEventListener(Event.ADDED_TO_STAGE, Update );
+			addEventListener( Event.ENTER_FRAME, Update );
 		}
 		
 		public function LoadFrame():void
@@ -118,7 +122,20 @@ package src.Customize_Frame
 				}
 			}
 			
-			if( this.price_attackPixel != null )
+			if( this.stage != null )
+			{
+				addChildAt( background, 0 );
+				with( background )
+				{
+					width = this.stage.stageWidth;
+					startY = this.stage.stageHeight;
+					x = 0;
+					y = startY; 
+					scrollRate = 10;
+				}
+			}
+			
+			if( price_attackPixel != null )
 			{
 				
 			}
@@ -216,6 +233,7 @@ package src.Customize_Frame
 		{
 			if( enabled )
 			{
+				this.background.Update( tick );
 			}
 		}
 		

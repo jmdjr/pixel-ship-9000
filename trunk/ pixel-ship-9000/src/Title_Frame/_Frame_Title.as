@@ -8,7 +8,7 @@ package src.Title_Frame
 	import src.Frames;
 	import src.GameDataTracker;
 	
-	public class TitleFrame extends MovieClip
+	public class _Frame_Title extends MovieClip
 	{
 		var myHeight:Number;
 		var myWidth:Number;
@@ -19,7 +19,7 @@ package src.Title_Frame
 		var shootLogo:menuShootLogo;
 		var background:Background;
 		
-		public function TitleFrame()
+		public function _Frame_Title()
 		{
 			super();
 			addEventListener( Event.ADDED_TO_STAGE, Loaded );

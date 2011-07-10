@@ -5,9 +5,9 @@ package src
 	import flash.geom.Rectangle;
 	
 	import src.Customize_Frame.PixelMod_Grid_;
-	import src.Game_Frame.Shot_Player_Missile;
-	import src.Game_Frame.Shot_;
 	import src.Game_Frame.ShipObject;
+	import src.Game_Frame.Shot_;
+	import src.Game_Frame.Shot_Player_Missile;
 	import src.PhysVector2D;
 	
 	public class Ship extends ShipObject
@@ -16,16 +16,10 @@ package src
 		var gameData:GameDataTracker;
 		var canFire:Boolean;
 		
-		private var ModAttack;
-		private var ModSpeed;
-		private var ModDefense;
+		private var ModAttack:Number;
+		private var ModSpeed:Number;
+		private var ModDefense:Number;
 		private var MG:PixelMod_Grid_;
-		
-		public override function Disappear():void
-		{
-			removeEventListener( Event.ENTER_FRAME, Update );
-			this.visible = false;
-		}
 		
 		public override function ResetHealth():void
 		{
@@ -71,6 +65,14 @@ package src
 			Attack = fullHealth;
 			ResetHealth();
 		}
+		
+		/**
+		 * Calculates the mod values from the ModGrid and assigns those values to the 
+		 * Ship.  All AttackMods will be set to fire in any direction not covered by
+		 * Any other Mod.
+		 */
+		public function RecalcModGrid():void
+		{}
 		
 		public override function Update( tick:Event ):void
 		{
@@ -212,6 +214,12 @@ package src
 		public function StopHorizontal():void
 		{
 			velocity.X = 0;
+		}
+		
+		public override function Disappear():void
+		{
+			removeEventListener( Event.ENTER_FRAME, Update );
+			this.visible = false;
 		}
 		
 		public function CorrectVelocity():void
