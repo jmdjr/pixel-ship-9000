@@ -152,6 +152,9 @@ package src
 			return -1;
 		}
 		
+		/**
+		 * Returns true if the Right vector is in the opposite direction of the calling vector.
+		 */
 		public function TestDirOpposite( Right:PhysVector2D ):Boolean
 		{
 			var opposite:PhysVector2D = PhysVector2D.Multiply( UnitV(), -1 );
@@ -160,6 +163,7 @@ package src
 		}
 		
 		/**
+		 * *May Be Broken - John*
 		 * Returns a number which represents the directon of rotation needed for the
 		 * current vector to point in the same direction as the Right vector.
 		 * <br/><br/>

@@ -16,54 +16,62 @@ package src
 		var gameData:GameDataTracker;
 		var canFire:Boolean;
 		
-		private var ModAttack:Number;
-		private var ModSpeed:Number;
+		var _UP:Boolean;
+		var _RIGHT:Boolean;
+		var _DOWN:Boolean;
+		var _LEFT:Boolean;
+		
+		var _FireUP:Boolean;
+		var _FireRIGHT:Boolean;
+		var _FireDOWN:Boolean;
+		var _FireLEFT:Boolean;
+		
+		//private var ModAttack:Number;
+		private var ModSpeed:Number; 
 		private var ModDefense:Number;
+		private var ModHealth:Number;
 		private var MG:PixelMod_Grid_;
 		
 		public override function ResetHealth():void
 		{
 			super.ResetHealth();
-			this.visible = true;
-		}
-		
-		protected override function get Attack():Number
-		{
-			return ModAttack + attack;
-		}
-		
-		protected override function get Defense():Number
-		{
-			return ModDefense + defense;
-		}
-		
-		protected override function get Speed():Number
-		{
-			return ModSpeed + speed;
+			visible = true;
 		}
 		
 		public function Ship()
 		{
 			super();
-			isFiring = false;
-			canFire = false;
 			
 			velocity = new PhysVector2D();
 			PrimaryWeapon = new Shot_Player_Missile();
+			
 			fullHealth = 1000;
+			ModDefense = 0;
+			//ModAttack = 0;
 			ShipSpeed = 3;
-			Defense = 0;
 			FireTimer = 1;
 			FireRate = 1;
-			
-			ModAttack = 0;
-			ModDefense = 0;
 			ModSpeed = 0;
+			Defense = 0;
 			
+			isFiring = false;
+			canFire = false;
 			Boundary = null;
 			WeaponBoundary = null;
 			Attack = fullHealth;
 			ResetHealth();
+			
+			// for moving in a direction.
+			_UP = false;
+			_RIGHT = false;
+			_DOWN = false;
+			_LEFT = false;
+			
+			// for firing in a direction.
+			_FireUP = true;
+			_FireRIGHT = true;
+			_FireDOWN = true;
+			_FireLEFT = true;
 		}
 		
 		/**
@@ -72,11 +80,38 @@ package src
 		 * Any other Mod.
 		 */
 		public function RecalcModGrid():void
-		{}
-		
-		public override function Update( tick:Event ):void
 		{
-			super.Update( tick );
+			this.ModHealth = MG.CalcModHealth();
+			this.ModDefense = MG.CalcModDefense();
+			this.ModSpeed = MG.CalcModSpeed();
+			
+			MG.CalcModAttack();
+		}
+		
+		protected override function DoMoveChecks():void
+		{
+			velocity.X = 0;
+			velocity.Y = 0;
+			
+			if( _DOWN )
+			{
+				velocity.Y = 1;
+			}
+			else if( _UP )
+			{
+				velocity.Y = -1;
+			}
+			
+			if( _LEFT )
+			{
+				velocity.X = -1;
+			}
+			else if( _RIGHT )
+			{
+				velocity.X = 1;
+			}
+			
+			super.DoMoveChecks();
 		}
 		
 		protected override function DoCombatChecks():void
@@ -84,25 +119,37 @@ package src
 			if( isFiring && canFire && parent != null && PrimaryWeapon != null )
 			{
 				var bullet:Shot_;
-				bullet = Shot_( parent.addChild( 
-						PrimaryWeapon.Spawn( x, y, PhysVector2D.UP ) ) );
-				bullet.LoadBoundary( WeaponBoundary );
-				gameData.FireShot();
+				if( _FireUP )
+				{
+					bullet = Shot_( parent.addChild( 
+							PrimaryWeapon.Spawn( x, y, PhysVector2D.UP ) ) );
+					bullet.LoadBoundary( WeaponBoundary );
+					gameData.FireShot();
+				}
 				
-				bullet = Shot_( parent.addChild( 
-					PrimaryWeapon.Spawn( x, y, PhysVector2D.DOWN ) ) );
-				bullet.LoadBoundary( WeaponBoundary );
-				gameData.FireShot();
+				if( _FireDOWN )
+				{
+					bullet = Shot_( parent.addChild( 
+						PrimaryWeapon.Spawn( x, y, PhysVector2D.DOWN ) ) );
+					bullet.LoadBoundary( WeaponBoundary );
+					gameData.FireShot();
+				}
 				
-				bullet = Shot_( parent.addChild( 
-					PrimaryWeapon.Spawn( x, y, PhysVector2D.LEFT ) ) );
-				bullet.LoadBoundary( WeaponBoundary );
-				gameData.FireShot();
+				if( _FireLEFT )
+				{
+					bullet = Shot_( parent.addChild( 
+						PrimaryWeapon.Spawn( x, y, PhysVector2D.LEFT ) ) );
+					bullet.LoadBoundary( WeaponBoundary );
+					gameData.FireShot();
+				}
 				
-				bullet = Shot_( parent.addChild( 
-					PrimaryWeapon.Spawn( x, y, PhysVector2D.RIGHT ) ) );
-				bullet.LoadBoundary( WeaponBoundary );
-				gameData.FireShot();
+				if( _FireRIGHT )
+				{
+					bullet = Shot_( parent.addChild( 
+						PrimaryWeapon.Spawn( x, y, PhysVector2D.RIGHT ) ) );
+					bullet.LoadBoundary( WeaponBoundary );
+					gameData.FireShot();
+				}
 				
 				canFire = false;
 				FireTimer = 1;
@@ -145,6 +192,18 @@ package src
 			}
 		}
 		
+		public override function Disappear():void
+		{
+			removeEventListener( Event.ENTER_FRAME, Update );
+			this.visible = false;
+		}
+		
+		public function CorrectVelocity():void
+		{
+			velocity.Normalize();
+			velocity.Multiply( Speed );
+		}
+		
 		/**
 		 * When an enemy is killed, they report to the ship that they have been killed
 		 * using this function.
@@ -164,10 +223,31 @@ package src
 			isDead = false;
 			return health / fullHealth;
 		}
+		
 		public function LoadBoundary( _bound:Rectangle, _bullet:Rectangle ):void
 		{
 			this.Boundary = _bound;
 			this.WeaponBoundary = _bullet;
+		}
+		
+		public function LoadGameData( data:GameDataTracker )
+		{
+			gameData = data;
+		}
+		
+		protected override function get Attack():Number
+		{
+			return /*ModAttack + */attack;
+		}
+		
+		protected override function get Defense():Number
+		{
+			return ModDefense + defense;
+		}
+		
+		protected override function get Speed():Number
+		{
+			return ModSpeed + speed;
 		}
 		
 		public function BeginFiring():void
@@ -180,52 +260,45 @@ package src
 			this.isFiring = false;
 		}
 		
-		public function LoadGameData( data:GameDataTracker )
-		{
-			gameData = data;
-		}
-		
 		// Movement functions for updating the direction of the ship's movement.
-		public function MoveNorth():void
+		public function MoveUP():void
 		{
-			velocity.Y = -1;
+			_UP = true;
 		}
 		
-		public function MoveSouth():void
+		public function MoveDown():void
 		{
-			velocity.Y = 1;
+			_DOWN = true;
 		}
 		
-		public function MoveEast():void
+		public function MoveRight():void
 		{
-			velocity.X = 1;
+			_RIGHT = true;
 		}
 		
-		public function MoveWest():void
+		public function MoveLeft():void
 		{
-			velocity.X = -1;
+			_LEFT = true;
 		}
 		
-		public function StopVertical():void
+		public function StopUP():void
 		{
-			velocity.Y = 0;
+			_UP = false;
 		}
 		
-		public function StopHorizontal():void
+		public function StopDown():void
 		{
-			velocity.X = 0;
+			_DOWN = false;
 		}
 		
-		public override function Disappear():void
+		public function StopRight():void
 		{
-			removeEventListener( Event.ENTER_FRAME, Update );
-			this.visible = false;
+			_RIGHT = false;
 		}
 		
-		public function CorrectVelocity():void
+		public function StopLeft():void
 		{
-			velocity.Normalize();
-			velocity.Multiply( Speed );
+			_LEFT = false;
 		}
 	}
 }

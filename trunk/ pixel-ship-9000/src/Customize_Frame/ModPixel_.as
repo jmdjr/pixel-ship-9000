@@ -17,12 +17,14 @@ package src.Customize_Frame
 		 *   Base Class for the Modifying Pixels that add to a ship.
 		 */
 		
-		public var position:Number;     //Position in the Mod Grid
+		public var positionX:Number;     //Position in the Mod Grid
+		public var positionY:Number;
 		//private var modAmount:Number;    // Generic amount used to modify an attribute. 
 		
 		public function ModPixel_()
 		{
-			position = 0;
+			positionX = 0;
+			positionY = 0;
 			//modAmount = 0;
 		}
 		
