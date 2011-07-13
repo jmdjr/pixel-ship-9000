@@ -307,19 +307,19 @@ package src.Game_Frame
 				switch( key.keyCode )
 				{
 					case Keyboard.UP:
-						ship.MoveNorth();
+						ship.MoveUP();
 						break;
 					
 					case Keyboard.DOWN:
-						ship.MoveSouth();
+						ship.MoveDown();
 						break;
 					
 					case Keyboard.LEFT:
-						ship.MoveWest();
+						ship.MoveLeft();
 						break;
 					
 					case Keyboard.RIGHT:
-						ship.MoveEast();
+						ship.MoveRight();
 						break;
 					
 					case Keyboard.Z:
@@ -333,8 +333,6 @@ package src.Game_Frame
 					default:
 						break;
 				}
-				
-				ship.CorrectVelocity();
 			}
 		}
 		
@@ -343,13 +341,19 @@ package src.Game_Frame
 			switch( key.keyCode )
 			{
 				case Keyboard.UP:
+					ship.StopUP();
+					break;
+				
 				case Keyboard.DOWN:
-					ship.StopVertical();
+					ship.StopDown();
 					break;
 				
 				case Keyboard.LEFT:
+					ship.StopLeft();
+					break;
+				
 				case Keyboard.RIGHT:
-					ship.StopHorizontal();
+					ship.StopRight();
 					break;
 				
 				case Keyboard.Z:
@@ -358,12 +362,11 @@ package src.Game_Frame
 				
 				case Keyboard.P:
 					paused = !paused;
+					break;
 					
 				default:
 					break;
 			}
-			
-			ship.CorrectVelocity();
 		}
 		
 		
