@@ -59,9 +59,9 @@ package
 			if( this.stage != null )
 			{
 				this.removeEventListener(Event.ADDED_TO_STAGE, Start );
-				//this.gotoTitleFrame( null );
+				this.gotoTitleFrame( null );
 				//this.gotoGameFrame( null );
-				this.gotoCustomizeFrame( null );
+				//this.gotoCustomizeFrame( null );
 				//this.gotoCreditsFrame( null );
 			}
 		}
