@@ -19,7 +19,7 @@ package src.Game_Frame
 			Velocity = new PhysVector2D( 0, 0 );
 		}
 		
-		public override function Update(tick:Event):void
+		public override function Update( tick:Event ):void
 		{
 			super.Update( tick );
 			

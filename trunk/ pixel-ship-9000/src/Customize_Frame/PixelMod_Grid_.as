@@ -1,7 +1,11 @@
 package src.Customize_Frame
 {
+	import flash.display.DisplayObjectContainer;
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	
+	import src.GameDataTracker;
+	import src.Game_Frame.Shot_;
 	import src.Ship;
 
 	public class PixelMod_Grid_
@@ -21,7 +25,7 @@ package src.Customize_Frame
 		public function Update( tick:Event ):void
 		{
 			Vector.<ModPixel_>(grid).forEach(
-				function( item:ModPixel_, index:int, array:Array )
+				function( item:ModPixel_, index:int, array:Vector.<ModPixel_> )
 				{
 					if( item != null )
 					{
@@ -38,10 +42,13 @@ package src.Customize_Frame
 				for( var c = 0; c < cols; ++c )
 				{
 					mod = ModPixel_(grid[r*cols+c]);
-					mod.x = mod.positionX + ship.x;
-					mod.y = mod.positionY + ship.y;
+					if( mod != null )
+					{
+						mod.x = mod.positionX + ship.x;
+						mod.y = mod.positionY + ship.y;
 					
-					ship.addChild( mod );
+						ship.addChild( mod );
+					}
 				}
 			}
 		}
@@ -54,7 +61,7 @@ package src.Customize_Frame
 			
 			grid[r*cols+c] = item;
 			item.positionX = item.width * (c - 1); // -1, 0, 1
-			item.positionY = -1 * item.height * (r - 1);
+			item.positionY = item.height * (r - 1);
 		}
 		
 		public function DeleteModPixel( ship:Ship, r:Number, c:Number ):void
@@ -74,7 +81,7 @@ package src.Customize_Frame
 		public function CalcModHealth():Number
 		{
 			var totalMods:Vector.<ModPixel_> = Vector.<ModPixel_>(grid).filter(
-				function( item:ModPixel_, index:int, array:Array )
+				function( item:ModPixel_, index:int, array:Vector.<ModPixel_> )
 				{
 					if( item is ModPixel_ )
 					{
@@ -87,13 +94,27 @@ package src.Customize_Frame
 			return totalMods.length;
 		}
 		
+		public function FireOffAttackMods( gameData:GameDataTracker, ship:MovieClip ):void
+		{
+			var bullet:Shot_;
+			
+			for( var i = 0; i < grid.length; ++i )
+			{
+				if( grid[i] is ModPixel_Attack )
+				{
+					ModPixel_Attack(grid[i]).Fire( gameData, ship );
+				}
+			}
+		}
+		
+		
 		/**
 		 * Calculates the total speed additions made by the Speed mods.
 		 * */
 		public function CalcModSpeed():Number
 		{
 			var totalMods:Vector.<ModPixel_> = Vector.<ModPixel_>(grid).filter(
-				function( item:ModPixel_, index:int, array:Array )
+				function( item:ModPixel_, index:int, array:Vector.<ModPixel_> )
 				{
 					if( item is ModPixel_Speed )
 					{
@@ -112,7 +133,7 @@ package src.Customize_Frame
 		public function CalcModDefense():Number
 		{
 			var totalMods:Vector.<ModPixel_> = Vector.<ModPixel_>(grid).filter(
-				function( item:Object, index:int, array:Array )
+				function( item:Object, index:int, array:Vector.<ModPixel_> )
 				{
 					if( item is ModPixel_Defense )
 					{
