@@ -4,6 +4,9 @@ package src
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
+	import src.Customize_Frame.ModPixel_;
+	import src.Customize_Frame.ModPixel_Attack;
+	import src.Customize_Frame.ModPixel_Speed;
 	import src.Customize_Frame.PixelMod_Grid_;
 	import src.Game_Frame.ShipObject;
 	import src.Game_Frame.Shot_;
@@ -13,18 +16,18 @@ package src
 	public class Ship extends ShipObject
 	{
 		private var isFiring:Boolean;
-		var gameData:GameDataTracker;
-		var canFire:Boolean;
+		private var gameData:GameDataTracker;
+		private var canFire:Boolean;
 		
-		var _UP:Boolean;
-		var _RIGHT:Boolean;
-		var _DOWN:Boolean;
-		var _LEFT:Boolean;
+		private var _UP:Boolean;
+		private var _RIGHT:Boolean;
+		private var _DOWN:Boolean;
+		private var _LEFT:Boolean;
 		
-		var _FireUP:Boolean;
-		var _FireRIGHT:Boolean;
-		var _FireDOWN:Boolean;
-		var _FireLEFT:Boolean;
+		private var _FireUP:Boolean;
+		private var _FireRIGHT:Boolean;
+		private var _FireDOWN:Boolean;
+		private var _FireLEFT:Boolean;
 		
 		//private var ModAttack:Number;
 		private var ModSpeed:Number; 
@@ -41,11 +44,12 @@ package src
 		public function Ship()
 		{
 			super();
-			
+		
 			velocity = new PhysVector2D();
 			PrimaryWeapon = new Shot_Player_Missile();
+			MG = new PixelMod_Grid_();
 			
-			fullHealth = 1000;
+			fullHealth = 1;
 			ModDefense = 0;
 			//ModAttack = 0;
 			ShipSpeed = 3;
@@ -68,10 +72,22 @@ package src
 			_LEFT = false;
 			
 			// for firing in a direction.
-			_FireUP = true;
-			_FireRIGHT = true;
-			_FireDOWN = true;
-			_FireLEFT = true;
+			_FireUP = false;
+			_FireRIGHT = false;
+			_FireDOWN = false;
+			_FireLEFT = false;
+			
+			RecalcModGrid();
+		}
+		
+		public function AddModPixel( mod:ModPixel_, r:Number, c:Number ):void
+		{
+			if( mod is ModPixel_Attack )
+			{
+				ModPixel_Attack(mod).LoadBoundary( WeaponBoundary );
+			}
+			
+			MG.AddModPixel( mod, r, c );
 		}
 		
 		/**
@@ -81,11 +97,17 @@ package src
 		 */
 		public function RecalcModGrid():void
 		{
-			this.ModHealth = MG.CalcModHealth();
-			this.ModDefense = MG.CalcModDefense();
-			this.ModSpeed = MG.CalcModSpeed();
+			ModHealth = MG.CalcModHealth();
+			ModDefense = MG.CalcModDefense();
+			ModSpeed = MG.CalcModSpeed();
 			
 			MG.CalcModAttack();
+			MG.DrawModPixelsOnShip( this );
+			
+			//_FireUP = !MG.CheckModAt( 0, 1 );
+			//_FireDOWN = !MG.CheckModAt( 2, 1 );
+			//_FireLEFT = !MG.CheckModAt( 1, 0 );
+			//_FireRIGHT = !MG.CheckModAt( 1, 2 );
 		}
 		
 		protected override function DoMoveChecks():void
@@ -151,6 +173,8 @@ package src
 					gameData.FireShot();
 				}
 				
+				MG.FireOffAttackMods( gameData, this );
+				
 				canFire = false;
 				FireTimer = 1;
 			}
@@ -198,12 +222,6 @@ package src
 			this.visible = false;
 		}
 		
-		public function CorrectVelocity():void
-		{
-			velocity.Normalize();
-			velocity.Multiply( Speed );
-		}
-		
 		/**
 		 * When an enemy is killed, they report to the ship that they have been killed
 		 * using this function.
@@ -228,6 +246,19 @@ package src
 		{
 			this.Boundary = _bound;
 			this.WeaponBoundary = _bullet;
+			
+			//** Test Mod Grid Stuff
+			var AttackMod:ModPixel_Attack = new ModPixel_Attack();
+			
+			AttackMod.EnableFireDirections( 1 );
+			AttackMod.EnableFireDirections( 2 );
+			AttackMod.EnableFireDirections( 3 );
+			AttackMod.EnableFireDirections( 4 );
+			
+			AddModPixel( AttackMod, 0, 1 );
+			//** End of Test Mod Grid Stuff
+			
+			RecalcModGrid();
 		}
 		
 		public function LoadGameData( data:GameDataTracker )

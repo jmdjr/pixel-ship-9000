@@ -1,5 +1,7 @@
 package src.Customize_Frame
 {
+	import flash.display.DisplayObjectContainer;
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
@@ -18,6 +20,7 @@ package src.Customize_Frame
 		var PrimaryWeapon:Shot_Player_Missile;
 		var WeaponBoundary:Rectangle;
 		var gameData:GameDataTracker;
+		var Boundary:Rectangle;
 		
 		public function ModPixel_Attack()
 		{
@@ -26,6 +29,8 @@ package src.Customize_Frame
 			FireSouth = true;
 			FireEast  = true;
 			FireWest  = true;
+			
+			PrimaryWeapon = new Shot_Player_Missile();
 		}
 		
 		/**
@@ -94,41 +99,46 @@ package src.Customize_Frame
 			}
 		}
 		
-		public function Fire():void
+		public function Fire( gameData:GameDataTracker, ship:MovieClip ):void
 		{
 			var bullet:Shot_;
 			
 			if( FireNorth )
 			{
-				bullet = Shot_( parent.addChild( 
-					PrimaryWeapon.Spawn( x, y, PhysVector2D.UP ) ) );
+				bullet = Shot_( ship.parent.addChild( 
+					PrimaryWeapon.Spawn( x + ship.x, y + ship.y, PhysVector2D.UP ) ) );
 				bullet.LoadBoundary( WeaponBoundary );
 				gameData.FireShot();
 			}
 			
 			if( FireEast )
 			{
-				bullet = Shot_( parent.addChild( 
-					PrimaryWeapon.Spawn( x, y, PhysVector2D.LEFT ) ) );
+				bullet = Shot_( ship.parent.addChild( 
+					PrimaryWeapon.Spawn( x + ship.x, y + ship.y, PhysVector2D.LEFT ) ) );
 				bullet.LoadBoundary( WeaponBoundary );
 				gameData.FireShot();
 			}
 			
 			if( FireSouth )
 			{
-				bullet = Shot_( parent.addChild( 
-					PrimaryWeapon.Spawn( x, y, PhysVector2D.DOWN ) ) );
+				bullet = Shot_( ship.parent.addChild( 
+					PrimaryWeapon.Spawn( x + ship.x, y + ship.y, PhysVector2D.DOWN ) ) );
 				bullet.LoadBoundary( WeaponBoundary );
 				gameData.FireShot();
 			}
 			
 			if( FireWest )
 			{
-				bullet = Shot_( parent.addChild( 
-					PrimaryWeapon.Spawn( x, y, PhysVector2D.RIGHT ) ) );
+				bullet = Shot_( ship.parent.addChild( 
+					PrimaryWeapon.Spawn( x + ship.x, y + ship.y, PhysVector2D.RIGHT ) ) );
 				bullet.LoadBoundary( WeaponBoundary );
 				gameData.FireShot();
 			}
+		}
+		
+		public function LoadBoundary( _bound:Rectangle ):void
+		{
+			Boundary = _bound;
 		}
 	}
 }
