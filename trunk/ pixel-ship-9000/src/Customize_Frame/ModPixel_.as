@@ -2,6 +2,7 @@ package src.Customize_Frame
 {
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.geom.Rectangle;
 
 	/**
 	 * ModPixel represents the pixel that is displayed with the ship, as well as 
@@ -19,18 +20,24 @@ package src.Customize_Frame
 		
 		public var positionX:Number;     //Position in the Mod Grid
 		public var positionY:Number;
-		//private var modAmount:Number;    // Generic amount used to modify an attribute. 
+		protected var _CurrentClass:Class;
 		
 		public function ModPixel_()
 		{
 			positionX = 0;
 			positionY = 0;
-			//modAmount = 0;
+			_CurrentClass = ModPixel_;
 		}
 		
 		public function Update( tick:Event ):void
 		{
 			
+		}
+		
+		public function Spawn( _bound:Rectangle = null ):ModPixel_
+		{
+			var temp:ModPixel_ = new _CurrentClass();
+			return temp;
 		}
 	}
 }

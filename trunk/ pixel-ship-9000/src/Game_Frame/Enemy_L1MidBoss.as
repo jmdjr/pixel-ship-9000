@@ -17,7 +17,7 @@ package src.Game_Frame
 			alpha = 0;
 			health = 5;
 			scrapAmount = 25;
-			fullHealth = 5;
+			FullHealth = 5;
 		}
 		
 		public override function Update( tick:Event ):void

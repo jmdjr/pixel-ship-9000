@@ -11,11 +11,11 @@ package src.Game_Frame
 			super();
 			Speed = 1;
 			FireRate = 1;
-			fullHealth = 5;
+			FullHealth = 5;
 			health = 5;
 			scrapAmount = 1;
 			
-			Attack = fullHealth;
+			Attack = FullHealth;
 			_CurrentClass = Enemy_Bomb;
 			PrimaryWeapon = new Shot_Enemy_Explosion();
 		}

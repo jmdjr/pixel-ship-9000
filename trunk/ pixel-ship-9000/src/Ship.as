@@ -29,7 +29,7 @@ package src
 		private var _FireDOWN:Boolean;
 		private var _FireLEFT:Boolean;
 		
-		//private var ModAttack:Number;
+		private var ModAttack:Number;
 		private var ModSpeed:Number; 
 		private var ModDefense:Number;
 		private var ModHealth:Number;
@@ -49,20 +49,20 @@ package src
 			PrimaryWeapon = new Shot_Player_Missile();
 			MG = new PixelMod_Grid_();
 			
-			fullHealth = 1;
+			FullHealth = 1;
 			ModDefense = 0;
 			//ModAttack = 0;
+			ModSpeed = 0;
 			ShipSpeed = 3;
 			FireTimer = 1;
 			FireRate = 1;
-			ModSpeed = 0;
+			
 			Defense = 0;
 			
 			isFiring = false;
 			canFire = false;
 			Boundary = null;
 			WeaponBoundary = null;
-			Attack = fullHealth;
 			ResetHealth();
 			
 			// for moving in a direction.
@@ -80,15 +80,6 @@ package src
 			RecalcModGrid();
 		}
 		
-		public function AddModPixel( mod:ModPixel_, r:Number, c:Number ):void
-		{
-			if( mod is ModPixel_Attack )
-			{
-				ModPixel_Attack(mod).LoadBoundary( WeaponBoundary );
-			}
-			
-			MG.AddModPixel( mod, r, c );
-		}
 		
 		/**
 		 * Calculates the mod values from the ModGrid and assigns those values to the 
@@ -100,14 +91,14 @@ package src
 			ModHealth = MG.CalcModHealth();
 			ModDefense = MG.CalcModDefense();
 			ModSpeed = MG.CalcModSpeed();
-			
-			MG.CalcModAttack();
+			ModAttack = FullHealth;
+			MG.CalibrateModAttack();
 			MG.DrawModPixelsOnShip( this );
 			
-			//_FireUP = !MG.CheckModAt( 0, 1 );
-			//_FireDOWN = !MG.CheckModAt( 2, 1 );
-			//_FireLEFT = !MG.CheckModAt( 1, 0 );
-			//_FireRIGHT = !MG.CheckModAt( 1, 2 );
+			_FireUP = !MG.CheckModAt( 0, 1 );
+			_FireDOWN = !MG.CheckModAt( 2, 1 );
+			_FireLEFT = !MG.CheckModAt( 1, 0 );
+			_FireRIGHT = !MG.CheckModAt( 1, 2 );
 		}
 		
 		protected override function DoMoveChecks():void
@@ -239,7 +230,12 @@ package src
 		public function HealthPercentage():Number
 		{
 			isDead = false;
-			return health / fullHealth;
+			return health / FullHealth;
+		}
+		
+		protected override function get FullHealth():Number
+		{
+			return fullHealth + ModHealth;
 		}
 		
 		public function LoadBoundary( _bound:Rectangle, _bullet:Rectangle ):void
@@ -248,17 +244,23 @@ package src
 			this.WeaponBoundary = _bullet;
 			
 			//** Test Mod Grid Stuff
-			var AttackMod:ModPixel_Attack = new ModPixel_Attack();
+/*			var AttackMod:ModPixel_Attack = new ModPixel_Attack();
+			AttackMod.LoadBoundary( _bullet );
 			
-			AttackMod.EnableFireDirections( 1 );
-			AttackMod.EnableFireDirections( 2 );
-			AttackMod.EnableFireDirections( 3 );
-			AttackMod.EnableFireDirections( 4 );
-			
-			AddModPixel( AttackMod, 0, 1 );
+			AddModPixel( AttackMod, 0, 1 );*/
 			//** End of Test Mod Grid Stuff
 			
 			RecalcModGrid();
+		}
+		
+		public function AddModPixel( mod:ModPixel_, r:Number, c:Number ):void
+		{
+			if( mod is ModPixel_Attack )
+			{
+				ModPixel_Attack(mod).LoadBoundary( WeaponBoundary );
+			}
+			
+			MG.AddModPixel( mod, r, c );
 		}
 		
 		public function LoadGameData( data:GameDataTracker )
@@ -268,7 +270,7 @@ package src
 		
 		protected override function get Attack():Number
 		{
-			return /*ModAttack + */attack;
+			return ModAttack + attack;
 		}
 		
 		protected override function get Defense():Number
@@ -279,6 +281,41 @@ package src
 		protected override function get Speed():Number
 		{
 			return ModSpeed + speed;
+		}
+		
+		public function ReportAttackMods():Number
+		{
+			return this.MG.CalcModAttack();
+		}
+		
+		public function ReportDefenseMods():Number
+		{
+			return this.MG.CalcModDefense();
+		}
+		
+		public function ReportSpeedMods():Number
+		{
+			return this.MG.CalcModSpeed();
+		}
+		
+		public function get ReportAttackStat():Number
+		{
+			return this.Attack;
+		}
+		
+		public function get ReportSpeedStat():Number
+		{
+			return this.Speed;
+		}
+		
+		public function get ReportDefenseStat():Number
+		{
+			return this.Defense
+		}
+		
+		public function get ReportHealthStat():Number
+		{
+			return this.FullHealth;
 		}
 		
 		public function BeginFiring():void

@@ -25,7 +25,7 @@ package src.Game_Frame
 		{
 			super();
 			_CurrentClass = Enemy_L1Boss_Real;
-			fullHealth = 20;
+			FullHealth = 20;
 			PrimaryWeapon = new Shot_Enemy_L1Boss_Real();
 			ResetHealth();
 			addEventListener( Event.ADDED, LoadPhantom );

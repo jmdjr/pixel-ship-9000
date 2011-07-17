@@ -39,6 +39,7 @@ package src.Customize_Frame
 		var BuyATK:ModSpawn_Attack;
 		var BuySPEED:ModSpawn_Speed;
 		var BuyDEF:ModSpawn_Defense;
+		var RefSpawner:ModSpawn_;
 		
 		public function _Frame_Customize()
 		{
@@ -116,7 +117,7 @@ package src.Customize_Frame
 						assignModSpawner( ModSpawn_( childClip ) );
 						break;
 					
-					case getQualifiedClassName( MovieClip ):
+					default:
 						assignRest( childClip );
 						break;
 				}
@@ -135,10 +136,7 @@ package src.Customize_Frame
 				}
 			}
 			
-			if( price_attackPixel != null )
-			{
-				
-			}
+			this.addEventListener(MouseEvent.CLICK, OnClick_Frame );
 		}
 		
 		private function assignModSpawner( childClip:ModSpawn_ ):void
@@ -147,14 +145,17 @@ package src.Customize_Frame
 			{
 				case getQualifiedClassName( ModSpawn_Attack ):
 					BuyATK = ModSpawn_Attack( childClip );
+					BuyATK.addEventListener(MouseEvent.CLICK, OnClick_AttackModSpawner );
 					break;
 				
 				case getQualifiedClassName( ModSpawn_Speed ):
 					BuySPEED = ModSpawn_Speed( childClip );
+					BuySPEED.addEventListener(MouseEvent.CLICK, OnClick_SpeedModSpawner );
 					break;
 				
 				case getQualifiedClassName( ModSpawn_Defense ):
 					BuyDEF = ModSpawn_Defense( childClip );
+					BuyDEF.addEventListener( MouseEvent.CLICK, OnClick_DefenseModSpawner );
 					break;
 			}
 		}
@@ -165,6 +166,11 @@ package src.Customize_Frame
 			{
 				case getQualifiedClassName( PixelMod_Grid_Customizer ):
 					MGC = PixelMod_Grid_Customizer( childClip );
+					MGC.LoadShipReference( ShipReference );
+					MGC.addEventListener( MouseEvent.CLICK, OnClick_Grid_Customizer );
+					break;
+				
+				case getQualifiedClassName( Ship ):
 					break;
 			}
 		}
@@ -196,68 +202,153 @@ package src.Customize_Frame
 			{
 				case getQualifiedClassName( Text_ShipAttackStat ):
 					sum_attackText = Text_ShipAttackStat( childClip );
+					sum_attackText.Value = String( 0 );
 					break;
 				
 				case getQualifiedClassName( Text_ShipDefenseStat ):
 					sum_defenseText = Text_ShipDefenseStat( childClip );
+					sum_defenseText.Value = String( 0 );
 					break;
 				
 				case getQualifiedClassName( Text_ShipSpeedStat ):
 					sum_speedText = Text_ShipSpeedStat( childClip );
+					sum_speedText.Value = String( 0 );
 					break;
 				
 				case getQualifiedClassName( Text_AttackPixelModPrice ):
 					price_attackPixel = Text_AttackPixelModPrice( childClip );
+					price_attackPixel.Value = String( 0 );
 					break;
 				
 				case getQualifiedClassName( Text_SpeedPixelModPrice ):
 					price_speedPixel = Text_SpeedPixelModPrice( childClip );
+					price_speedPixel.Value = String( 0 );
 					break;
 				
 				case getQualifiedClassName( Text_DefensePixelModPrice ):
 					price_defensePixel = Text_DefensePixelModPrice( childClip );
+					price_defensePixel.Value = String( 0 );
 					break;
 				
 				case getQualifiedClassName( Text_ShipScrap ):
 					ship_scrapTotalText = Text_ShipScrap( childClip );
+					ship_scrapTotalText.Value = "Scrap:" + String( 0 );
 					break;
 			}
 		}
 		
-		public function LoadGameData( data:GameDataTracker )
+
+		
+		public function UpdateUI():void
 		{
-			gameData = data;
+			ship_scrapTotalText.Value = "Scrap:" + String( gameData.Scrap );
+
+			sum_attackText.Value = String( ShipReference.ReportAttackStat );
+			sum_speedText.Value = String( ShipReference.ReportSpeedStat );
+			sum_defenseText.Value = String( ShipReference.ReportDefenseStat );
+			
+			price_attackPixel.Value = String( (ShipReference.ReportAttackMods() + 1) * 10 );
+			price_speedPixel.Value = String( (ShipReference.ReportSpeedMods() + 1) * 10 );
+			price_defensePixel.Value = String( (ShipReference.ReportDefenseMods() + 1) * 10 );
 		}
 		
 		public function Update( tick:Event ):void
 		{
 			if( enabled )
 			{
-				this.background.Update( tick );
+				background.Update( tick );
+				UpdateUI();
+				
+				if( RefSpawner != null )
+				{
+					RefSpawner.x = mouseX + RefSpawner.width + 5;
+					RefSpawner.y = mouseY;
+				}
 			}
 		}
 		
 		private function OnClick_AttackModSpawner( click:MouseEvent ):void
 		{
+			click.stopPropagation();
+			if( gameData.Scrap < int( price_attackPixel.Value ) )
+			{
+				// do something to warn the player about being so bloody poor.
+				return;
+			}
 			
+			gameData.SpendScrap( int( price_attackPixel.Value ) );
+			
+			// Spawns a spawner and moves it to the reference spawner's spot.
+			RefSpawner = BuyATK.Spawn_ModSpawn();
+			MGC.UpdateReferenceMod( RefSpawner );
+			addChild( RefSpawner );
 		}
 		
 		private function OnClick_DefenseModSpawner( click:MouseEvent ):void
 		{
+			click.stopPropagation();
+			if( gameData.Scrap < int( price_defensePixel.Value ) )
+			{
+				// do something to warn the player about being so bloody poor.
+				return;
+			}
+			
+			gameData.SpendScrap( int( price_defensePixel.Value ) );
+			
+			// Spawns a spawner and moves it to the reference spawner's spot.
+			RefSpawner = BuyDEF.Spawn_ModSpawn();
+			MGC.UpdateReferenceMod( RefSpawner );
+			addChild( RefSpawner );
 		}
 		
 		private function OnClick_SpeedModSpawner( click:MouseEvent ):void
 		{
+			click.stopPropagation();
+			if( gameData.Scrap < int( price_speedPixel.Value ) )
+			{
+				// do something to warn the player about being so bloody poor.
+				return;
+			}
+			
+			gameData.SpendScrap( int( price_speedPixel.Value ) );
+			
+			// Spawns a spawner and moves it to the reference spawner's spot.
+			RefSpawner = BuySPEED.Spawn_ModSpawn();
+			MGC.UpdateReferenceMod( RefSpawner );
+			addChild( RefSpawner );
+		}
+		
+		private function OnClick_Grid_Customizer( click:MouseEvent ):void
+		{
+			click.stopPropagation();
+			MGC.OnClick_ZoneGrid( click );
+		}
+		
+		private function OnClick_Frame( click:MouseEvent ):void
+		{
+			if( RefSpawner != null )
+			{
+				RefSpawner.visible = false;
+				RefSpawner.enabled = false;
+				RefSpawner.parent.removeChild( RefSpawner );
+				RefSpawner = null;
+			}
 		}
 		
 		private function returnMainMenu( click:MouseEvent ):void
 		{
+			
 			dispatchEvent( new Event( Frames.TITLE, true ) );
 		}
 		
 		private function returnPlayAgain( click:MouseEvent ):void
 		{
 			dispatchEvent( new Event( Frames.GAME, true ) );
+		}
+		
+		public function LoadGameData( data:GameDataTracker )
+		{
+			gameData = data;
 		}
 	}
 }

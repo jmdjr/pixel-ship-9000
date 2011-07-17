@@ -71,6 +71,7 @@ package src.Game_Frame
 		
 		private function Echo( test:Event )
 		{
+			removeEventListener( Event.ADDED_TO_STAGE, Echo );
 			stage.addEventListener( ShipObject.MANAGED_UPDATE, Update );
 		}
 		

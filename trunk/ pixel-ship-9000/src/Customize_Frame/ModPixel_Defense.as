@@ -5,6 +5,7 @@ package src.Customize_Frame
 		public function ModPixel_Defense()
 		{
 			super();
+			_CurrentClass = ModPixel_Defense;
 		}
 	}
 }
