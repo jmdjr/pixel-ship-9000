@@ -20,7 +20,6 @@ package src.Customize_Frame
 		var PrimaryWeapon:Shot_Player_Missile;
 		var WeaponBoundary:Rectangle;
 		var gameData:GameDataTracker;
-		var Boundary:Rectangle;
 		
 		public function ModPixel_Attack()
 		{
@@ -31,6 +30,7 @@ package src.Customize_Frame
 			FireWest  = true;
 			
 			PrimaryWeapon = new Shot_Player_Missile();
+			_CurrentClass = ModPixel_Attack;
 		}
 		
 		/**
@@ -138,7 +138,15 @@ package src.Customize_Frame
 		
 		public function LoadBoundary( _bound:Rectangle ):void
 		{
-			Boundary = _bound;
+			WeaponBoundary = _bound;
+		}
+		
+		public override function Spawn( _bound:Rectangle=null ):ModPixel_
+		{
+			var temp:ModPixel_ = super.Spawn( );
+			WeaponBoundary = _bound;
+			
+			return temp;
 		}
 	}
 }

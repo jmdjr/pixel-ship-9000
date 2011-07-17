@@ -24,8 +24,8 @@ package src.Customize_Frame
 		
 		public function Update( tick:Event ):void
 		{
-			Vector.<ModPixel_>(grid).forEach(
-				function( item:ModPixel_, index:int, array:Vector.<ModPixel_> )
+			grid.forEach(
+				function( item:ModPixel_, index:int, array:Array )
 				{
 					if( item != null )
 					{
@@ -46,7 +46,7 @@ package src.Customize_Frame
 					{
 						mod.x = mod.positionX + ship.x;
 						mod.y = mod.positionY + ship.y;
-					
+						
 						ship.addChild( mod );
 					}
 				}
@@ -55,6 +55,10 @@ package src.Customize_Frame
 		public function AddModPixel( item:ModPixel_, r:Number, c:Number ):void
 		{
 			if( r >= rows || c >= cols || r < 0 || c < 0 )
+			{
+				return;
+			}
+			if( r*cols+c == 4 )
 			{
 				return;
 			}
@@ -80,10 +84,10 @@ package src.Customize_Frame
 		 * */
 		public function CalcModHealth():Number
 		{
-			var totalMods:Vector.<ModPixel_> = Vector.<ModPixel_>(grid).filter(
-				function( item:ModPixel_, index:int, array:Vector.<ModPixel_> )
+			var totalMods:Array = grid.filter(
+				function( item:Object, index:int, array:Array )
 				{
-					if( item is ModPixel_ )
+					if( item != null )
 					{
 						return true;
 					}
@@ -94,27 +98,14 @@ package src.Customize_Frame
 			return totalMods.length;
 		}
 		
-		public function FireOffAttackMods( gameData:GameDataTracker, ship:MovieClip ):void
-		{
-			var bullet:Shot_;
-			
-			for( var i = 0; i < grid.length; ++i )
-			{
-				if( grid[i] is ModPixel_Attack )
-				{
-					ModPixel_Attack(grid[i]).Fire( gameData, ship );
-				}
-			}
-		}
-		
-		
 		/**
 		 * Calculates the total speed additions made by the Speed mods.
+		 * Currently returns the number of Speed Mods on the ship.
 		 * */
 		public function CalcModSpeed():Number
 		{
-			var totalMods:Vector.<ModPixel_> = Vector.<ModPixel_>(grid).filter(
-				function( item:ModPixel_, index:int, array:Vector.<ModPixel_> )
+			var totalMods:Array = grid.filter(
+				function( item:Object, index:int, array:Array )
 				{
 					if( item is ModPixel_Speed )
 					{
@@ -129,11 +120,13 @@ package src.Customize_Frame
 		
 		/**
 		 * Calculates the total defense made by the Defense mods.
+		 * Currently returns the number of Defense mods on the ship.
 		 * */
+		
 		public function CalcModDefense():Number
 		{
-			var totalMods:Vector.<ModPixel_> = Vector.<ModPixel_>(grid).filter(
-				function( item:Object, index:int, array:Vector.<ModPixel_> )
+			var totalMods:Array = grid.filter(
+				function( item:Object, index:int, array:Array )
 				{
 					if( item is ModPixel_Defense )
 					{
@@ -148,11 +141,54 @@ package src.Customize_Frame
 		
 		/**
 		 * Makes all attack mods aware of the grid, and sets their firing
-		 *  Directions
+		 *  Directions.
 		 * */
-		public function CalcModAttack():void
+		public function CalibrateModAttack():void
 		{
+			//Step through and assign appropriate directions to fire for.
+			for( var i = 0; i < grid.length; ++i )
+			{
+				for( var j = 0; j < grid.length; ++j )
+				{
+					
+				}
+			}
+		}
+		
+		/**
+		 * Makes all attack mods aware of the grid, and sets their firing
+		 *  Directions.
+		 * */
+		public function CalcModAttack():Number
+		{
+			var totalMods:Array = grid.filter(
+				function( item:Object, index:int, array:Array )
+				{
+					if( item is ModPixel_Attack )
+					{
+						return true;
+					}
+					
+					return false;
+				});
 			
+			return totalMods.length;
+		}
+		
+		/**
+		 * Steps through all Attack Mods and Fires each one.
+		 */
+		public function FireOffAttackMods( gameData:GameDataTracker, ship:MovieClip ):void
+		{
+			var bullet:Shot_;
+			
+			for( var i = 0; i < grid.length; ++i )
+			{
+				if( grid[i] is ModPixel_Attack )
+				{
+					ModPixel_Attack(grid[i]).Fire( gameData, ship );
+				}
+			}
 		}
 		
 		/**
@@ -165,8 +201,19 @@ package src.Customize_Frame
 			{
 				return true;
 			}
-			
+			if( r*cols + c == 4 )
+			{
+				return true;
+			}
 			return grid[r*cols + c] != null;
+		}
+		
+		public function DeletePixelModGrid( ship:Ship ):void
+		{
+			for( var i = 0; i < grid.length; ++i )
+			{
+				DeleteModPixel( ship, int(i/cols), i%cols );
+			}	
 		}
 	}
 }

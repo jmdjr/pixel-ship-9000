@@ -7,13 +7,14 @@ package src
 
 	public class GameDataTracker
 	{
+		public var JB:JukeBox;
+		
 		private var ShotsFired:Number;
 		private var EnemiesKilled:Number;
 		private var Accuracy:Number;
 		private var Score:Number;
 		private var CurrentScrap:Number;
-		private var TotalScrap:Number;
-		public var JB:JukeBox;
+		private var Total_Scrap:Number;
 		private var CurrentLevel:Level;
 		
 		public function GameDataTracker()
@@ -22,7 +23,7 @@ package src
 			EnemiesKilled = 0;
 			Score = 0;
 			CurrentScrap = 0;
-			TotalScrap = 0;
+			Total_Scrap = 0;
 			Accuracy = 1.0;
 			CurrentLevel = null;
 			JB = new JukeBox();
@@ -83,6 +84,5 @@ package src
 			
 			return "Blank Level Name";
 		}
-
 	}
 }

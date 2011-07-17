@@ -152,7 +152,10 @@ package src.Game_Frame
 				text = "Scrap: " + this.gameData.Scrap.toString();
 				x = this.stage.stageWidth - ( shipHBText.x + textWidth );
 				y = shipHBText.y;
+				
 			}
+			
+			//shipPixelCount.defaultTextFormat.align;
 			
 			with( shipHealthBar )
 			{ 

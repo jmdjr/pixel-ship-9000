@@ -14,7 +14,7 @@ package src.Game_Frame
 		{
 			super();
 			FireRate = 1;
-			fullHealth = 1;
+			FullHealth = 1;
 			scrapAmount = 1;
 			ResetHealth();
 			PrimaryWeapon = new Shot_Enemy_Missile();

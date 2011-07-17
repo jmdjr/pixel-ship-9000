@@ -8,6 +8,7 @@ package src.Customize_Frame
 		{
 			super();
 			_ModPixel_To_Spawn = ModPixel_Speed;
+			_ModSpawn_Class = ModSpawn_Speed;
 		}
 	}
 }

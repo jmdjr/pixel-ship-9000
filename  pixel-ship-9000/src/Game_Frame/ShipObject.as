@@ -7,7 +7,7 @@ package src.Game_Frame
 	import flash.geom.Rectangle;
 	import flash.utils.Timer;
 	
-	import src.PhysVector2D;
+	import src.PhysVector2D; 
 	import src.Ship;
 	
 	public class ShipObject extends MovieClip
@@ -114,7 +114,6 @@ package src.Game_Frame
 			}
 		}
 		
-		
 		public function Disappear():void
 		{
 			removeEventListener( Event.ENTER_FRAME, Update );
@@ -184,7 +183,17 @@ package src.Game_Frame
 		
 		public function ResetHealth():void
 		{
-			Health = fullHealth;
+			Health = FullHealth;
+		}
+		
+		protected function get FullHealth():Number
+		{
+			return fullHealth;
+		}
+		
+		protected function set FullHealth( value:Number ):void
+		{
+			fullHealth = value;
 		}
 		
 		protected function get Speed():Number

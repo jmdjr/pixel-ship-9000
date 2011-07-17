@@ -16,7 +16,7 @@ package src.Game_Frame
 			_CurrentClass = Enemy_Javelin;
 			FireRate = 1;
 			FireTimer = 1;
-			fullHealth = 3;
+			FullHealth = 3;
 			scrapAmount = 2;
 			ResetHealth();
 			HasFired = false;
