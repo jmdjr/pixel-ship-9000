@@ -44,8 +44,8 @@ package src.Customize_Frame
 					mod = ModPixel_(grid[r*cols+c]);
 					if( mod != null )
 					{
-						mod.x = mod.positionX + ship.x;
-						mod.y = mod.positionY + ship.y;
+						mod.x = mod.positionX;
+						mod.y = mod.positionY;
 						
 						ship.addChild( mod );
 					}
@@ -54,7 +54,7 @@ package src.Customize_Frame
 		}
 		public function AddModPixel( item:ModPixel_, r:Number, c:Number ):void
 		{
-			if( r >= rows || c >= cols || r < 0 || c < 0 )
+			if( r >= rows || c >= cols || r < 0 || c < 0  || item == null )
 			{
 				return;
 			}
@@ -64,19 +64,30 @@ package src.Customize_Frame
 			}
 			
 			grid[r*cols+c] = item;
-			item.positionX = item.width * (c - 1); // -1, 0, 1
-			item.positionY = item.height * (r - 1);
+			item.positionX = item.width * (r - 1); // -1, 0, 1
+			item.positionY = item.height * (c - 1);
 		}
 		
 		public function DeleteModPixel( ship:Ship, r:Number, c:Number ):void
 		{
-			if( r >= rows || c >= cols || r < 0 || c < 0 )
+			if( r >= rows || c >= cols || r < 0 || c < 0 || ship == null || grid[r*cols+c] == null || !ship.contains( ModPixel_(grid[r*cols+c]) ) )
 			{
 				return;
 			}
 			
 			ship.removeChild( ModPixel_(grid[r*cols+c]) );
 			grid[r*cols+c] = null;  // hopefully this is handeled by the garbage collector.
+		}
+		
+		public function DeleteAllMods( ship:Ship ):void
+		{
+			for( var i = 0; i < rows; ++i )
+			{
+				for( var j = 0; j < cols; ++j )
+				{
+					DeleteModPixel( ship, i, j );
+				}
+			}
 		}
 			
 		/**
@@ -146,13 +157,16 @@ package src.Customize_Frame
 		public function CalibrateModAttack():void
 		{
 			//Step through and assign appropriate directions to fire for.
-			for( var i = 0; i < grid.length; ++i )
+/*			for( var i = 0; i < rows; ++i )
 			{
-				for( var j = 0; j < grid.length; ++j )
+				for( var j = 0; j < cols; ++j )
 				{
-					
+					if( grid[i*cols+j] is ModPixel_Attack )
+					{
+						
+					}
 				}
-			}
+			}*/
 		}
 		
 		/**
@@ -195,17 +209,18 @@ package src.Customize_Frame
 		 * Returns true if a Mod exists at the designated row|col position.
 		 *  these are zero based indecies.
 		 * */
-		public function CheckModAt( r:Number, c:Number ):Boolean
+		public function CheckModAt( r:Number, c:Number ):ModPixel_
 		{
 			if( r >= rows || c >= cols || r < 0 || c < 0 )
 			{
-				return true;
+				return null;
 			}
 			if( r*cols + c == 4 )
 			{
-				return true;
+				return null;
 			}
-			return grid[r*cols + c] != null;
+			
+			return ModPixel_( grid[c*cols + r] );
 		}
 		
 		public function DeletePixelModGrid( ship:Ship ):void

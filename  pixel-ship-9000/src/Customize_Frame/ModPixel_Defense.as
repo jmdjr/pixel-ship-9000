@@ -6,6 +6,7 @@ package src.Customize_Frame
 		{
 			super();
 			_CurrentClass = ModPixel_Defense;
+			_SpawnerClass = ModSpawn_Defense;
 		}
 	}
 }
