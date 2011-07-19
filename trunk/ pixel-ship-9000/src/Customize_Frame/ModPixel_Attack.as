@@ -31,6 +31,7 @@ package src.Customize_Frame
 			
 			PrimaryWeapon = new Shot_Player_Missile();
 			_CurrentClass = ModPixel_Attack;
+			_SpawnerClass = ModSpawn_Attack;
 		}
 		
 		/**

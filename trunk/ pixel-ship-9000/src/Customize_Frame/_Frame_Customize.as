@@ -85,11 +85,6 @@ package src.Customize_Frame
 			}
 		}
 		
-		public function LoadShipReference( sr:Ship ):void
-		{
-			this.ShipReference = sr;
-		}
-		
 		public function init( e:Event ):void
 		{
 			removeEventListener( Event.ADDED_TO_STAGE, init );
@@ -136,7 +131,7 @@ package src.Customize_Frame
 				}
 			}
 			
-			this.addEventListener(MouseEvent.CLICK, OnClick_Frame );
+			this.addEventListener( MouseEvent.CLICK, OnClick_Frame );
 		}
 		
 		private function assignModSpawner( childClip:ModSpawn_ ):void
@@ -186,7 +181,7 @@ package src.Customize_Frame
 				
 				case getQualifiedClassName( GenericButton_Continue ):
 					BTContinue = GenericButton_Continue( childClip );
-					BTContinue.addEventListener( MouseEvent.CLICK, returnMainMenu );
+					BTContinue.addEventListener( MouseEvent.CLICK, returnPlayAgain );
 					break;
 				
 				case getQualifiedClassName( GenericButton_TitleScreen ):
@@ -236,9 +231,7 @@ package src.Customize_Frame
 					break;
 			}
 		}
-		
-
-		
+				
 		public function UpdateUI():void
 		{
 			ship_scrapTotalText.Value = "Scrap:" + String( gameData.Scrap );
@@ -270,6 +263,14 @@ package src.Customize_Frame
 		private function OnClick_AttackModSpawner( click:MouseEvent ):void
 		{
 			click.stopPropagation();
+			
+			if( RefSpawner != null && getQualifiedClassName( RefSpawner ) == getQualifiedClassName( BuyATK ) )
+			{
+				return;
+			}
+			
+			OnClick_Frame( click );
+			
 			if( gameData.Scrap < int( price_attackPixel.Value ) )
 			{
 				// do something to warn the player about being so bloody poor.
@@ -287,6 +288,14 @@ package src.Customize_Frame
 		private function OnClick_DefenseModSpawner( click:MouseEvent ):void
 		{
 			click.stopPropagation();
+			
+			if( RefSpawner != null && getQualifiedClassName( RefSpawner ) == getQualifiedClassName( BuyDEF ) )
+			{
+				return;
+			}
+			
+			OnClick_Frame( click );
+			
 			if( gameData.Scrap < int( price_defensePixel.Value ) )
 			{
 				// do something to warn the player about being so bloody poor.
@@ -304,6 +313,14 @@ package src.Customize_Frame
 		private function OnClick_SpeedModSpawner( click:MouseEvent ):void
 		{
 			click.stopPropagation();
+			
+			if( RefSpawner != null && getQualifiedClassName( RefSpawner ) == getQualifiedClassName( BuySPEED ) )
+			{
+				return;
+			}
+			
+			OnClick_Frame( click );
+			
 			if( gameData.Scrap < int( price_speedPixel.Value ) )
 			{
 				// do something to warn the player about being so bloody poor.
@@ -321,7 +338,15 @@ package src.Customize_Frame
 		private function OnClick_Grid_Customizer( click:MouseEvent ):void
 		{
 			click.stopPropagation();
-			MGC.OnClick_ZoneGrid( click );
+			
+			if( RefSpawner != null && contains( RefSpawner ) )
+			{
+				removeChild( RefSpawner );
+				MGC.OnClick_ZoneGrid( click );
+			
+				RefSpawner = null;
+				MGC.UpdateReferenceMod( null );
+			}
 		}
 		
 		private function OnClick_Frame( click:MouseEvent ):void
@@ -337,18 +362,24 @@ package src.Customize_Frame
 		
 		private function returnMainMenu( click:MouseEvent ):void
 		{
-			
+			MGC.Produce_Ship_From_Grid();
 			dispatchEvent( new Event( Frames.TITLE, true ) );
 		}
 		
 		private function returnPlayAgain( click:MouseEvent ):void
 		{
+			MGC.Produce_Ship_From_Grid();
 			dispatchEvent( new Event( Frames.GAME, true ) );
 		}
 		
 		public function LoadGameData( data:GameDataTracker )
 		{
 			gameData = data;
+		}
+		
+		public function LoadShipReference( sr:Ship ):void
+		{
+			this.ShipReference = sr;
 		}
 	}
 }

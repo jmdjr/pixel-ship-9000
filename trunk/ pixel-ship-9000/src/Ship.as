@@ -48,7 +48,6 @@ package src
 			velocity = new PhysVector2D();
 			PrimaryWeapon = new Shot_Player_Missile();
 			MG = new PixelMod_Grid_();
-			
 			FullHealth = 1;
 			ModDefense = 0;
 			//ModAttack = 0;
@@ -95,10 +94,10 @@ package src
 			MG.CalibrateModAttack();
 			MG.DrawModPixelsOnShip( this );
 			
-			_FireUP = !MG.CheckModAt( 0, 1 );
-			_FireDOWN = !MG.CheckModAt( 2, 1 );
-			_FireLEFT = !MG.CheckModAt( 1, 0 );
-			_FireRIGHT = !MG.CheckModAt( 1, 2 );
+			_FireUP = MG.CheckModAt( 0, 1 ) == null;
+			_FireDOWN = MG.CheckModAt( 2, 1 ) == null;
+			_FireLEFT = MG.CheckModAt( 1, 0 ) == null;
+			_FireRIGHT = MG.CheckModAt( 1, 2 ) == null;
 		}
 		
 		protected override function DoMoveChecks():void
@@ -213,6 +212,8 @@ package src
 			this.visible = false;
 		}
 		
+		
+		
 		/**
 		 * When an enemy is killed, they report to the ship that they have been killed
 		 * using this function.
@@ -243,13 +244,6 @@ package src
 			this.Boundary = _bound;
 			this.WeaponBoundary = _bullet;
 			
-			//** Test Mod Grid Stuff
-/*			var AttackMod:ModPixel_Attack = new ModPixel_Attack();
-			AttackMod.LoadBoundary( _bullet );
-			
-			AddModPixel( AttackMod, 0, 1 );*/
-			//** End of Test Mod Grid Stuff
-			
 			RecalcModGrid();
 		}
 		
@@ -261,6 +255,16 @@ package src
 			}
 			
 			MG.AddModPixel( mod, r, c );
+		}
+		
+		public function RemoveAllMods():void
+		{
+			MG.DeleteAllMods( this );
+		}
+		
+		public function ReportPixelModAt( r:Number, c:Number ):ModPixel_
+		{
+			return MG.CheckModAt( r, c );
 		}
 		
 		public function LoadGameData( data:GameDataTracker )

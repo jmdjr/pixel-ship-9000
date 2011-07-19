@@ -2,6 +2,7 @@ package src.Customize_Frame
 {
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	
 	import src.Ship;
 
@@ -57,10 +58,52 @@ package src.Customize_Frame
 			
 			if( mod_zone != null )
 			{
+				var modSpawner:ModSpawn_ = null;
+				
+				// Identify if there is a mod present at this point in the grid.
+				var modSpawnTest:Array = this.getObjectsUnderPoint( new Point( mod_zone.x, mod_zone.y ) );
+				var hasSpawner:Boolean = modSpawnTest.some( 
+					function( item:Object, index:int, array:Array )
+					{
+						if( item is ModSpawn_ )
+						{
+							modSpawner = ModSpawn_( item );
+							return true;
+						}
+						
+						return false;
+					});
+				
+				// if it does have a spawner, then remove the old spawner.
+				if( hasSpawner && modSpawner != null )
+				{
+					this.removeChild( modSpawner );
+					modSpawner.visible = false;
+					modSpawner.enabled = false;
+				}
+				
 				ReferenceModSpawner.x = mod_zone.x;
 				ReferenceModSpawner.y = mod_zone.y;
-				ShipReference.AddModPixel( ReferenceModSpawner.Spawn_ModPixel(), int(mod_zone.x/mod_zone.width) + 1, int(mod_zone.y/mod_zone.height) + 1 );
+				this.addChild( ReferenceModSpawner );
+				mod_zone.UpdateModSpawnerRef( ReferenceModSpawner );
 			}
+		}
+		
+		/**
+		 * produces the PixelMod grid and assigns the mods to the ship based on the grid.
+		 * */
+		public function Produce_Ship_From_Grid():void
+		{
+			ShipReference.RemoveAllMods();
+			zones.forEach(
+				function( item:Object, index:int, array:Array )
+				{
+					if( item != null )
+					{
+						var temp:PixelMod_GridZone = PixelMod_GridZone( item );
+						ShipReference.AddModPixel( temp.InvokeModSpawner(), Math.round( temp.x / temp.width ) + 1, Math.round( temp.y / temp.height ) + 1 );
+					}
+				});
 		}
 	}
 }

@@ -2,6 +2,7 @@ package src.Customize_Frame
 {
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
 
 	/**
@@ -21,12 +22,13 @@ package src.Customize_Frame
 		public var positionX:Number;     //Position in the Mod Grid
 		public var positionY:Number;
 		protected var _CurrentClass:Class;
-		
+		protected var _SpawnerClass:Class;
 		public function ModPixel_()
 		{
 			positionX = 0;
 			positionY = 0;
 			_CurrentClass = ModPixel_;
+			_SpawnerClass = null;
 		}
 		
 		public function Update( tick:Event ):void
@@ -36,8 +38,12 @@ package src.Customize_Frame
 		
 		public function Spawn( _bound:Rectangle = null ):ModPixel_
 		{
-			var temp:ModPixel_ = new _CurrentClass();
-			return temp;
+			return new _CurrentClass();
+		}
+		
+		public function SpawnSpawners():ModSpawn_
+		{
+			return new _SpawnerClass();
 		}
 	}
 }

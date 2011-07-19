@@ -41,7 +41,7 @@ package
 			//**********************************************
 			//  Testing values for gamedata.
 			//**********************************************
-			myData.AddScrap( 1000000 );
+			myData.AddScrap( 100 );
 			gameFrame.LoadGameData( myData );
 			titleFrame.LoadGameData( myData );
 			customFrame.LoadGameData( myData );
@@ -63,9 +63,9 @@ package
 			if( this.stage != null )
 			{
 				this.removeEventListener(Event.ADDED_TO_STAGE, Start );
-				//this.gotoTitleFrame( null );
+				this.gotoTitleFrame( null );
 				//this.gotoGameFrame( null );
-				this.gotoCustomizeFrame( null );
+				//this.gotoCustomizeFrame( null );
 				//this.gotoCreditsFrame( null );
 			}
 		}
