@@ -113,13 +113,13 @@
 			
 			if( Time == 1 )
 			{
+				gameData.JB.Play( JukeBox.GAME_MUSIC );
 				DisplayLevelHint();
-				gameData.JB.Play( JukeBox.BOSS_MUSIC );
 			}
 			
 			if ( Time == 3 * stage.frameRate )
 			{
-				gameData.JB.Play( JukeBox.GAME_MUSIC );
+				
 				RemoveLevelHint();
 			}
 			//e1

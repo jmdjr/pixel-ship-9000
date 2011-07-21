@@ -1,7 +1,5 @@
 package src.Game_Frame
 {
-	import flash.display.MovieClip;
-
 	public class Shot_Enemy_L1Boss_Real extends Shot_Enemy_
 	{
 		public function Shot_Enemy_L1Boss_Real()

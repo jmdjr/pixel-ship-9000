@@ -9,29 +9,29 @@ package src.Customize_Frame
 	import src.Background;
 	import src.Frames;
 	import src.GameDataTracker;
+	import src.JukeBox;
 	import src.Ship;
 	
 	public class _Frame_Customize extends MovieClip
 	{
-		public static var RESTART_ONLY:String = "RestartOnly";
-		public static var RESTART_CONTINUE:String = "RestartAndContinue";
-		
 		var background:Background;
 		var gameData:GameDataTracker;
-		var DidShipDie:Boolean;
 		var ShipReference:Ship;
 		
 		var BTMainMenu:GenericButton_TitleScreen;
 		var BTPlayAgain:GenericButton_Restart;
-		var BTContinue:GenericButton_Continue;
+		//var BTContinue:GenericButton_Continue;
 		
 		var sum_attackText:Text_ShipAttackStat;
 		var sum_defenseText:Text_ShipDefenseStat;
 		var sum_speedText:Text_ShipSpeedStat;
+		var sum_healthText:Text_ShipHealthStat;
 		
 		var price_defensePixel:Text_DefensePixelModPrice;
 		var price_speedPixel:Text_SpeedPixelModPrice;
 		var price_attackPixel:Text_AttackPixelModPrice;
+		
+		var amount_perchase:Number;
 		
 		var ship_scrapTotalText:Text_ShipScrap;
 		var MGC:PixelMod_Grid_Customizer;
@@ -51,11 +51,12 @@ package src.Customize_Frame
 			
 			BTMainMenu = null;
 			BTPlayAgain = null;	
-			BTContinue = null;
+			//BTContinue = null;
 			
 			sum_attackText = null;
 			sum_defenseText = null;
 			sum_speedText = null;
+			sum_healthText = null;
 			
 			price_defensePixel = null;
 			price_speedPixel = null;
@@ -68,32 +69,24 @@ package src.Customize_Frame
 			BuySPEED = null;
 			BuyDEF = null;	
 			
-			DidShipDie = true;
-			
 			this.addEventListener( Event.ADDED_TO_STAGE, init );
-		}
-		
-		private function ContinueOrRestart( e:Event ):void
-		{ 
-			if( e.type == RESTART_ONLY )
-			{
-				DidShipDie = true;
-			}
-			else if ( e.type == RESTART_CONTINUE )
-			{
-				DidShipDie = false;	
-			}
 		}
 		
 		public function init( e:Event ):void
 		{
 			removeEventListener( Event.ADDED_TO_STAGE, init );
 			LoadFrame();
+			amount_perchase = 0;
 			addEventListener( Event.ENTER_FRAME, Update );
 		}
 		
 		public function LoadFrame():void
 		{
+			if( gameData != null )
+			{
+				gameData.JB.Play( JukeBox.CUSTOM_MUSIC );
+			}
+				
 			for(var child:int = 0; child < numChildren; ++child )
 			{
 				var childClip = getChildAt( child );
@@ -179,10 +172,10 @@ package src.Customize_Frame
 					BTPlayAgain.addEventListener(MouseEvent.CLICK, returnPlayAgain );
 					break;
 				
-				case getQualifiedClassName( GenericButton_Continue ):
-					BTContinue = GenericButton_Continue( childClip );
-					BTContinue.addEventListener( MouseEvent.CLICK, returnPlayAgain );
-					break;
+				//case getQualifiedClassName( GenericButton_Continue ):
+				//	BTContinue = GenericButton_Continue( childClip );
+				//	BTContinue.addEventListener( MouseEvent.CLICK, returnPlayAgain );
+				//	break;
 				
 				case getQualifiedClassName( GenericButton_TitleScreen ):
 					BTMainMenu = GenericButton_TitleScreen( childClip );
@@ -195,6 +188,11 @@ package src.Customize_Frame
 		{
 			switch( getQualifiedClassName( childClip ) )
 			{
+				case getQualifiedClassName( Text_ShipHealthStat ):
+					sum_healthText = Text_ShipHealthStat( childClip );
+					sum_healthText.Value = String( 0 );
+					break;
+				
 				case getQualifiedClassName( Text_ShipAttackStat ):
 					sum_attackText = Text_ShipAttackStat( childClip );
 					sum_attackText.Value = String( 0 );
@@ -212,17 +210,17 @@ package src.Customize_Frame
 				
 				case getQualifiedClassName( Text_AttackPixelModPrice ):
 					price_attackPixel = Text_AttackPixelModPrice( childClip );
-					price_attackPixel.Value = String( 0 );
+					price_attackPixel.Value = String( 0 ) + "s";
 					break;
 				
 				case getQualifiedClassName( Text_SpeedPixelModPrice ):
 					price_speedPixel = Text_SpeedPixelModPrice( childClip );
-					price_speedPixel.Value = String( 0 );
+					price_speedPixel.Value = String( 0 ) + "s";
 					break;
 				
 				case getQualifiedClassName( Text_DefensePixelModPrice ):
 					price_defensePixel = Text_DefensePixelModPrice( childClip );
-					price_defensePixel.Value = String( 0 );
+					price_defensePixel.Value = String( 0 ) + "s";
 					break;
 				
 				case getQualifiedClassName( Text_ShipScrap ):
@@ -230,19 +228,21 @@ package src.Customize_Frame
 					ship_scrapTotalText.Value = "Scrap:" + String( 0 );
 					break;
 			}
-		}
+		} 
 				
 		public function UpdateUI():void
 		{
+			ShipReference.RecalcModGrid();
 			ship_scrapTotalText.Value = "Scrap:" + String( gameData.Scrap );
 
 			sum_attackText.Value = String( ShipReference.ReportAttackStat );
 			sum_speedText.Value = String( ShipReference.ReportSpeedStat );
 			sum_defenseText.Value = String( ShipReference.ReportDefenseStat );
+			sum_healthText.Value = String( ShipReference.ReportHealthStat );
 			
-			price_attackPixel.Value = String( (ShipReference.ReportAttackMods() + 1) * 10 );
-			price_speedPixel.Value = String( (ShipReference.ReportSpeedMods() + 1) * 10 );
-			price_defensePixel.Value = String( (ShipReference.ReportDefenseMods() + 1) * 10 );
+			price_attackPixel.Value = String( (ShipReference.ReportAttackMods() + 1) * 20 );
+			price_speedPixel.Value = String( (ShipReference.ReportSpeedMods() + 1) * 5 );
+			price_defensePixel.Value = String( (ShipReference.ReportDefenseMods() + 1) * 50 );
 		}
 		
 		public function Update( tick:Event ):void
@@ -263,7 +263,7 @@ package src.Customize_Frame
 		private function OnClick_AttackModSpawner( click:MouseEvent ):void
 		{
 			click.stopPropagation();
-			
+			JukeBox.PlaySE( JukeBox.CHOICE_SE );
 			if( RefSpawner != null && getQualifiedClassName( RefSpawner ) == getQualifiedClassName( BuyATK ) )
 			{
 				return;
@@ -276,8 +276,7 @@ package src.Customize_Frame
 				// do something to warn the player about being so bloody poor.
 				return;
 			}
-			
-			gameData.SpendScrap( int( price_attackPixel.Value ) );
+			amount_perchase = Number( price_attackPixel.Value );
 			
 			// Spawns a spawner and moves it to the reference spawner's spot.
 			RefSpawner = BuyATK.Spawn_ModSpawn();
@@ -288,7 +287,7 @@ package src.Customize_Frame
 		private function OnClick_DefenseModSpawner( click:MouseEvent ):void
 		{
 			click.stopPropagation();
-			
+			JukeBox.PlaySE( JukeBox.CHOICE_SE );
 			if( RefSpawner != null && getQualifiedClassName( RefSpawner ) == getQualifiedClassName( BuyDEF ) )
 			{
 				return;
@@ -301,8 +300,7 @@ package src.Customize_Frame
 				// do something to warn the player about being so bloody poor.
 				return;
 			}
-			
-			gameData.SpendScrap( int( price_defensePixel.Value ) );
+			amount_perchase = Number( price_defensePixel.Value );
 			
 			// Spawns a spawner and moves it to the reference spawner's spot.
 			RefSpawner = BuyDEF.Spawn_ModSpawn();
@@ -313,7 +311,7 @@ package src.Customize_Frame
 		private function OnClick_SpeedModSpawner( click:MouseEvent ):void
 		{
 			click.stopPropagation();
-			
+			JukeBox.PlaySE( JukeBox.CHOICE_SE );
 			if( RefSpawner != null && getQualifiedClassName( RefSpawner ) == getQualifiedClassName( BuySPEED ) )
 			{
 				return;
@@ -326,8 +324,7 @@ package src.Customize_Frame
 				// do something to warn the player about being so bloody poor.
 				return;
 			}
-			
-			gameData.SpendScrap( int( price_speedPixel.Value ) );
+			amount_perchase = Number( price_speedPixel.Value );
 			
 			// Spawns a spawner and moves it to the reference spawner's spot.
 			RefSpawner = BuySPEED.Spawn_ModSpawn();
@@ -339,20 +336,33 @@ package src.Customize_Frame
 		{
 			click.stopPropagation();
 			
+			gameData.SpendScrap( amount_perchase );
+			
 			if( RefSpawner != null && contains( RefSpawner ) )
 			{
+				JukeBox.PlaySE( JukeBox.ADD_MOD_SE );
 				removeChild( RefSpawner );
 				MGC.OnClick_ZoneGrid( click );
 			
 				RefSpawner = null;
 				MGC.UpdateReferenceMod( null );
 			}
+			else
+			{
+				JukeBox.PlaySE( JukeBox.DELETE_MOD_SE );
+				RefSpawner = null;
+				MGC.UpdateReferenceMod( null );
+				MGC.OnClick_ZoneGrid( click );
+			}
+			
+			MGC.Produce_Ship_From_Grid();
 		}
 		
 		private function OnClick_Frame( click:MouseEvent ):void
 		{
 			if( RefSpawner != null )
 			{
+				JukeBox.PlaySE( JukeBox.DELETE_MOD_SE );
 				RefSpawner.visible = false;
 				RefSpawner.enabled = false;
 				RefSpawner.parent.removeChild( RefSpawner );
@@ -362,13 +372,11 @@ package src.Customize_Frame
 		
 		private function returnMainMenu( click:MouseEvent ):void
 		{
-			MGC.Produce_Ship_From_Grid();
 			dispatchEvent( new Event( Frames.TITLE, true ) );
 		}
 		
 		private function returnPlayAgain( click:MouseEvent ):void
 		{
-			MGC.Produce_Ship_From_Grid();
 			dispatchEvent( new Event( Frames.GAME, true ) );
 		}
 		

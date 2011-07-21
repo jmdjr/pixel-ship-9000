@@ -3,8 +3,8 @@ package src.Game_Frame
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.Point;
-	import flash.utils.getQualifiedClassName;
 	import src.PhysVector2D;
+	import src.JukeBox;
 	
 	public class Shot_Player_Missile extends Shot_Player_
 	{
@@ -28,6 +28,12 @@ package src.Game_Frame
 				Enemy_( CollectedTargets[0].parent ).TakeDamage( Damage );
 				Disappear();
 			}
+		}
+		
+		public override function Spawn(_x:Number, _y:Number, _v:PhysVector2D):Shot_
+		{
+			JukeBox.PlaySE( JukeBox.ATTACK1_SE );
+			return super.Spawn( _x, _y, _v );
 		}
 	}
 }
