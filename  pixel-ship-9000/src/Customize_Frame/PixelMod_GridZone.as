@@ -14,6 +14,13 @@ package src.Customize_Frame
 		
 		public function UpdateModSpawnerRef( ref:ModSpawn_ ):void
 		{
+			if( ModSpawnerRef != null )
+			{
+				ModSpawnerRef.visible = false;
+				ModSpawnerRef.enabled = false;
+				ModSpawnerRef = null;
+			}
+			
 			ModSpawnerRef = ref;
 		}
 		

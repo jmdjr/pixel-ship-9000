@@ -50,9 +50,9 @@ package src
 			MG = new PixelMod_Grid_();
 			FullHealth = 1;
 			ModDefense = 0;
-			//ModAttack = 0;
+			ModAttack = 0;
 			ModSpeed = 0;
-			ShipSpeed = 3;
+			ShipSpeed = 1;
 			FireTimer = 1;
 			FireRate = 1;
 			
@@ -90,7 +90,8 @@ package src
 			ModHealth = MG.CalcModHealth();
 			ModDefense = MG.CalcModDefense();
 			ModSpeed = MG.CalcModSpeed();
-			ModAttack = FullHealth;
+			ModAttack = MG.CalcModAttack();
+			
 			MG.CalibrateModAttack();
 			MG.DrawModPixelsOnShip( this );
 			

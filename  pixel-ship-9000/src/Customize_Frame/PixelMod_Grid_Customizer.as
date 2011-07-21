@@ -37,11 +37,6 @@ package src.Customize_Frame
 		
 		public function OnClick_ZoneGrid( click:MouseEvent )
 		{
-			if( ReferenceModSpawner == null )
-			{
-				return;
-			}
-			
 			var mod_zone:PixelMod_GridZone = null;
 			
 			zones.some( 
@@ -55,6 +50,13 @@ package src.Customize_Frame
 					
 					return false;
 				});
+			
+			if( ReferenceModSpawner == null )
+			{
+				mod_zone.UpdateModSpawnerRef( null );
+				
+				return;
+			}
 			
 			if( mod_zone != null )
 			{

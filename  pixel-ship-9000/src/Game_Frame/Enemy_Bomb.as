@@ -10,7 +10,7 @@ package src.Game_Frame
 		{
 			super();
 			Speed = 1;
-			FireRate = 1;
+			FireRate = 0.5;
 			FullHealth = 5;
 			health = 5;
 			scrapAmount = 1;

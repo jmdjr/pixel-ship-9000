@@ -7,6 +7,7 @@ package src.Title_Frame
 	import src.Background;
 	import src.Frames;
 	import src.GameDataTracker;
+	import src.JukeBox;
 	
 	public class _Frame_Title extends MovieClip
 	{
@@ -18,6 +19,7 @@ package src.Title_Frame
 		var playBT:PlayButton;
 		var shootLogo:menuShootLogo;
 		var background:Background;
+		var isPlaying:Boolean;
 		
 		public function _Frame_Title()
 		{
@@ -37,6 +39,8 @@ package src.Title_Frame
 		
 		public function ResetFrame()
 		{
+			isPlaying = false;
+			
 			with( this.menuExp )
 			{
 				x = 324/800 * this.stage.stageWidth;
@@ -96,6 +100,11 @@ package src.Title_Frame
 			if( enabled )
 			{
 				background.Update( tick );
+				if( gameData != null && !isPlaying )
+				{
+					gameData.JB.Play( JukeBox.TITLE_MUSIC );
+					isPlaying = true;
+				}
 			}
 		}
 		

@@ -1,9 +1,5 @@
 package src.Game_Frame
-{
-	import BulletDance.mp3;
-	
-	import UnfriendlyRave.mp3;
-	
+{	
 	import fl.motion.Color;
 	
 	import flash.display.MovieClip;
