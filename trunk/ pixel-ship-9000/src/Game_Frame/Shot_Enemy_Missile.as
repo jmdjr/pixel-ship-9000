@@ -1,7 +1,7 @@
 package src.Game_Frame
 {	
 	import src.PhysVector2D;
-	import src.JukeBox;
+	import Juke_Box.JukeBox;
 
 	public class Shot_Enemy_Missile extends Shot_Enemy_
 	{

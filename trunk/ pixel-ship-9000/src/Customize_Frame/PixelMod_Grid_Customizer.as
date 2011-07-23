@@ -12,14 +12,14 @@ package src.Customize_Frame
 	 */ 
 	public class PixelMod_Grid_Customizer extends MovieClip
 	{
-		var ShipReference:Ship;
-		var zones:Array;
-		var ReferenceModSpawner:ModSpawn_;
+		private var ShipReference:Ship;
+		private var zones:Array;
+		private var ReferenceModSpawner:ModSpawn_;
 		
 		public function PixelMod_Grid_Customizer()
 		{
 			zones = new Array( numChildren );
-			for( var i = 0; i < numChildren; ++i )
+			for( var i:int = 0; i < numChildren; ++i )
 			{
 				zones[i] = PixelMod_GridZone( getChildAt( i ) );
 			}
@@ -35,12 +35,12 @@ package src.Customize_Frame
 			ReferenceModSpawner = mod;
 		}
 		
-		public function OnClick_ZoneGrid( click:MouseEvent )
+		public function OnClick_ZoneGrid( click:MouseEvent ):void
 		{
 			var mod_zone:PixelMod_GridZone = null;
 			
 			zones.some( 
-				function( item:Object, index:int, array:Array )
+				function( item:Object, index:int, array:Array ):Boolean
 				{
 					if( PixelMod_GridZone( item ).hitTestPoint( click.stageX, click.stageY, true ) )
 					{
@@ -65,7 +65,7 @@ package src.Customize_Frame
 				// Identify if there is a mod present at this point in the grid.
 				var modSpawnTest:Array = this.getObjectsUnderPoint( new Point( mod_zone.x, mod_zone.y ) );
 				var hasSpawner:Boolean = modSpawnTest.some( 
-					function( item:Object, index:int, array:Array )
+					function( item:Object, index:int, array:Array ):Boolean
 					{
 						if( item is ModSpawn_ )
 						{
@@ -98,7 +98,7 @@ package src.Customize_Frame
 		{
 			ShipReference.RemoveAllMods();
 			zones.forEach(
-				function( item:Object, index:int, array:Array )
+				function( item:Object, index:int, array:Array ):void
 				{
 					if( item != null )
 					{

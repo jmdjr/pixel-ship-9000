@@ -28,7 +28,7 @@ package src.Credits_Frame
 		 * 
 		 *  @author John M Davis Jr.
 		 */
-		public function LoadGameData( data:GameDataTracker )
+		public function LoadGameData( data:GameDataTracker ):void
 		{
 			gameData = data;
 		}

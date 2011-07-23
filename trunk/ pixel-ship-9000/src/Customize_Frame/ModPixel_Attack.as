@@ -13,13 +13,13 @@ package src.Customize_Frame
 	
 	public class ModPixel_Attack extends ModPixel_
 	{
-		var FireNorth:Boolean;
-		var FireSouth:Boolean;
-		var FireEast:Boolean;
-		var FireWest:Boolean;
-		var PrimaryWeapon:Shot_Player_Missile;
-		var WeaponBoundary:Rectangle;
-		var gameData:GameDataTracker;
+		private var FireNorth:Boolean;
+		private var FireSouth:Boolean;
+		private var FireEast:Boolean;
+		private var FireWest:Boolean;
+		private var PrimaryWeapon:Shot_Player_Missile;
+		private var WeaponBoundary:Rectangle;
+		private var gameData:GameDataTracker;
 		
 		public function ModPixel_Attack()
 		{

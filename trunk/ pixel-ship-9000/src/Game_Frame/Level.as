@@ -13,7 +13,7 @@
 	
 	import src.GameDataTracker;
 	import src.Game_Frame.Summary_Frame.Asset_Status_Level_BG;
-	import src.JukeBox;
+	import Juke_Box.JukeBox;
 	import src.PhysVector2D;
 	import src.Ship;
 
@@ -113,7 +113,7 @@
 			
 			if( Time == 1 )
 			{
-				gameData.JB.Play( JukeBox.GAME_MUSIC );
+				JukeBox.Play( JukeBox.GAME_MUSIC );
 				DisplayLevelHint();
 			}
 			
@@ -404,7 +404,7 @@
 		 * 
 		 *  @author John M Davis Jr.
 		 */
-		public function LoadGameData( data:GameDataTracker )
+		public function LoadGameData( data:GameDataTracker ):void
 		{
 			gameData = data;
 		}

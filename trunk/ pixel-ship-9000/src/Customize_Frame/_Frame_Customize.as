@@ -1,5 +1,8 @@
 package src.Customize_Frame
 {
+	import Juke_Box.JukeBox;
+	
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -9,37 +12,35 @@ package src.Customize_Frame
 	import src.Background;
 	import src.Frames;
 	import src.GameDataTracker;
-	import src.JukeBox;
 	import src.Ship;
 	
 	public class _Frame_Customize extends MovieClip
 	{
-		var background:Background;
-		var gameData:GameDataTracker;
-		var ShipReference:Ship;
+		private var background:Background;
+		private var gameData:GameDataTracker;
+		private var ShipReference:Ship;
 		
-		var BTMainMenu:GenericButton_TitleScreen;
-		var BTPlayAgain:GenericButton_Restart;
-		//var BTContinue:GenericButton_Continue;
+		private var BTMainMenu:GenericButton_TitleScreen;
+		private var BTPlayAgain:GenericButton_Restart;
+				
+		private var sum_attackText:Text_ShipAttackStat;
+		private var sum_defenseText:Text_ShipDefenseStat;
+		private var sum_speedText:Text_ShipSpeedStat;
+		private var sum_healthText:Text_ShipHealthStat;
 		
-		var sum_attackText:Text_ShipAttackStat;
-		var sum_defenseText:Text_ShipDefenseStat;
-		var sum_speedText:Text_ShipSpeedStat;
-		var sum_healthText:Text_ShipHealthStat;
+		private var price_defensePixel:Text_DefensePixelModPrice;
+		private var price_speedPixel:Text_SpeedPixelModPrice;
+		private var price_attackPixel:Text_AttackPixelModPrice;
 		
-		var price_defensePixel:Text_DefensePixelModPrice;
-		var price_speedPixel:Text_SpeedPixelModPrice;
-		var price_attackPixel:Text_AttackPixelModPrice;
+		private var amount_perchase:Number;
 		
-		var amount_perchase:Number;
+		private var ship_scrapTotalText:Text_ShipScrap;
+		private var MGC:PixelMod_Grid_Customizer;
 		
-		var ship_scrapTotalText:Text_ShipScrap;
-		var MGC:PixelMod_Grid_Customizer;
-		
-		var BuyATK:ModSpawn_Attack;
-		var BuySPEED:ModSpawn_Speed;
-		var BuyDEF:ModSpawn_Defense;
-		var RefSpawner:ModSpawn_;
+		private var BuyATK:ModSpawn_Attack;
+		private var BuySPEED:ModSpawn_Speed;
+		private var BuyDEF:ModSpawn_Defense;
+		private var RefSpawner:ModSpawn_;
 		
 		public function _Frame_Customize()
 		{
@@ -84,12 +85,12 @@ package src.Customize_Frame
 		{
 			if( gameData != null )
 			{
-				gameData.JB.Play( JukeBox.CUSTOM_MUSIC );
+				JukeBox.Play( JukeBox.CUSTOM_MUSIC );
 			}
 				
 			for(var child:int = 0; child < numChildren; ++child )
 			{
-				var childClip = getChildAt( child );
+				var childClip:DisplayObject = getChildAt( child );
 				
 				switch( getQualifiedSuperclassName( childClip ) )
 				{
@@ -106,7 +107,7 @@ package src.Customize_Frame
 						break;
 					
 					default:
-						assignRest( childClip );
+						assignRest( MovieClip( childClip ) );
 						break;
 				}
 			}
@@ -380,7 +381,7 @@ package src.Customize_Frame
 			dispatchEvent( new Event( Frames.GAME, true ) );
 		}
 		
-		public function LoadGameData( data:GameDataTracker )
+		public function LoadGameData( data:GameDataTracker ):void
 		{
 			gameData = data;
 		}

@@ -6,7 +6,7 @@ package src.Game_Frame
 
 	public class Enemy_L1MidBoss extends Enemy_
 	{
-		var fadeEffectTimer:Number;
+		private var fadeEffectTimer:Number;
 		
 		public function Enemy_L1MidBoss()
 		{
@@ -42,10 +42,10 @@ package src.Game_Frame
 		{
 			if( Boundary != null && !IsDead )
 			{
-				var ShipTop = y;
-				var ShipBottom = y + height;
-				var ShipLeft = x;
-				var ShipRight = x + width;
+				var ShipTop:int = y;
+				var ShipBottom:int = y + height;
+				var ShipLeft:int = x;
+				var ShipRight:int = x + width;
 				
 				if( ShipTop < Boundary.y || ShipBottom > 300 )
 				{

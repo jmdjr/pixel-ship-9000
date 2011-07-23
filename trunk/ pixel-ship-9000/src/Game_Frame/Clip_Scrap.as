@@ -7,8 +7,8 @@ package src.Game_Frame
 	
 	public class Clip_Scrap extends MovieClip
 	{
-		var direction:PhysVector2D;
-		var fade:Number;
+		private var direction:PhysVector2D;
+		private var fade:Number;
 		
 		public function Clip_Scrap()
 		{

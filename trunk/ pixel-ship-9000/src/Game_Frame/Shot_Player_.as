@@ -25,7 +25,7 @@ package src.Game_Frame
 				if( CollectedTargets != null && CollectedTargets.length > 0 )
 				{
 					CollectedTargets = CollectedTargets.filter((
-						function( item:Object, index:int, array:Array )
+						function( item:Object, index:int, array:Array ):Boolean
 						{
 							if( item.parent is Enemy_ )
 							{

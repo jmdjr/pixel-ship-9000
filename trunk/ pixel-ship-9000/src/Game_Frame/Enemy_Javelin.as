@@ -8,7 +8,7 @@ package src.Game_Frame
 	
 	public class Enemy_Javelin extends Enemy_
 	{
-		var HasFired:Boolean;
+		private var HasFired:Boolean;
 		
 		public function Enemy_Javelin()
 		{

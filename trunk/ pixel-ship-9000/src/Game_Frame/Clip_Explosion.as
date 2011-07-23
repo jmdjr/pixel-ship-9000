@@ -3,11 +3,11 @@ package src.Game_Frame
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	
-	import src.JukeBox;
+	import Juke_Box.JukeBox;
 	
 	public class Clip_Explosion extends MovieClip
 	{
-		var timer:Number;
+		private var timer:Number;
 		public function Clip_Explosion()
 		{
 			super();
