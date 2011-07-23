@@ -73,7 +73,7 @@ package src
 		 */
 		public function Normalize():Number
 		{
-			var magnitude = Magnitude();
+			var magnitude:Number = Magnitude();
 			if( magnitude != 1 && magnitude != 0 )
 			{
 				X /= magnitude;
@@ -123,7 +123,7 @@ package src
 		public function Projection( Right:PhysVector2D ):PhysVector2D
 		{
 			var unitRVel:PhysVector2D = Right.UnitV();
-			var projMag = DotP( unitRVel );
+			var projMag:Number = DotP( unitRVel );
 			unitRVel.Multiply( projMag );
 			
 			return unitRVel;
@@ -137,8 +137,8 @@ package src
 		 * */
 		public function CompareMagnitudes( Right:PhysVector2D ):Number
 		{
-			var left = Magnitude();
-			var right = Right.Magnitude();
+			var left:Number = Magnitude();
+			var right:Number = Right.Magnitude();
 			
 			if( left > right )
 			{
@@ -158,7 +158,7 @@ package src
 		public function TestDirOpposite( Right:PhysVector2D ):Boolean
 		{
 			var opposite:PhysVector2D = PhysVector2D.Multiply( UnitV(), -1 );
-			var right = Right.UnitV();
+			var right:PhysVector2D = Right.UnitV();
 			return ( opposite.X == right.X && opposite.Y == right.Y );
 		}
 		
@@ -174,9 +174,9 @@ package src
 		 * 	 */
 		public function TestDirRelative( Right:PhysVector2D ):Number
 		{
-			var dotp = this.DotP( Right );
-			var crossp = this.CrossP( Right );
-			var opposite = this.TestDirOpposite( Right );
+			var dotp:Number = this.DotP( Right );
+			var crossp:Number = this.CrossP( Right );
+			var opposite:Boolean = this.TestDirOpposite( Right );
 			
 			if( opposite || dotp == 0 )
 			{

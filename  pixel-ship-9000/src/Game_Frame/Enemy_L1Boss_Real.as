@@ -10,16 +10,16 @@ package src.Game_Frame
 	
 	public class Enemy_L1Boss_Real extends Enemy_
 	{
-		var TopLeftPosition:Boolean;
-		var blackImage:Asset_Enemy_L1Boss_Black = new Asset_Enemy_L1Boss_Black();
-		var whiteImage:Asset_Enemy_L1Boss_White = new Asset_Enemy_L1Boss_White();
-		var PhantomBoss:Enemy_L1Boss_Phantom = new Enemy_L1Boss_Phantom();
+		private var TopLeftPosition:Boolean;
+		private var blackImage:Asset_Enemy_L1Boss_Black = new Asset_Enemy_L1Boss_Black();
+		private var whiteImage:Asset_Enemy_L1Boss_White = new Asset_Enemy_L1Boss_White();
+		private var PhantomBoss:Enemy_L1Boss_Phantom = new Enemy_L1Boss_Phantom();
 		
 		// in absence of internal structures in AS3.0, I will be using a number
 		//  to represent the state of the boss.
-		var stateStep:Number;
+		private var stateStep:Number;
 		
-		var MyTimer:Timer;
+		private var MyTimer:Timer;
 		
 		public function Enemy_L1Boss_Real()
 		{
@@ -78,7 +78,7 @@ package src.Game_Frame
 			}
 		}
 		
-		public function DecideWhichSpawnImage()
+		public function DecideWhichSpawnImage():void
 		{
 			blackImage = new Asset_Enemy_L1Boss_Black();
 			whiteImage = new Asset_Enemy_L1Boss_White();
@@ -104,7 +104,7 @@ package src.Game_Frame
 			}
 		}
 		
-		public function DecideWhichDirectionToMove()
+		public function DecideWhichDirectionToMove():void
 		{
 			stateStep = 3;
 			if( Math.random() <= 0.5 )
@@ -158,7 +158,7 @@ package src.Game_Frame
 			stateStep = 2;
 		}
 		
-		public function WaitThenReset()
+		public function WaitThenReset():void
 		{
 			if( stage != null && ( x > width + stage.stageWidth || y > height + stage.stageHeight ) )
 			{
@@ -236,18 +236,6 @@ package src.Game_Frame
 		{
 			super.Explode();
 			PhantomBoss.Explode();
-		}
-			
-		/**
-		 * this version of 
-		 * */
-		protected override function DoBoundaryChecks():void
-		{
-			
-		}
-		
-		protected override function DoCombatChecks():void
-		{
 		}
 	}
 }

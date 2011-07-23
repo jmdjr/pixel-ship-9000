@@ -4,7 +4,7 @@ package src.Game_Frame
 	import flash.events.Event;
 	import flash.geom.Point;
 	import src.PhysVector2D;
-	import src.JukeBox;
+	import Juke_Box.JukeBox;
 	
 	public class Shot_Player_Missile extends Shot_Player_
 	{

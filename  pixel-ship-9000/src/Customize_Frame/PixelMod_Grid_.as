@@ -25,7 +25,7 @@ package src.Customize_Frame
 		public function Update( tick:Event ):void
 		{
 			grid.forEach(
-				function( item:ModPixel_, index:int, array:Array )
+				function( item:ModPixel_, index:int, array:Array ):void
 				{
 					if( item != null )
 					{
@@ -37,9 +37,9 @@ package src.Customize_Frame
 		public function DrawModPixelsOnShip( ship:Ship ):void
 		{
 			var mod:ModPixel_ = null;
-			for( var r = 0; r < rows; ++r )
+			for( var r:int = 0; r < rows; ++r )
 			{
-				for( var c = 0; c < cols; ++c )
+				for( var c:int = 0; c < cols; ++c )
 				{
 					mod = ModPixel_(grid[r*cols+c]);
 					if( mod != null )
@@ -81,9 +81,9 @@ package src.Customize_Frame
 		
 		public function DeleteAllMods( ship:Ship ):void
 		{
-			for( var i = 0; i < rows; ++i )
+			for( var i:int = 0; i < rows; ++i )
 			{
-				for( var j = 0; j < cols; ++j )
+				for( var j:int = 0; j < cols; ++j )
 				{
 					DeleteModPixel( ship, i, j );
 				}
@@ -96,7 +96,7 @@ package src.Customize_Frame
 		public function CalcModHealth():Number
 		{
 			var totalMods:Array = grid.filter(
-				function( item:Object, index:int, array:Array )
+				function( item:Object, index:int, array:Array ):Boolean
 				{
 					if( item != null )
 					{
@@ -116,7 +116,7 @@ package src.Customize_Frame
 		public function CalcModSpeed():Number
 		{
 			var totalMods:Array = grid.filter(
-				function( item:Object, index:int, array:Array )
+				function( item:Object, index:int, array:Array ):Boolean
 				{
 					if( item is ModPixel_Speed )
 					{
@@ -137,7 +137,7 @@ package src.Customize_Frame
 		public function CalcModDefense():Number
 		{
 			var totalMods:Array = grid.filter(
-				function( item:Object, index:int, array:Array )
+				function( item:Object, index:int, array:Array ):Boolean
 				{
 					if( item is ModPixel_Defense )
 					{
@@ -176,7 +176,7 @@ package src.Customize_Frame
 		public function CalcModAttack():Number
 		{
 			var totalMods:Array = grid.filter(
-				function( item:Object, index:int, array:Array )
+				function( item:Object, index:int, array:Array ):Boolean
 				{
 					if( item is ModPixel_Attack )
 					{
@@ -196,7 +196,7 @@ package src.Customize_Frame
 		{
 			var bullet:Shot_;
 			
-			for( var i = 0; i < grid.length; ++i )
+			for( var i:int = 0; i < grid.length; ++i )
 			{
 				if( grid[i] is ModPixel_Attack )
 				{
@@ -225,7 +225,7 @@ package src.Customize_Frame
 		
 		public function DeletePixelModGrid( ship:Ship ):void
 		{
-			for( var i = 0; i < grid.length; ++i )
+			for( var i:int = 0; i < grid.length; ++i )
 			{
 				DeleteModPixel( ship, int(i/cols), i%cols );
 			}	

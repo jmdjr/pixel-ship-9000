@@ -7,19 +7,19 @@ package src.Title_Frame
 	import src.Background;
 	import src.Frames;
 	import src.GameDataTracker;
-	import src.JukeBox;
+	import Juke_Box.JukeBox;
 	
 	public class _Frame_Title extends MovieClip
 	{
-		var myHeight:Number;
-		var myWidth:Number;
+		private var myHeight:Number;
+		private var myWidth:Number;
 		
-		var gameData:GameDataTracker;
-		var menuExp:menuExplosion;
-		var playBT:PlayButton;
-		var shootLogo:menuShootLogo;
-		var background:Background;
-		var isPlaying:Boolean;
+		private var gameData:GameDataTracker;
+		private var menuExp:menuExplosion;
+		private var playBT:PlayButton;
+		private var shootLogo:menuShootLogo;
+		private var background:Background;
+		private var isPlaying:Boolean;
 		
 		public function _Frame_Title()
 		{
@@ -27,7 +27,7 @@ package src.Title_Frame
 			addEventListener( Event.ADDED_TO_STAGE, Loaded );
 		}
 		
-		public function Loaded( tick:Event )
+		public function Loaded( tick:Event ):void
 		{
 			menuExp = new menuExplosion();
 			playBT = new PlayButton();
@@ -37,7 +37,7 @@ package src.Title_Frame
 			addEventListener( Event.ENTER_FRAME, Update );
 		}
 		
-		public function ResetFrame()
+		public function ResetFrame():void
 		{
 			isPlaying = false;
 			
@@ -90,7 +90,7 @@ package src.Title_Frame
 			}
 		}
 		
-		public function LoadGameData( data:GameDataTracker )
+		public function LoadGameData( data:GameDataTracker ):void
 		{
 			gameData = data;
 		}
@@ -102,7 +102,7 @@ package src.Title_Frame
 				background.Update( tick );
 				if( gameData != null && !isPlaying )
 				{
-					gameData.JB.Play( JukeBox.TITLE_MUSIC );
+					JukeBox.Play( JukeBox.TITLE_MUSIC );
 					isPlaying = true;
 				}
 			}

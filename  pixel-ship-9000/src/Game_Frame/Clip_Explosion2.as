@@ -2,11 +2,11 @@ package src.Game_Frame
 {
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	import explode2.wav;
-	
+	import Juke_Box.JukeBox;
+
 	public class Clip_Explosion2 extends MovieClip
 	{
-		var timer:Number;
+		private var timer:Number;
 		public function Clip_Explosion2()
 		{
 			super();
@@ -17,8 +17,7 @@ package src.Game_Frame
 		
 		private function Loaded( load:Event ):void
 		{
-			var tempSound:explode2.wav = new wav();
-			tempSound.play(0, 0);
+			JukeBox.PlaySE( JukeBox.EXPLODE_SE );
 			addEventListener(Event.ENTER_FRAME, Update );
 		}
 		

@@ -180,10 +180,10 @@ package src
 		{
 			if( Boundary != null )
 			{
-				var ShipTop = y;
-				var ShipBottom = y + height;
-				var ShipLeft = x;
-				var ShipRight = x + width;
+				var ShipTop:int = y;
+				var ShipBottom:int = y + height;
+				var ShipLeft:int = x;
+				var ShipRight:int = x + width;
 				
 				if( ShipTop < Boundary.y )
 				{
@@ -268,7 +268,7 @@ package src
 			return MG.CheckModAt( r, c );
 		}
 		
-		public function LoadGameData( data:GameDataTracker )
+		public function LoadGameData( data:GameDataTracker ):void
 		{
 			gameData = data;
 		}

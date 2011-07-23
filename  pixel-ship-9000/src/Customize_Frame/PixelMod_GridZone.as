@@ -4,7 +4,7 @@ package src.Customize_Frame
 	
 	public class PixelMod_GridZone extends MovieClip
 	{
-		var ModSpawnerRef:ModSpawn_;
+		private var ModSpawnerRef:ModSpawn_;
 		
 		public function PixelMod_GridZone()
 		{

@@ -20,9 +20,9 @@ package src.Game_Frame
 		 * @param toSpawnOn The movieclip where the scrapnul will be added.
 		 * @param amountToSpawn The given amount of scrapnul that will be spawned.
 		 * */
-		public static function Spawn_Scraps( toSpawnAt:MovieClip, toSpawnOn:DisplayObjectContainer, amountToSpawn:Number )
+		public static function Spawn_Scraps( toSpawnAt:MovieClip, toSpawnOn:DisplayObjectContainer, amountToSpawn:Number ):void
 		{
-			var ranDir;
+			var ranDir:Number;
 			while( amountToSpawn > 0 )
 			{
 				--amountToSpawn;

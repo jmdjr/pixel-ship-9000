@@ -4,7 +4,7 @@ package src.Game_Frame
 	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import src.JukeBox;
+	import Juke_Box.JukeBox;
 	
 	import src.PhysVector2D;
 	
@@ -70,7 +70,7 @@ package src.Game_Frame
 			addEventListener(Event.REMOVED_FROM_STAGE, Unloaded );
 		}
 		
-		private function Echo( test:Event )
+		private function Echo( test:Event ):void
 		{
 			removeEventListener( Event.ADDED_TO_STAGE, Echo );
 			stage.addEventListener( ShipObject.MANAGED_UPDATE, Update );
@@ -89,10 +89,10 @@ package src.Game_Frame
 				x += Velocity.X;
 				y += Velocity.Y;
 				
-				var ShipTop = y;
-				var ShipBottom = y + height;
-				var ShipLeft = x;
-				var ShipRight = x + width;
+				var ShipTop:int = y;
+				var ShipBottom:int = y + height;
+				var ShipLeft:int = x;
+				var ShipRight:int = x + width;
 				
 				if( ShipTop < Boundary.y || ShipBottom > Boundary.height || ShipLeft < Boundary.x || ShipRight > Boundary.width )
 				{

@@ -4,8 +4,8 @@ package src.Customize_Frame
 	
 	public class ModSpawn_ extends MovieClip
 	{
-		var _ModPixel_To_Spawn:Class;
-		var _ModSpawn_Class:Class;
+		protected var _ModPixel_To_Spawn:Class;
+		protected var _ModSpawn_Class:Class;
 		
 		public function ModSpawn_()
 		{

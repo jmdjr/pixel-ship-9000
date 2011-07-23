@@ -7,8 +7,6 @@ package src
 
 	public class GameDataTracker
 	{
-		public var JB:JukeBox;
-		
 		private var ShotsFired:Number;
 		private var EnemiesKilled:Number;
 		private var Accuracy:Number;
@@ -26,7 +24,6 @@ package src
 			Total_Scrap = 0;
 			Accuracy = 1.0;
 			CurrentLevel = null;
-			JB = new JukeBox();
 		}
 		
 		public function FireShot():void

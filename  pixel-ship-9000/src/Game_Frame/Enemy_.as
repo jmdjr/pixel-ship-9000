@@ -73,7 +73,7 @@ package src.Game_Frame
 			addEventListener(Event.REMOVED_FROM_STAGE, Unloaded );
 		}
 		
-		private function OnAddToStage( test:Event )
+		private function OnAddToStage( test:Event ):void
 		{
 			// Made for an internally managed update.
 			//  this way enemies and items can be placed dynamically without any need
@@ -104,10 +104,10 @@ package src.Game_Frame
 			super.DoBoundaryChecks();
 			if( Boundary != null && !IsDead )
 			{
-				var ShipTop = y;
-				var ShipBottom = y + height;
-				var ShipLeft = x;
-				var ShipRight = x + width;
+				var ShipTop:int = y;
+				var ShipBottom:int = y + height;
+				var ShipLeft:int = x;
+				var ShipRight:int = x + width;
 			
 				if( ShipTop < Boundary.y || ShipBottom > Boundary.height || ShipLeft < Boundary.x || ShipRight > Boundary.width )
 				{
@@ -150,7 +150,7 @@ package src.Game_Frame
 			super.DoCombatChecks();
 			if( !IsDead && PrimaryWeapon != null && parent != null )
 			{
-				var indexOf = parent.getChildIndex( this );
+				var indexOf:int = parent.getChildIndex( this );
 				var bullet:Shot_Enemy_ = Shot_Enemy_(
 					parent.addChildAt( PrimaryWeapon.Spawn( x, y, FireDirection ), indexOf - 1 ) );
 				

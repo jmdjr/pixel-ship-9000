@@ -4,9 +4,9 @@ package src.Game_Frame
 
 	public class Clip_HPMeter extends MovieClip
 	{
-		var healthBG:Asset_HPMeter_BG;
-		var health:Asset_HPMeter_FG;
-		var barLength:Number;
+		private var healthBG:Asset_HPMeter_BG;
+		private var health:Asset_HPMeter_FG;
+		private var barLength:Number;
 		
 		public function Clip_HPMeter()
 		{

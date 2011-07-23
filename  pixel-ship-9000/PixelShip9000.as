@@ -14,13 +14,13 @@ package
 	
 	public class PixelShip9000 extends Sprite
 	{
-		var gameMask:GameMask;
-		var titleFrame:_Frame_Title;
-		var gameFrame:_Frame_Game;
-		var customFrame:_Frame_Customize;
-		var creditsFrame:_Frame_Credits;
-		var masterShipReference:Ship;
-		var myData:GameDataTracker;
+		private var gameMask:GameMask;
+		private var titleFrame:_Frame_Title;
+		private var gameFrame:_Frame_Game;
+		private var customFrame:_Frame_Customize;
+		private var creditsFrame:_Frame_Credits;
+		private var masterShipReference:Ship;
+		private var myData:GameDataTracker;
 		
 		public function PixelShip9000()
 		{ 

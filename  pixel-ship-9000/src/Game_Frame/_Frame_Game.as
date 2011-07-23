@@ -19,7 +19,7 @@ package src.Game_Frame
 	import src.Background;
 	import src.Frames;
 	import src.GameDataTracker;
-	import src.JukeBox;
+	import Juke_Box.JukeBox;
 	import src.PhysVector2D;
 	import src.Ship;
 
@@ -32,26 +32,26 @@ package src.Game_Frame
 	 */
 	public class _Frame_Game extends MovieClip
 	{
-		var gameData:GameDataTracker;
-		var timeTracker:Number;
-		var shipHealthBar:Clip_HPMeter;
-		var shipHBText:TextField;
-		var shipPixelCount:TextField;
+		private var gameData:GameDataTracker;
+		private var timeTracker:Number;
+		private var shipHealthBar:Clip_HPMeter;
+		private var shipHBText:TextField;
+		private var shipPixelCount:TextField;
 		
-		var SpaceBG:Background;
-		var ship:Ship;
+		private var SpaceBG:Background;
+		private var ship:Ship;
 		
-		var level1:Level;
-		var Factory:EnemyFactory;
+		private var level1:Level;
+		private var Factory:EnemyFactory;
 		
-		var IsPlaying:Boolean;
-		var WorldMusic:Sound;
-		var WorldChannel:SoundChannel;
+		private var IsPlaying:Boolean;
+		private var WorldMusic:Sound;
+		private var WorldChannel:SoundChannel;
 		
-		var paused:Boolean;
-		var pauseText:Asset_Text_Pause;
+		private var paused:Boolean;
+		private var pauseText:Asset_Text_Pause;
 		
-		var fps:Clip_FrameRate;
+		private var fps:Clip_FrameRate;
 		
 		public function _Frame_Game()
 		{
@@ -278,7 +278,7 @@ package src.Game_Frame
 				if( ship.HealthPercentage() <= 0 )
 				{
 					CleanUp();
-					gameData.JB.Stop(); 
+					JukeBox.Stop(); 
 					dispatchEvent( new Event( Frames.CUSTOM, true ) );
 				}
 				
@@ -377,7 +377,7 @@ package src.Game_Frame
 		 * 
 		 *  @author John M Davis Jr.
 		 */
-		public function LoadGameData( data:GameDataTracker )
+		public function LoadGameData( data:GameDataTracker ):void
 		{
 			gameData = data;
 		}

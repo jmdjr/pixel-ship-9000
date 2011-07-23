@@ -3,16 +3,16 @@
   <PublishFormatProperties enabled="true">
     <defaultNames>0</defaultNames>
     <flash>1</flash>
-    <projectorWin>0</projectorWin>
+    <projectorWin>1</projectorWin>
     <projectorMac>0</projectorMac>
-    <html>0</html>
+    <html>1</html>
     <gif>0</gif>
     <jpeg>0</jpeg>
     <png>0</png>
     <qt>0</qt>
     <rnwk>0</rnwk>
     <flashDefaultName>0</flashDefaultName>
-    <projectorWinDefaultName>1</projectorWinDefaultName>
+    <projectorWinDefaultName>0</projectorWinDefaultName>
     <projectorMacDefaultName>1</projectorMacDefaultName>
     <htmlDefaultName>0</htmlDefaultName>
     <gifDefaultName>1</gifDefaultName>
@@ -21,7 +21,7 @@
     <qtDefaultName>1</qtDefaultName>
     <rnwkDefaultName>1</rnwkDefaultName>
     <flashFileName>C:\projects\PixelShip9000\bin-debug\PixelShip9000.swf</flashFileName>
-    <projectorWinFileName>PixelShip9000.exe</projectorWinFileName>
+    <projectorWinFileName>C:\projects\PixelShip9000\bin-debug\PixelShip9000.exe</projectorWinFileName>
     <projectorMacFileName>PixelShip9000.app</projectorMacFileName>
     <htmlFileName>C:\projects\PixelShip9000\bin-debug\PixelShip9000.html</htmlFileName>
     <gifFileName>PixelShip9000.gif</gifFileName>
@@ -53,7 +53,7 @@
     <WindowMode>0</WindowMode>
     <DisplayMenu>1</DisplayMenu>
     <DeviceFont>0</DeviceFont>
-    <TemplateFileName>C:\Users\John M Davis Jr\AppData\Local\Adobe\Flash CS5\en_US\Configuration\HTML\Default.html</TemplateFileName>
+    <TemplateFileName>C:\Users\Binary3D-06\AppData\Local\Adobe\Flash CS5\en_US\Configuration\HTML\Default.html</TemplateFileName>
     <showTagWarnMsg>1</showTagWarnMsg>
   </PublishHtmlProperties>
   <PublishFlashProperties enabled="true">
@@ -78,7 +78,7 @@
     <AS3ConfigConst></AS3ConfigConst>
     <DebuggingPermitted>1</DebuggingPermitted>
     <DebuggingPassword></DebuggingPassword>
-    <CompressMovie>1</CompressMovie>
+    <CompressMovie>0</CompressMovie>
     <InvisibleLayer>1</InvisibleLayer>
     <DeviceSound>0</DeviceSound>
     <StreamUse8kSampleRate>0</StreamUse8kSampleRate>
