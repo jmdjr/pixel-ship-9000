@@ -715,18 +715,259 @@
 				// b85 b86 b87
 			if( Time == 290 * stage.frameRate )
 			{ 
-				this.parent.addChild( this.factory.Spawn( "met", 300, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
-				this.parent.addChild( this.factory.Spawn( "met", 200, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
-				this.parent.addChild( this.factory.Spawn( "Enemy_Silo", 350, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Silo", 150, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Light", 250, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "BD", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
+			
+			
+			// r1
+			if( Time == 300 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 250, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				
+			{
+				
+			// r2 r3 
+			if( Time == 305 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 200, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 300, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				
+			{
+				
+			// r4 r5 r6 r7 
+			if( Time == 310 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 50, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 100, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 450, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
+				
+				
+				
+			
+			// r8 r9 r10 r11 r12 r13
+			if( Time == 315 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 100, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 150, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 200, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 300, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 350, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
+
+			// r14 r15 
+			if( Time == 320 * stage.frameRate )
+			{ 
+				
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 50, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 450, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
+				
+			
+			// r16 r17
+			if( Time == 321 * stage.frameRate )
+			{ 
+				
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 100, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
+			
+			
+			// r18 r19
+			if( Time == 325 * stage.frameRate )
+			{ 
+				
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 200, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 300, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
+				
+			
+			
+			// r20 r21
+			if( Time == 326 * stage.frameRate )
+			{ 
+				
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 150, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 350, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
 			{
 			
 			
 			
+			// r22 r23
+			if( Time == 327 * stage.frameRate )
+			{ 
+				
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 100, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
 			
+			// r24 r25
+			if( Time == 330 * stage.frameRate )
+			{ 
+				
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 250, 250, new PhysVector2D( 0, 0 ), this.myShip ) );
+				
+			{
+				
+			// r26 r27
+			if( Time == 335 * stage.frameRate )
+			{ 
+				
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 250, 400, new PhysVector2D( 0, 0 ), this.myShip ) );
+			{
+				
+			// r28 r29
+			if( Time == 336 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 250, 250, new PhysVector2D( 0, 0 ), this.myShip ) );
+			{
+			
+			// r30 r31
+			if( Time == 337 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 250, 100, new PhysVector2D( 0, 0 ), this.myShip ) );
+			{
+				
+			// r32 r33  
+			if( Time == 340 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 100, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 150, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 350, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
 				
 				
+			// r34 r35 r36 r37 r38
+			if( Time == 345 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 50, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 150, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 250, 250, new PhysVector2D( 0, 0 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 450, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
+				
+				
+			// r39 r40
+			if( Time == 350 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 150, 150, new PhysVector2D( 0, 0 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 350, 350, new PhysVector2D( 0, 0 ), this.myShip ) );
+			{
+				
+			
+			// r43
+			if( Time == 355 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 150, 150, new PhysVector2D( 0, 0 ), this.myShip ) );
+
+			{
+				
+			// r44
+			if( Time == 356 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 350, 150, new PhysVector2D( 0, 0 ), this.myShip ) );
+
+			{
+				
+			// r45
+			if( Time == 357 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 350, 350, new PhysVector2D( 0, 0 ), this.myShip ) );
+
+			{
+			
+			// r46
+			if( Time == 358 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 150, 350, new PhysVector2D( 0, 0 ), this.myShip ) );
+
+			{
+			
+			//WORLD END aka Drop 275
+		
+			// r47 r48
+			if( Time == 380 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 100, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
+				
+				
+			// r49
+			if( Time == 385 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 100, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
 			
 			
+		
+			// r50 r50
+			if( Time == 390 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 50, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Red", 450, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
+				
+			
+			// r51
+			if( Time == 395 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 250, 400, new PhysVector2D( 0, 0 ), this.myShip ) );
+			{
+				
+			// r52 r53
+			if( Time == 400 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 400, 350, new PhysVector2D( 0, 0 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 100, 350, new PhysVector2D( 0, 0 ), this.myShip ) );
+			{
+			
+			
+			// r55
+			if( Time == 405 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Sprinkler", 150, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
+				
+			// r56 r57
+			if( Time == 410 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Sprinkler", 50, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Sprinkler", 450, 0, new PhysVector2D( 0, 1 ), this.myShip ) );  
+			{
+				
+			// r58 
+			if( Time == 415 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Sprinkler", 350, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
+			
+			// r56
+			if( Time == 420 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Sprinkler", 50, 0, new PhysVector2D( 0, 1 ), this.myShip ) );  
+			{
+				
+			// r56 r57 r58
+			if( Time == 425 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Sprinkler", 100, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 250, 400, new PhysVector2D( 0, 0 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Sprinkler", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
+				
+			// r59 r60 r61
+			if( Time == 430 * stage.frameRate )
+			{ 
+				this.parent.addChild( this.factory.Spawn( "Enemy_Drone", 100, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Nuke", 250, 350, new PhysVector2D( 0, 0 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "Enemy_Sprinkler", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			{
 			*/
 		}
 		
