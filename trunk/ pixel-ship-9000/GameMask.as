@@ -7,6 +7,9 @@ package
 		public function GameMask()
 		{
 			super();
+
+
+
 		}
 	}
 }
