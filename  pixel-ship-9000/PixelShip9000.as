@@ -21,17 +21,19 @@ package
 		private var creditsFrame:_Frame_Credits;
 		private var masterShipReference:Ship;
 		private var myData:GameDataTracker;
+		private var KongAPI:Kongrgate_API;
 		
 		public function PixelShip9000()
 		{ 
 			gameMask = null;
+			KongAPI = new Kongrgate_API();
 			myData = new GameDataTracker();
 			gameFrame = new _Frame_Game(); 
 			titleFrame = new _Frame_Title();
 			customFrame = new _Frame_Customize();
 			creditsFrame = new _Frame_Credits();
-			
 			masterShipReference = new Ship();
+			
 			// Initialize all of the variables and load data.
 			init();
 		}
@@ -42,20 +44,19 @@ package
 			//  Testing values for gamedata.
 			//**********************************************
 			myData.AddScrap( 100000 );
+			
 			gameFrame.LoadGameData( myData );
 			titleFrame.LoadGameData( myData );
 			customFrame.LoadGameData( myData );
 			creditsFrame.LoadGameData( myData );
 			
-			gameFrame.LoadShipReference( masterShipReference );
-			customFrame.LoadShipReference( masterShipReference );
-
-			addEventListener( Frames.GAME, gotoGameFrame );
 			addEventListener( Frames.CUSTOM, gotoCustomizeFrame );
-			addEventListener( Frames.TITLE, gotoTitleFrame ); 
-			addEventListener( Frames.TITLE, gotoTitleFrame );
 			addEventListener( Frames.CREDITS, gotoCreditsFrame );
+			customFrame.LoadShipReference( masterShipReference );
+			gameFrame.LoadShipReference( masterShipReference );
+			addEventListener( Frames.TITLE, gotoTitleFrame );
 			addEventListener( Event.ADDED_TO_STAGE, Start );
+			addEventListener( Frames.GAME, gotoGameFrame );
 		}
 		
 		private function Start( event:Event ):void
@@ -63,6 +64,9 @@ package
 			if( this.stage != null )
 			{
 				this.removeEventListener(Event.ADDED_TO_STAGE, Start );
+				
+				addChild( KongAPI );
+				
 				this.gotoTitleFrame( null );
 				//this.gotoGameFrame( null );
 				//this.gotoCustomizeFrame( null );
