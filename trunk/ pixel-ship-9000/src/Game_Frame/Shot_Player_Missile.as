@@ -32,7 +32,6 @@ package src.Game_Frame
 		
 		public override function Spawn(_x:Number, _y:Number, _v:PhysVector2D):Shot_
 		{
-			JukeBox.PlaySE( JukeBox.ATTACK1_SE );
 			return super.Spawn( _x, _y, _v );
 		}
 	}

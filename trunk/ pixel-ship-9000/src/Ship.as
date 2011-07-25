@@ -1,5 +1,7 @@
 package src
 {
+	import Juke_Box.JukeBox;
+	
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
@@ -131,6 +133,7 @@ package src
 		{	
 			if( isFiring && canFire && parent != null && PrimaryWeapon != null )
 			{
+				
 				var bullet:Shot_;
 				if( _FireUP )
 				{
@@ -162,6 +165,11 @@ package src
 						PrimaryWeapon.Spawn( x, y, PhysVector2D.RIGHT ) ) );
 					bullet.LoadBoundary( WeaponBoundary );
 					gameData.FireShot();
+				}
+				
+				if( _FireRIGHT || _FireLEFT || _FireDOWN || _FireUP )
+				{
+					JukeBox.PlaySE( JukeBox.ATTACK1_SE );
 				}
 				
 				MG.FireOffAttackMods( gameData, this );

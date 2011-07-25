@@ -296,7 +296,7 @@ package src.Game_Frame
 			while( numChildren > 0 )
 			{
 				removeChildAt(0);
-			}	
+			}
 		}
 		
 		public function KeyPressed( key:KeyboardEvent ):void

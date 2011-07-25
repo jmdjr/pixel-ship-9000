@@ -24,7 +24,7 @@ package
 		
 		public function PixelShip9000()
 		{ 
-			gameMask = new GameMask();
+			gameMask = null;
 			myData = new GameDataTracker();
 			gameFrame = new _Frame_Game(); 
 			titleFrame = new _Frame_Title();
@@ -41,7 +41,7 @@ package
 			//**********************************************
 			//  Testing values for gamedata.
 			//**********************************************
-			myData.AddScrap( 100 );
+			myData.AddScrap( 100000 );
 			gameFrame.LoadGameData( myData );
 			titleFrame.LoadGameData( myData );
 			customFrame.LoadGameData( myData );
@@ -84,10 +84,13 @@ package
 			
 			addChild( frame );
 			
-			gameMask.visible = true;
-			gameMask.enabled = true;
-			addChild( gameMask );
-			mask = gameMask;
+			if( gameMask != null )
+			{
+				gameMask.visible = true;
+				gameMask.enabled = true;
+				addChild( gameMask );
+				mask = gameMask;
+			}
 		}
 		 
 		private function gotoTitleFrame( event:Event ):void

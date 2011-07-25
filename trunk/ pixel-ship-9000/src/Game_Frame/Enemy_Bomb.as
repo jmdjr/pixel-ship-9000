@@ -1,7 +1,7 @@
 package src.Game_Frame
 {
+	import Juke_Box.JukeBox;
 	import flash.events.Event;
-	
 	import src.PhysVector2D;
 
 	public class Enemy_Bomb extends Enemy_
@@ -36,6 +36,7 @@ package src.Game_Frame
 		{
 			if( stage != null && FireTimer % ( stage.frameRate / FireRate ) == 0 )
 			{
+				JukeBox.PlaySE( JukeBox.EXPLODE_SE );
 				super.DoCombatChecks();
 				Explode();
 			}

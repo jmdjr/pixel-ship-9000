@@ -3,6 +3,7 @@ package src.Game_Frame
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
+	import Juke_Box.JukeBox;
 	
 	import src.PhysVector2D;
 	
@@ -27,6 +28,7 @@ package src.Game_Frame
 		{
 			if( !HasFired && FireTimer % ( stage.frameRate / FireRate ) == 0 )
 			{
+				JukeBox.PlaySE( JukeBox.ATTACK1_SE );
 				super.DoCombatChecks();
 				HasFired = true;
 			}
