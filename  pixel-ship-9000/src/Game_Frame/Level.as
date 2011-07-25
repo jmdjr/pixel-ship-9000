@@ -126,14 +126,14 @@
 			if( Time == 5 * stage.frameRate ) 
 
 			{ 
-				parent.addChild( this.factory.Spawn( "Drone", 350, 499, new PhysVector2D( 0, -1 ), this.myShip ) );
+				parent.addChild( this.factory.Spawn( "BlueDrone", 350, 499, new PhysVector2D( 0, -1 ), this.myShip ) );
 
 			}
 			//e2 e3
 			if( Time == 10 * stage.frameRate )
 			{ 
-				this.parent.addChild( this.factory.Spawn( "Drone", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
-				this.parent.addChild( this.factory.Spawn( "Drone", 100, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "BlueDrone", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "BlueDrone", 100, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
 			}
 			//e4 e5 e6
 			if( Time == 15 * stage.frameRate )
@@ -145,7 +145,7 @@
 			//e7
 			if( Time == 20 * stage.frameRate )
 			{ 
-				this.parent.addChild( this.factory.Spawn( "Drone", 0, 300, new PhysVector2D( 1, 0 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "BlueDrone", 0, 300, new PhysVector2D( 1, 0 ), this.myShip ) );
 			}
 			//e8
 			if( Time == 22 * stage.frameRate )

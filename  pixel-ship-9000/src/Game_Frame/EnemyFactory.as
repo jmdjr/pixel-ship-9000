@@ -18,8 +18,11 @@ package src.Game_Frame
 		{
 			MasterCopyList = new Dictionary();
 			MasterCopyList["Drone"] = new Enemy_Drone(); 
+			MasterCopyList["BlueDrone"] = new Enemy_BlueDrone();
 			MasterCopyList["Jav"] = new Enemy_Javelin();
 			MasterCopyList["Bomb"] = new Enemy_Bomb();
+			MasterCopyList["Meteor"] = new Enemy_Meteor_();
+			
 					
 			MasterCopyList["MidBoss"] = new Enemy_L1MidBoss();
 			MasterCopyList["BigBoss"] = new Enemy_L1Boss_Real();
@@ -28,8 +31,11 @@ package src.Game_Frame
 		public function LoadBoundary( _bound:Rectangle, _wepBound:Rectangle ):void
 		{
 			Enemy_Drone( MasterCopyList["Drone"] ).LoadBoundary( _bound, _wepBound );
+			Enemy_BlueDrone( MasterCopyList["BlueDrone"] ).LoadBoundary( _bound, _wepBound );
 			Enemy_Javelin( MasterCopyList["Jav"] ).LoadBoundary( _bound, _wepBound );
 			Enemy_Bomb( MasterCopyList["Bomb"] ).LoadBoundary( _bound, _wepBound );
+			Enemy_Meteor_( MasterCopyList["Meteor"] ).LoadBoundary( _bound, _wepBound );
+			
 			
 			Enemy_L1Boss_Real( MasterCopyList["BigBoss"] ).LoadBoundary( _bound, _wepBound );
 			Enemy_L1MidBoss( MasterCopyList["MidBoss"] ).LoadBoundary( _bound, _wepBound );

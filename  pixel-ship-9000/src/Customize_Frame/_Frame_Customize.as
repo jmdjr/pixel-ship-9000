@@ -337,14 +337,12 @@ package src.Customize_Frame
 		{
 			click.stopPropagation();
 			
-			gameData.SpendScrap( amount_perchase );
-			
 			if( RefSpawner != null && contains( RefSpawner ) )
 			{
 				JukeBox.PlaySE( JukeBox.ADD_MOD_SE );
 				removeChild( RefSpawner );
 				MGC.OnClick_ZoneGrid( click );
-			
+				gameData.SpendScrap( amount_perchase );
 				RefSpawner = null;
 				MGC.UpdateReferenceMod( null );
 			}

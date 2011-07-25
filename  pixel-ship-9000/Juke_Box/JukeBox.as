@@ -33,7 +33,8 @@ package Juke_Box
 		public static var WorldChannel:SoundChannel;
 		
 		public function JukeBox()
-		{  
+		{
+			 
 		}
 		
 		public static function Play( StaticName:Sound ):void

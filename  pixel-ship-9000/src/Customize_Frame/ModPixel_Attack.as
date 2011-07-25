@@ -4,12 +4,11 @@ package src.Customize_Frame
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
-	
+	import Juke_Box.JukeBox;
 	import src.GameDataTracker;
 	import src.Game_Frame.Shot_;
 	import src.Game_Frame.Shot_Player_Missile;
 	import src.PhysVector2D;
-	
 	
 	public class ModPixel_Attack extends ModPixel_
 	{
@@ -134,6 +133,11 @@ package src.Customize_Frame
 					PrimaryWeapon.Spawn( x + ship.x, y + ship.y, PhysVector2D.RIGHT ) ) );
 				bullet.LoadBoundary( WeaponBoundary );
 				gameData.FireShot();
+			}
+			
+			if( FireWest || FireEast || FireSouth || FireEast || FireNorth )
+			{
+				JukeBox.PlaySE( JukeBox.ATTACK1_SE );
 			}
 		}
 		
