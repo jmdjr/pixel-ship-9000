@@ -1,4 +1,4 @@
-package src
+﻿package src
 {
 	import Juke_Box.JukeBox;
 	
@@ -50,7 +50,7 @@ package src
 			velocity = new PhysVector2D();
 			PrimaryWeapon = new Shot_Player_Missile();
 			MG = new PixelMod_Grid_();
-			FullHealth = 1;
+			FullHealth = 100;
 			ModDefense = 0;
 			ModAttack = 0;
 			ModSpeed = 0;

@@ -26,7 +26,7 @@ package
 		public function PixelShip9000()
 		{ 
 			gameMask = null;
-			KongAPI = new Kongrgate_API();
+			//KongAPI = new Kongrgate_API();
 			myData = new GameDataTracker();
 			gameFrame = new _Frame_Game(); 
 			titleFrame = new _Frame_Title();
@@ -65,7 +65,7 @@ package
 			{
 				this.removeEventListener(Event.ADDED_TO_STAGE, Start );
 				
-				addChild( KongAPI );
+				//addChild( KongAPI );
 				
 				this.gotoTitleFrame( null );
 				//this.gotoGameFrame( null );

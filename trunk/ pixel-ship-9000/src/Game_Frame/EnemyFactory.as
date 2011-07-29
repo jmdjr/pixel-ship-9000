@@ -22,6 +22,7 @@ package src.Game_Frame
 			MasterCopyList["Jav"] = new Enemy_Javelin();
 			MasterCopyList["Bomb"] = new Enemy_Bomb();
 			MasterCopyList["Meteor"] = new Enemy_Meteor_();
+			MasterCopyList["GreenDrone"] = new Enemy_GreenDrone();
 			
 					
 			MasterCopyList["MidBoss"] = new Enemy_L1MidBoss();
@@ -35,6 +36,7 @@ package src.Game_Frame
 			Enemy_Javelin( MasterCopyList["Jav"] ).LoadBoundary( _bound, _wepBound );
 			Enemy_Bomb( MasterCopyList["Bomb"] ).LoadBoundary( _bound, _wepBound );
 			Enemy_Meteor_( MasterCopyList["Meteor"] ).LoadBoundary( _bound, _wepBound );
+			Enemy_GreenDrone( MasterCopyList["GreenDrone"] ).LoadBoundary( _bound, _wepBound );
 			
 			
 			Enemy_L1Boss_Real( MasterCopyList["BigBoss"] ).LoadBoundary( _bound, _wepBound );
