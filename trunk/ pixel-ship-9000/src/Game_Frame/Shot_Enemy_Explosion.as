@@ -22,12 +22,8 @@ package src.Game_Frame
 			super();
 			_CurrentClass = Shot_Enemy_Explosion;
 			Damage = 2;
-			GrowToScale = 1;
-			SpinBy = 20;
-			TimeLast = 2;
+			TimeLast = 1;
 			Timer = 0;
-			Interval = 0.5;
-			DimBy = 0.02;
 			
 			GrowDiff = GrowToScale/TimeLast;
 		}
@@ -42,14 +38,6 @@ package src.Game_Frame
 			{
 				Disappear();
 				return;
-			}
-			else if( ( Timer <= (TimeLast * stage.frameRate) ) && (Timer % Interval * stage.frameRate) == 0 )
-			{
-				scaleX += GrowDiff;
-				scaleY += GrowDiff;
-				
-				rotation += SpinBy;
-				alpha -= DimBy;
 			}
 		}
 	}

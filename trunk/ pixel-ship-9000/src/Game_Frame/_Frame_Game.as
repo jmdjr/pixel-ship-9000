@@ -1,5 +1,7 @@
 package src.Game_Frame
 {	
+	import Juke_Box.JukeBox;
+	
 	import fl.motion.Color;
 	
 	import flash.display.MovieClip;
@@ -19,7 +21,6 @@ package src.Game_Frame
 	import src.Background;
 	import src.Frames;
 	import src.GameDataTracker;
-	import Juke_Box.JukeBox;
 	import src.PhysVector2D;
 	import src.Ship;
 
@@ -70,7 +71,7 @@ package src.Game_Frame
 		
 		public function Loaded( e:Event ):void
 		{ 
-			
+			removeEventListener( Event.ADDED_TO_STAGE, Loaded );
 			var enemyBound:Rectangle = new Rectangle( -100, -100, stage.stageWidth + 100, stage.stageHeight + 100 );
 			var shipBound:Rectangle = new Rectangle( 50, 50, stage.stageWidth - 50, stage.stageHeight - 50 );
 			
@@ -120,6 +121,7 @@ package src.Game_Frame
 		 */
 		public function ResetFrame():void
 		{
+			this.alpha = 0;
 			timeTracker = 0;
 			with( SpaceBG )
 			{
@@ -233,6 +235,7 @@ package src.Game_Frame
 			
 			if( enabled && !paused )
 			{
+				
 				//Reset frame's base objects and tell game that this frame is playing stuff
 				if( !IsPlaying )
 				{
@@ -240,6 +243,10 @@ package src.Game_Frame
 					IsPlaying = true;
 				}
 				
+				if( !FadeIn() )
+				{
+					return;
+				}
 				//**********************************************************************************************
 				//*  Update calls for all base objects under this frame's control
 				//**********************************************************************************************
@@ -278,7 +285,7 @@ package src.Game_Frame
 				if( ship.HealthPercentage() <= 0 )
 				{
 					CleanUp();
-					JukeBox.Stop(); 
+					JukeBox.Stop();
 					dispatchEvent( new Event( Frames.CUSTOM, true ) );
 				}
 				
@@ -366,6 +373,28 @@ package src.Game_Frame
 				default:
 					break;
 			}
+		}
+		
+		private function FadeIn():Boolean
+		{
+			if( this.alpha < 1 )
+			{
+				this.alpha += 1/60;
+				return false;
+			}
+			
+			return true;
+		}
+		
+		private function FadeOut():Boolean
+		{
+			if( this.alpha > 0 )
+			{
+				this.alpha -= 1/60;
+				return false;
+			}
+			
+			return true;
 		}
 		
 		

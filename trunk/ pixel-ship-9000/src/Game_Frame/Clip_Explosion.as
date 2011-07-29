@@ -18,7 +18,7 @@ package src.Game_Frame
 		 
 		private function Loaded( load:Event ):void
 		{
-			JukeBox.PlaySE( JukeBox.EXPLODE_SE );
+			//JukeBox.PlaySE( JukeBox.EXPLODE_SE );
 			addEventListener(Event.ENTER_FRAME, Update );
 		}
 		
@@ -35,6 +35,9 @@ package src.Game_Frame
 			{
 				removeEventListener(Event.ENTER_FRAME, Update );
 				parent.removeChild( this );
+				this.enabled = false;
+				this.visible = false;
+				this.stop();
 			}
 		}
 	}

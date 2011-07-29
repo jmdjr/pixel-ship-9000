@@ -24,8 +24,9 @@ package
 		private var KongAPI:Kongrgate_API;
 		
 		public function PixelShip9000()
-		{ 
-			gameMask = null;
+		{
+			
+			//gameMask = new GameMask();
 			//KongAPI = new Kongrgate_API();
 			myData = new GameDataTracker();
 			gameFrame = new _Frame_Game(); 
@@ -79,6 +80,7 @@ package
 			while( this.numChildren > 0 )
 			{
 				var SomeFrame:MovieClip = MovieClip( removeChildAt(0) );
+
 				SomeFrame.visible = false;
 				SomeFrame.enabled = false;
 			}
