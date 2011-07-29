@@ -1,21 +1,37 @@
 package src.Game_Frame
 {
+	import Juke_Box.JukeBox;
+	
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import Juke_Box.JukeBox;
 	
 	import src.PhysVector2D;
 	
 	public class Shot_ extends MovieClip
 	{
 		protected var Center:PhysVector2D;     	// Internal reference to the center of the Projectile
-		protected var Velocity:PhysVector2D;    // The direction of the Projectile
+		protected var velocity:PhysVector2D;    // The direction of the Projectile
 		protected var Damage:Number;            // The amount of damage the Projectile can cause
 		protected var Boundary:Rectangle;      	// The restrictive boundary determining when the Projectile should be removed
 		protected var speed:Number;				// The speed of the Projectile.  accessors used to update Velocity.
 		protected var _CurrentClass:Class;    	// An internal reference to the current class for spawning
+		
+		protected function get Velocity():PhysVector2D
+		{
+			velocity.Normalize();
+			velocity.Multiply( speed );
+			return velocity;
+		}
+		
+		protected function set Velocity( value:PhysVector2D ):void
+		{
+			if( velocity != null )
+				velocity.Equal( value );
+			else
+				velocity = value;
+		}
 		
 		public function Shot_()
 		{
@@ -49,9 +65,7 @@ package src.Game_Frame
 			temp.x = _x - x;
 			temp.y = _y - y;
 			
-			temp.Velocity.Equal( _v.UnitV() );
-			temp.Velocity.Normalize();
-			temp.Velocity.Multiply( temp.speed );
+			temp.Velocity = _v.UnitV();
 			temp.Damage = Damage;
 			temp.Initialize();
 			
