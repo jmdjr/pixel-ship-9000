@@ -39,14 +39,6 @@
 			BossReference = null;
 			LevelTitle = "Level 1";
 			InternalFrame = new Sprite();
-			
-			// to bomb area of first level, uncomment following
-			Time = 84 * 60;
-			
-			// to skip to level two, uncomment the following line
-			// Time = 199 * 60;
-			// to skip to level three, uncomment the follonw line
-			// Time = 299 * 60;
 		}
 		
 		public function get IsComplete():Boolean
@@ -70,10 +62,11 @@
 			BossMode = false;
 			isComplete = false;
 			// to bomb area of first level, uncomment following
-			Time = 84* 60;
+			//Time = 84* 60;
 			
 			// to skip to level two, uncomment the following line
 			// Time = 199 * 61;
+			//Time = 233 * 60;
 			// to skip to level three, uncomment the follonw line
 			// Time = 299 * 61;
 		}
@@ -134,21 +127,19 @@
 			
 			if ( Time == 3 * stage.frameRate )
 			{
-				
 				RemoveLevelHint();
 			}
 			
 			if( Time == 4 * stage.frameRate ) 
-
 			{ 
-				parent.addChild( this.factory.Spawn( "GreenDrone", 350, 499, new PhysVector2D( 0, -1 ), this.myShip ) );
+				parent.addChild( this.factory.Spawn( "Beam", 350, 499, new PhysVector2D( 0, -1 ), this.myShip ) );
 			}
 			
 			//e1
 			if( Time == 5 * stage.frameRate ) 
 
 			{ 
-				parent.addChild( this.factory.Spawn( "GreenDrone", 350, 499, new PhysVector2D( 0, -1 ), this.myShip ) );
+				parent.addChild( this.factory.Spawn( "Beam", 350, 499, new PhysVector2D( 0, -1 ), this.myShip ) );
 
 			}
 		
@@ -157,8 +148,8 @@
 			//e2 e3
 			if( Time == 10 * stage.frameRate )
 			{ 
-				this.parent.addChild( this.factory.Spawn( "BlueDrone", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
-				this.parent.addChild( this.factory.Spawn( "BlueDrone", 100, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "EnemySilo", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				this.parent.addChild( this.factory.Spawn( "EnemySilo", 100, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
 			}
 			//e4 e5 e6
 			if( Time == 15 * stage.frameRate )

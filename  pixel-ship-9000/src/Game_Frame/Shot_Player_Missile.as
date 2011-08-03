@@ -13,7 +13,7 @@ package src.Game_Frame
 			super();
 			_CurrentClass = Shot_Player_Missile;
 			
-			Speed = 10; 
+			Speed = 10;
 			Damage = 1;
 			Center = new PhysVector2D( height/2, width/2 );
 			Velocity = new PhysVector2D( 0, 0 );

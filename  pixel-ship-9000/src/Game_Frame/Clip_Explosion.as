@@ -18,7 +18,7 @@ package src.Game_Frame
 		 
 		private function Loaded( load:Event ):void
 		{
-			//JukeBox.PlaySE( JukeBox.EXPLODE_SE );
+			JukeBox.PlaySE( JukeBox.EXPLODE_SE );
 			addEventListener(Event.ENTER_FRAME, Update );
 		}
 		

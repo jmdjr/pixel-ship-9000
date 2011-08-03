@@ -108,7 +108,7 @@ package src.Game_Frame
 		 */ 
 		public function DealDamage( someone:ShipObject ):void
 		{
-			if( !Invulnerable )
+			if( !someone.Invulnerable )
 			{
 				someone.TakeDamage( Attack );
 			}
