@@ -126,8 +126,9 @@ package src.Game_Frame
 				if( !Invulnerable )
 				{
 					ShipReference.DealDamage( this );
-					DealDamage( ShipReference );
 				}
+				
+				DealDamage( ShipReference );
 				
 				bounceOffShip();
 			}

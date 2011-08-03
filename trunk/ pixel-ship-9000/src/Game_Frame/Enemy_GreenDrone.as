@@ -12,12 +12,6 @@ package src.Game_Frame
 			_CurrentClass = Enemy_GreenDrone;
 			PrimaryWeapon = new Shot_Boss_Homing();
 		}
-		
-		public override function Spawn(_x:Number, _y:Number, _v:PhysVector2D):Enemy_
-		{
-			return super.Spawn( _x, _y, _v );
-		}
-		
 	}
 
 }

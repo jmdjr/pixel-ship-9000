@@ -5,6 +5,7 @@ package src.Game_Frame
 		public function Enemy_Meteor_A()
 		{
 			super();
+			this._CurrentClass = Enemy_Meteor_A;
 		}
 	}
 }

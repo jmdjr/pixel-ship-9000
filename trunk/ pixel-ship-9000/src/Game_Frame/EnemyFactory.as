@@ -21,10 +21,11 @@ package src.Game_Frame
 			MasterCopyList["BlueDrone"] = new Enemy_BlueDrone();
 			MasterCopyList["Jav"] = new Enemy_Javelin();
 			MasterCopyList["Bomb"] = new Enemy_Bomb();
-			MasterCopyList["Meteor"] = new Enemy_Meteor_();
+			MasterCopyList["Meteor"] = new Enemy_Meteor_Spawner();
 			MasterCopyList["GreenDrone"] = new Enemy_GreenDrone();
+			MasterCopyList["EnemySilo"] = new Enemy_Silo();
+			MasterCopyList["Beam"] = new Enemy_Beam();		
 			
-					
 			MasterCopyList["MidBoss"] = new Enemy_L1MidBoss();
 			MasterCopyList["BigBoss"] = new Enemy_L1Boss_Real();
 		} 
@@ -35,9 +36,10 @@ package src.Game_Frame
 			Enemy_BlueDrone( MasterCopyList["BlueDrone"] ).LoadBoundary( _bound, _wepBound );
 			Enemy_Javelin( MasterCopyList["Jav"] ).LoadBoundary( _bound, _wepBound );
 			Enemy_Bomb( MasterCopyList["Bomb"] ).LoadBoundary( _bound, _wepBound );
-			Enemy_Meteor_( MasterCopyList["Meteor"] ).LoadBoundary( _bound, _wepBound );
+			Enemy_Meteor_Spawner( MasterCopyList["Meteor"] ).LoadBoundary( _bound, _wepBound );
 			Enemy_GreenDrone( MasterCopyList["GreenDrone"] ).LoadBoundary( _bound, _wepBound );
-			
+			Enemy_Silo( MasterCopyList["EnemySilo"] ).LoadBoundary( _bound, _wepBound );
+			Enemy_Beam( MasterCopyList["Beam"] ).LoadBoundary( _bound, _wepBound );
 			
 			Enemy_L1Boss_Real( MasterCopyList["BigBoss"] ).LoadBoundary( _bound, _wepBound );
 			Enemy_L1MidBoss( MasterCopyList["MidBoss"] ).LoadBoundary( _bound, _wepBound );

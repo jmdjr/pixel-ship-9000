@@ -1,7 +1,10 @@
 package src.Game_Frame
 {
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.Point;
+	
+	import src.Background;
 
 	public class Shot_Player_ extends Shot_
 	{
@@ -26,7 +29,7 @@ package src.Game_Frame
 				{
 					CollectedTargets = CollectedTargets.filter((
 						function( item:Object, index:int, array:Array ):Boolean
-						{
+						{	
 							if( item.parent is Enemy_ )
 							{
 								return true;
