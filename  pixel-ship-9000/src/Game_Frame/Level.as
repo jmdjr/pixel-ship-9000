@@ -39,6 +39,16 @@
 			BossReference = null;
 			LevelTitle = "Level 1";
 			InternalFrame = new Sprite();
+
+			
+			// to bomb area of first level, uncomment following
+			//Time = 84 * 60;
+			
+			// to skip to level two, uncomment the following line
+			// Time = 199 * 60;
+			// to skip to level three, uncomment the follonw line
+			// Time = 299 * 60;
+
 		}
 		
 		public function get IsComplete():Boolean
