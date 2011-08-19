@@ -142,7 +142,7 @@
 			
 			if( Time == 4 * stage.frameRate ) 
 			{ 
-				parent.addChild( this.factory.Spawn( "Beam", 350, 499, new PhysVector2D( 0, -1 ), this.myShip ) );
+				parent.addChild( this.factory.Spawn( "Nuke", 350, 350, new PhysVector2D( 0, -1 ), this.myShip ) );
 			}
 			
 			//e1
