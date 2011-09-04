@@ -135,10 +135,11 @@
 				DisplayLevelHint();
 			}
 			
-			if ( Time == 10 * stage.frameRate )
+			if ( Time == 4 * stage.frameRate )
 			{
 				RemoveLevelHint();
 			}
+			
 			
 			//e1
 			if( Time == 10 * stage.frameRate )
@@ -740,6 +741,22 @@
 				this.parent.addChild( this.factory.Spawn( "Enemy_Silo", 150, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
 				this.parent.addChild( this.factory.Spawn( "Light", 250, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
 				this.parent.addChild( this.factory.Spawn( "BlueDrone", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+			}
+			
+			if( Time == 6 * stage.frameRate )
+			{
+				if( !BossMode )
+				{
+					BossReference = Enemy_( parent.addChild( factory.Spawn( "HullBoss", 250, 250, new PhysVector2D( 0, 0 ), myShip ) ) );
+					BossReference.LoadBoundary( myShip.Boundary );
+				}
+				
+				BossMode = true;
+				if( BossReference != null && BossReference.IsDead )
+				{
+					BossReference = null;
+					BossMode = false;
+				}
 			}
 			
 			/*
