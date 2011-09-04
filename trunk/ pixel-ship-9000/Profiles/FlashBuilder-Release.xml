@@ -45,13 +45,13 @@
     <Units>0</Units>
     <Loop>1</Loop>
     <StartPaused>0</StartPaused>
-    <Scale>0</Scale>
+    <Scale>2</Scale>
     <HorizontalAlignment>1</HorizontalAlignment>
     <VerticalAlignment>1</VerticalAlignment>
     <Quality>4</Quality>
     <DeblockingFilter>0</DeblockingFilter>
     <WindowMode>0</WindowMode>
-    <DisplayMenu>1</DisplayMenu>
+    <DisplayMenu>0</DisplayMenu>
     <DeviceFont>0</DeviceFont>
     <TemplateFileName>C:\Users\Binary3D-06\AppData\Local\Adobe\Flash CS5\en_US\Configuration\HTML\Default.html</TemplateFileName>
     <showTagWarnMsg>1</showTagWarnMsg>

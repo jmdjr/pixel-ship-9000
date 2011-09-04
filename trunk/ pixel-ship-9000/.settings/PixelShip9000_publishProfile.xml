@@ -21,7 +21,7 @@
     <qtDefaultName>1</qtDefaultName>
     <rnwkDefaultName>1</rnwkDefaultName>
     <flashFileName>C:\projects\PixelShip9000\bin-debug\PixelShip9000.swf</flashFileName>
-    <projectorWinFileName>.\bin-debug\PixelShip9000.exe</projectorWinFileName>
+    <projectorWinFileName>.\bin-release\PixelShip9000.exe</projectorWinFileName>
     <projectorMacFileName>PixelShip9000.app</projectorMacFileName>
     <htmlFileName>C:\projects\PixelShip9000\bin-debug\PixelShip9000.html</htmlFileName>
     <gifFileName>PixelShip9000.gif</gifFileName>
@@ -45,13 +45,13 @@
     <Units>0</Units>
     <Loop>1</Loop>
     <StartPaused>0</StartPaused>
-    <Scale>0</Scale>
+    <Scale>2</Scale>
     <HorizontalAlignment>1</HorizontalAlignment>
     <VerticalAlignment>1</VerticalAlignment>
     <Quality>4</Quality>
     <DeblockingFilter>0</DeblockingFilter>
     <WindowMode>0</WindowMode>
-    <DisplayMenu>1</DisplayMenu>
+    <DisplayMenu>0</DisplayMenu>
     <DeviceFont>0</DeviceFont>
     <TemplateFileName>C:\Users\Binary3D-06\AppData\Local\Adobe\Flash CS5\en_US\Configuration\HTML\Default.html</TemplateFileName>
     <showTagWarnMsg>1</showTagWarnMsg>
@@ -96,9 +96,9 @@
     <IncludeXMP>1</IncludeXMP>
     <HardwareAcceleration>0</HardwareAcceleration>
     <AS3Flags>4102</AS3Flags>
-    <DefaultLibraryLinkage>merge</DefaultLibraryLinkage>
+    <DefaultLibraryLinkage>rsl</DefaultLibraryLinkage>
     <RSLPreloaderMethod>wrap</RSLPreloaderMethod>
-    <RSLPreloaderSWF></RSLPreloaderSWF>
+    <RSLPreloaderSWF>$(AppConfig)/ActionScript 3.0/rsls/loader_animation.swf</RSLPreloaderSWF>
     <LibraryPath>
       <library-path-entry>
         <swc-path>$(AppConfig)/ActionScript 3.0/libs</swc-path>
@@ -106,7 +106,7 @@
       </library-path-entry>
       <library-path-entry>
         <swc-path>$(AppConfig)/ActionScript 3.0/libs/11.0/textLayout.swc</swc-path>
-        <linkage usesDefault="true">merge</linkage>
+        <linkage usesDefault="true">rsl</linkage>
         <rsl-url>http://fpdownload.adobe.com/pub/swz/tlf/1.0.0.595/textLayout_1.0.0.595.swz</rsl-url>
         <policy-file-url>http://fpdownload.adobe.com/pub/swz/crossdomain.xml</policy-file-url>
         <rsl-url>textLayout_1.0.0.595.swz</rsl-url>
