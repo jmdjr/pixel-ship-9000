@@ -44,7 +44,7 @@ package
 			//**********************************************
 			//  Testing values for gamedata.
 			//**********************************************
-			myData.AddScrap( 100000 );
+			myData.AddScrap( 100 );
 			
 			gameFrame.LoadGameData( myData );
 			titleFrame.LoadGameData( myData );
