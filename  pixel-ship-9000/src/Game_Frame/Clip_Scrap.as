@@ -13,7 +13,7 @@ package src.Game_Frame
 		public function Clip_Scrap()
 		{
 			super();
-			fade = 0.02;
+			fade = 0.01;
 			alpha = 1;
 			direction = new PhysVector2D();
 			this.addEventListener(Event.ADDED_TO_STAGE, Loaded );
@@ -22,7 +22,7 @@ package src.Game_Frame
 		public function Loaded( tick:Event ):void
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, Loaded );
-			addEventListener( Event.ENTER_FRAME, Update );
+			addEventListener( Event.ENTER_FRAME, Update ); 
 		}
 		
 		public function set Velocity( _v:PhysVector2D ):void

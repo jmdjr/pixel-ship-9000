@@ -89,14 +89,22 @@
 				var Title:TextField = TextField( InternalFrame.addChild( new TextField() ) );
 				
 				var mini:TextFormat = new TextFormat( "BM mini", 24, new Color( 0.5, 1.0, 0.5 ) );
-				Title.width = bg.width;
+
+				Title.height = bg.height 
 				Title.wordWrap = true;
 				
 				Title.defaultTextFormat = mini;
-				Title.text = this.LevelTitle;
+				Title.text = this.LevelTitle + "\n\n" + 
+					"Move with the arrow keys, and fire with Z. \n" +
+					"If you die, you get a chance to upgrade your ship!\n" + 
+					"but you go back to the start of the level... :'(\n\n";
+				/*+ 
+					"The next game will be better, Promise!";*/
 	 			
 				Title.x = bg.x - bg.width/2 + 50;
 				Title.y = bg.y - bg.height/2 + 20;
+				Title.width = bg.width - Title.x;
+				Title.height = bg.height - Title.y;
 			}
 		}
 		
@@ -127,14 +135,13 @@
 				DisplayLevelHint();
 			}
 			
-			if ( Time == 3 * stage.frameRate )
+			if ( Time == 10 * stage.frameRate )
 			{
 				RemoveLevelHint();
 			}
 			
 			//e1
-			if( Time == 5 * stage.frameRate ) 
-
+			if( Time == 10 * stage.frameRate )
 			{ 
 				this.parent.addChild( this.factory.Spawn( "Drone", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
 			}
