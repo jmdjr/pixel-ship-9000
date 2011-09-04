@@ -28,6 +28,7 @@
 			MasterCopyList["Beam"] = new Enemy_Beam();		
 			MasterCopyList["MidBoss"] = new Enemy_L1MidBoss();
 			MasterCopyList["BigBoss"] = new Enemy_L1Boss_Real();
+			MasterCopyList["HullBoss"] = new Enemy_Boss_Hull();
 		} 
 		
 		public function LoadBoundary( _bound:Rectangle, _wepBound:Rectangle ):void
@@ -43,6 +44,7 @@
 			Enemy_Beam( MasterCopyList["Beam"] ).LoadBoundary( _bound, _wepBound );
 			Enemy_L1Boss_Real( MasterCopyList["BigBoss"] ).LoadBoundary( _bound, _wepBound );
 			Enemy_L1MidBoss( MasterCopyList["MidBoss"] ).LoadBoundary( _bound, _wepBound );
+			Enemy_Boss_Hull( MasterCopyList["HullBoss"] ).LoadBoundary( _bound, _wepBound );
 		}
 		
 		public function Spawn( _enemy:String, _x:Number, _y:Number, _v:PhysVector2D, _s:Ship ):Enemy_

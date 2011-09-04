@@ -21,7 +21,7 @@
     <qtDefaultName>1</qtDefaultName>
     <rnwkDefaultName>1</rnwkDefaultName>
     <flashFileName>C:\projects\PixelShip9000\bin-debug\PixelShip9000.swf</flashFileName>
-    <projectorWinFileName>C:\projects\PixelShip9000\bin-debug\PixelShip9000.exe</projectorWinFileName>
+    <projectorWinFileName>.\bin-debug\PixelShip9000.exe</projectorWinFileName>
     <projectorMacFileName>PixelShip9000.app</projectorMacFileName>
     <htmlFileName>C:\projects\PixelShip9000\bin-debug\PixelShip9000.html</htmlFileName>
     <gifFileName>PixelShip9000.gif</gifFileName>

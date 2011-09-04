@@ -7,7 +7,7 @@ package src.Game_Frame
 	import flash.geom.Rectangle;
 	import flash.utils.Timer;
 	
-	import src.PhysVector2D; 
+	import src.PhysVector2D;
 	import src.Ship;
 	
 	public class ShipObject extends MovieClip
@@ -260,6 +260,10 @@ package src.Game_Frame
 		public function get Velocity():PhysVector2D
 		{
 			return this.velocity;
+		}
+		public function set Velocity( v:PhysVector2D):void
+		{
+			this.velocity = v;
 		}
 	}
 }
