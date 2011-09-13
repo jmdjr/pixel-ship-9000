@@ -13,9 +13,9 @@ package src.Game_Frame
 	{
 		protected var Center:PhysVector2D;     	// Internal reference to the center of the Projectile
 		protected var velocity:PhysVector2D;    // The direction of the Projectile
-		protected var Damage:Number;            // The amount of damage the Projectile can cause
+		public var Damage:Number;               // The amount of damage the Projectile can cause
 		protected var Boundary:Rectangle;      	// The restrictive boundary determining when the Projectile should be removed
-		protected var speed:Number;				// The speed of the Projectile.  accessors used to update Velocity.
+		public var speed:Number;				// The speed of the Projectile.  accessors used to update Velocity.
 		protected var _CurrentClass:Class;    	// An internal reference to the current class for spawning
 		
 		protected function get Velocity():PhysVector2D

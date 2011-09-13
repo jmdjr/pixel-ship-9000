@@ -15,8 +15,8 @@ package src.Game_Frame
 		
 		protected var weapon_pos:int;
 		protected var weapon_cycleClock:int;
+		protected var weapon_cycleTime:int;
 		protected var weapon_list:Array;
-		
 		
 		public function Enemy_Boss_Hull()
 		{
@@ -26,7 +26,7 @@ package src.Game_Frame
 			this.FullHealth = 20;
 			this.ResetHealth();
 			
-			this.FireRate = 5;
+			this.FireRate = 2;
 			
 			this.startingPos = new Point(250, 100);
 			this.endingPos = new Point(250, 300);
@@ -35,11 +35,24 @@ package src.Game_Frame
 			
 			this.weapon_pos = 0;
 			this.weapon_cycleClock = 0;
+			this.weapon_cycleTime = 10;
+			
 			this.weapon_list  = new Array(); 
 			this.weapon_list[0] = new Shot_Enemy_Missile();
+			(this.weapon_list[0] as Shot_Enemy_Missile).Damage = 4;
+			(this.weapon_list[0] as Shot_Enemy_Missile).Speed = 1;
+				
 			this.weapon_list[1] = new Shot_Enemy_Beam();
+			(this.weapon_list[1] as Shot_Enemy_Beam).Damage = 10;
+			(this.weapon_list[1] as Shot_Enemy_Beam).Speed = 0.5;
+			
 			this.weapon_list[2] = new Shot_Boss_Homing();
+			(this.weapon_list[2] as Shot_Boss_Homing).Damage = 5;
+			(this.weapon_list[2] as Shot_Boss_Homing).Speed = 1;
+			
 			this.weapon_list[3] = new Shot_Enemy_Bee();
+			(this.weapon_list[3] as Shot_Enemy_Bee).Damage = 4;
+			(this.weapon_list[3] as Shot_Enemy_Bee).Speed = 1;
 			
 			this.PrimaryWeapon = this.weapon_list[this.weapon_pos];
 		}
@@ -83,10 +96,23 @@ package src.Game_Frame
 		{
 			if( FireTimer % ( stage.frameRate / FireRate ) == 0 )
 			{
+				this.FireDirection.Equal( PhysVector2D.DOWN );
+				super.DoCombatChecks();
+				
+				this.FireDirection.Equal( PhysVector2D.LEFT );
+				super.DoCombatChecks();
+				
+				this.FireDirection.Equal( PhysVector2D.RIGHT );
+				super.DoCombatChecks();
+				
+				this.FireDirection.Equal( new PhysVector2D( -1, -1 ) );
+				super.DoCombatChecks();
+				
+				this.FireDirection.Equal( new PhysVector2D( 1, -1 ) );
 				super.DoCombatChecks();
 			}
 			
-			if( this.weapon_cycleClock % 5*stage.frameRate == 0 )
+			if( this.weapon_cycleClock % this.weapon_cycleTime*stage.frameRate == 0 )
 			{
 				this.cycleWeapon();
 			}

@@ -14,7 +14,7 @@ package src.Game_Frame
 		{
 			super();
 			clock = 0;
-			Speed = 2;
+			Speed = 4;
 			lifespan = 5;  // number of seconds to live.
 			delay = 0;     // time before missle starts aiming towards ship
 			lag = 1;	   // lag between each reorientation of the missle. 
