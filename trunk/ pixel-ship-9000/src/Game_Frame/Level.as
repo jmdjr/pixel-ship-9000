@@ -95,9 +95,11 @@
 				
 				Title.defaultTextFormat = mini;
 				Title.text = this.LevelTitle + "\n\n" + 
-					"Move with the arrow keys, and fire with Z. \n" +
-					"If you die, you get a chance to upgrade your ship!\n" + 
-					"but you go back to the start of the level... :'(\n\n";
+					"Arrow keys to move\n" + 
+					"Z to fire. \n" +
+					"If you die...\n" +
+					"you get to upgrade your ship!\n" + 
+					"but you have to restart at the beginning... \n\n";
 				/*+ 
 					"The next game will be better, Promise!";*/
 	 			
@@ -140,9 +142,8 @@
 				RemoveLevelHint();
 			}
 			
-			
 			//e1
-			if( Time == 10 * stage.frameRate )
+			if( Time == 8 * stage.frameRate )
 			{ 
 				this.parent.addChild( this.factory.Spawn( "Drone", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
 			}

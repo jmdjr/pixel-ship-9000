@@ -379,7 +379,7 @@ package src.Game_Frame
 		{
 			if( this.alpha < 1 )
 			{
-				this.alpha += 1/60;
+				this.alpha += 1;
 				return false;
 			}
 			
