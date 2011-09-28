@@ -145,7 +145,18 @@
 			//e1
 			if( Time == 8 * stage.frameRate )
 			{ 
-				this.parent.addChild( this.factory.Spawn( "Drone", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) );
+				if( !BossMode )
+				{
+					BossReference = Enemy_( this.parent.addChild( this.factory.Spawn( "HullBoss", 400, 0, new PhysVector2D( 0, 1 ), this.myShip ) ) );
+					BossReference.LoadBoundary( myShip.Boundary );
+				}
+				
+				BossMode = true;
+				if( BossReference != null && BossReference.IsDead )
+				{
+					BossReference = null;
+					BossMode = false;
+				}
 			}
 			
 			//e2 e3
