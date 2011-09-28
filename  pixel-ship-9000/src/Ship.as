@@ -50,14 +50,13 @@
 			velocity = new PhysVector2D();
 			PrimaryWeapon = new Shot_Player_Missile();
 			MG = new PixelMod_Grid_();
-			FullHealth = 1;
-			ModDefense = 0;
+			FullHealth = 100;
+			ModDefense = 100;
 			ModAttack = 0;
 			ModSpeed = 0;
 			ShipSpeed = 1;
 			FireTimer = 1;
 			FireRate = 1;
-			
 			Defense = 0;
 			
 			isFiring = false;
@@ -67,7 +66,7 @@
 			ResetHealth();
 			
 			// for moving in a direction.
-			_UP = false;
+			_UP = false; 
 			_RIGHT = false;
 			_DOWN = false;
 			_LEFT = false;

@@ -46,7 +46,7 @@ package src.Game_Frame
 			FireRate = 1;
 			FireTimer = 0;
 			fullHealth = 1;
-			defense = 0;
+			Defense = 1;
 			attack = 1;
 			speed = 1;
 			
@@ -169,7 +169,7 @@ package src.Game_Frame
 		{			
 			FireTimer += 1;
 			
-			if( FireTimer > 1000000 )
+			if( FireTimer > 1000000000 )
 			{
 				FireTimer = 0;
 			}
