@@ -40,7 +40,7 @@ package src.Game_Frame
 			_CurrentClass = Shot_;
 			Velocity = new PhysVector2D( );
 			Speed = 0;
-			Damage = 2;
+			Damage = 1;
 			Center = new PhysVector2D( height/2, width/2 );
 		}
 		

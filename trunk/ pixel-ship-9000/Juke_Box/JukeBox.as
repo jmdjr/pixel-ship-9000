@@ -34,7 +34,6 @@ package Juke_Box
 		
 		public function JukeBox()
 		{
-			 
 		}
 		
 		public static function Play( StaticName:Sound ):void

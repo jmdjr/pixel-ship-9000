@@ -19,7 +19,7 @@ package src.Title_Frame
 		private var playBT:PlayButton;
 		private var shootLogo:menuShootLogo;
 		private var background:Background;
-		private var isPlaying:Boolean;
+		private var isTitlePlaying:Boolean;
 		
 		public function _Frame_Title()
 		{
@@ -39,7 +39,7 @@ package src.Title_Frame
 		
 		public function ResetFrame():void
 		{
-			isPlaying = false;
+			isTitlePlaying = false;
 			
 			with( this.menuExp )
 			{
@@ -100,10 +100,10 @@ package src.Title_Frame
 			if( enabled )
 			{
 				background.Update( tick );
-				if( gameData != null && !isPlaying )
+				if( gameData != null && !isTitlePlaying )
 				{
 					JukeBox.Play( JukeBox.TITLE_MUSIC );
-					isPlaying = true;
+					isTitlePlaying = true;
 				}
 			}
 		}
