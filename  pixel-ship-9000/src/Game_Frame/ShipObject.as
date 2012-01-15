@@ -47,7 +47,7 @@ package src.Game_Frame
 			FireTimer = 0;
 			fullHealth = 1;
 			Defense = 1;
-			attack = 1;
+			attack = 0;
 			speed = 1;
 			
 			ResetHealth();

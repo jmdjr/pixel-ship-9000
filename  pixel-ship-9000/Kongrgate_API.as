@@ -48,7 +48,7 @@ package
 			addEventListener( Event.ADDED_TO_STAGE, AddToStage );
 		}
 		
-		private function AddToStage( event:Event )
+		private function AddToStage( event:Event ):void
 		{
 			removeEventListener( Event.ADDED_TO_STAGE, AddToStage );
 			

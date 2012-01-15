@@ -50,10 +50,10 @@
 			velocity = new PhysVector2D();
 			PrimaryWeapon = new Shot_Player_Missile();
 			MG = new PixelMod_Grid_();
-			FullHealth = 100;
-			ModDefense = 100;
-			ModAttack = 0;
-			ModSpeed = 0;
+			FullHealth = 10;
+			ModDefense = 10;
+			ModAttack = 1;
+			ModSpeed = 1;
 			ShipSpeed = 1;
 			FireTimer = 1;
 			FireRate = 1;
